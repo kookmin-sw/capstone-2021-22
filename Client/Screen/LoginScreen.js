@@ -20,6 +20,7 @@ class LoginScreen extends Component {
 
     login = (id, pw) => {
         console.log(JSON.stringify(this.state))      
+
     }
 
 
@@ -47,8 +48,7 @@ class LoginScreen extends Component {
                     placeholderTextColor = "#cccccc"
                     autoCapitalize="none"
                     onChangeText={this.handlePw}
-                    secureTextEntry= {true}
-                    />
+                    secureTextEntry= {true} />
                     <View style= {styles.hr} />
 
                 </View>
@@ -124,12 +124,11 @@ const styles = StyleSheet.create({
         marginLeft: 47,
         paddingRight : 10,
         paddingLeft : 10,
-
     },
     hr : {
         borderBottomWidth: 1, 
         borderBottomColor: '#cccccc',
-
+        paddingLeft : 10
     },
     LoginButtonView : {
         flex : 2,
