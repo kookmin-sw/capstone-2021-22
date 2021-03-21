@@ -1,5 +1,6 @@
+import { useNavigation } from '@react-navigation/native';
 import React, {Component} from 'react';
-import { StyleSheet, Text, Button, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
 
 
 export default class RegisterScreen extends Component {
@@ -23,6 +24,8 @@ export default class RegisterScreen extends Component {
      
     registerFunc (){
       console.log(JSON.stringify(this.state))
+      alert("가입이 완료되었습니다 !" + "\n" + "이름 : " + this.state.name + ", 아이디 : " + this.state.id + ", 비밀번호 : " + this.state.password)
+      this.props.navigation.navigate('RegisterFinish')
     };
 
     render(){
