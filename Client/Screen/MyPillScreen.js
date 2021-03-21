@@ -3,52 +3,44 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 import logo from './images/pills-bottle.png';
+import icon from './images/star.png';
 
 import testImage from './images/test.jpg';
 
 
 class MyPillScreen extends Component {
-
-    state = {
-        userData :
-            {
-                name : "지원",
-            }
-        ,
-        pillData :
-            {
-              ITEM_NAME : '진셀몬정',
-              CLASS_NAME :"혼합비타민제",
-              FORM_CODE_NAME :"필름코팅정",
-              ITEM_IMAGE :"image"
-            }
-          
-    };
     
-
     render () {
 
         return (
-            <ScrollView style={styles.MainView}>
-                <View style={styles.TitleContainer}>
+            <ScrollView style={styles.scrollView}>
+                <View style={styles.titleContainer}>
                     <Image
-                        style={styles.LogoImage}
+                        style={styles.logoImage}
                         source={logo}
                     />
-                    <Text style={styles.TitleText}>{JSON.stringify(this.state.userData.name)}님의 약통</Text>
+                    <Text style={styles.titleText}>지원님의 약통</Text>
                 </View>
 
-                <View style={styles.PillList}>
+                <View style={styles.pillList}>
                     <TouchableOpacity 
-                        style={styles.PillContainer}
+                        style={styles.pillContainer}
                         onPress={()=>{
                             this.props.navigation.navigate('MyPillDetail')
                         }}>
-                        <Image style={styles.PillImage} source={testImage}/>
-                        <View style={styles.TextContainer}>
-                                <Text style={styles.MainText}>{JSON.stringify(this.state.pillData.ITEM_NAME)}</Text> 
-                                <Text style={styles.SubText}>{JSON.stringify(this.state.pillData.CLASS_NAME)}</Text>
-                                <Text style={styles.SubText}>{JSON.stringify(this.state.pillData.FORM_CODE_NAME)}</Text>
+                        <Image style={styles.pillImage} source={testImage}/>
+                        <View style={styles.textContainer}>
+                            <View style={{flexDirection: 'row'}}>
+                                <Text style={styles.mainText}>진셀몬정</Text> 
+                                <TouchableOpacity>
+                                    <Image
+                                    style={styles.icon}
+                                    source={icon}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <Text style={styles.subText}>혼합비타민제</Text>
+                            <Text style={styles.subText}>필름코팅정</Text>
                         </View>
                     </TouchableOpacity>
                     <View style= {styles.hr} />            
@@ -62,21 +54,27 @@ class MyPillScreen extends Component {
 }
 
 const styles = StyleSheet.create({
-    MainView : {
+    scrollView : {
         flex: 1,
         backgroundColor: '#fff',
     },
-    TitleContainer : {
+    titleContainer : {
         flexDirection: 'row',
         alignItems: 'center',
-        padding : 20
+        padding : 20,
     },
-    LogoImage : {
+    logoImage : {
         width: 30,
         height: 30,
         marginRight : 10
     },
-    TitleText : {
+    icon : {
+        width: 23,
+        height: 23,
+        marginTop : 10, 
+
+    },
+    titleText : {
         // fontFamily: "AppleSDGothicNeo",
         fontSize: 20,
         fontWeight: "bold",
@@ -85,30 +83,24 @@ const styles = StyleSheet.create({
         textAlign: "left",
         color: "#404040"
     },
-    PillList : {
-
-    },
-    PillContainer : {
+    pillContainer : {
         height: 125,
         flexDirection: 'row',
-
-
     },
     hr : {
         borderBottomWidth: 1, 
         borderBottomColor: '#D5D5D5',
     },
-
-    PillImage : { 
+    pillImage : { 
         flex: 1,
         width: 157,
         height: 125,
     },
-    TextContainer : {
+    textContainer : {
         flex: 1,
 
     },
-    MainText : {
+    mainText : {
         marginTop : 10, 
         marginBottom : 5, 
         marginLeft : 15,
@@ -124,7 +116,7 @@ const styles = StyleSheet.create({
         color: "#000000",
         
     },
-    SubText : {
+    subText : {
         marginLeft : 15,
         marginTop: 5,
         width: 192,
