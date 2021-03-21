@@ -10,7 +10,7 @@ class MainScreen extends Component {
         return (
             <View style={styles.MainView}>
                 <View style={styles.TextView}>
-                    <Text style={styles.Text}>사진을 찍어서</Text>
+                    <Text style={styles.Text}><Text style={styles.highlight}>사진</Text>을 찍어서</Text>
                     <Text style={styles.Text}>무슨 약인지 알아보세요</Text>
                 </View>
 
@@ -145,6 +145,17 @@ const styles = StyleSheet.create({
         letterSpacing: -0.48,
         textAlign: "left",
         color: "#404040"
+    },
+    highlight : {
+        width: 287,
+        height: 78,
+        // fontFamily: "AppleSDGothicNeo",
+        fontSize: 32,
+        fontWeight: "800",
+        fontStyle: "normal",
+        letterSpacing: -0.64,
+        textAlign: "left",
+        color: "#a7484d"
     }
 });
 
