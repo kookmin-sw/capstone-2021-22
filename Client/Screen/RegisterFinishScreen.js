@@ -11,15 +11,15 @@ export default class RegisterFinishScreen extends Component {
                     <TouchableOpacity
                         style={styles.Button}
                         onPress={()=>{
-                            this.props.navigation.navigate('Search')
+                            this.props.navigation.navigate('Main')
                         }}>
                         <Text style={styles.ButtonText}>홈으로</Text>
                     </TouchableOpacity>
                     <TouchableOpacity
                         style={styles.Button}
-                        /*onPress={()=>{
-                            this.props.navigation.navigate('Main')
-                        }}*/>
+                        onPress={()=>{
+                            this.props.navigation.navigate('Login')
+                        }}>
                         <Text style={styles.ButtonText}>로그인</Text>
                     </TouchableOpacity>
                 </View>
@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
   },
 
   Text: {
-    marginTop: 250,
+    marginTop: 300,
     fontSize: 24,
     color: '#707070'
   },

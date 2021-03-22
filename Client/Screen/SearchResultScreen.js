@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import testData from '../src/testdata';
 
 class SearchResultScreen extends Component {
     state = {
@@ -29,9 +30,9 @@ class SearchResultScreen extends Component {
                     value={this.state.searchData}
                     />
                     <TouchableOpacity 
-                    /*onPress={()=>{
-                        this.props.navigation.navigate('SearchResult')
-                    }}*/>
+                    onPress={()=>{
+                        this.props.navigation.navigate('MyPillDetail')
+                    }}>
                         <Image
                         source={require('../src/icon/search.png')}
                         />
@@ -46,12 +47,12 @@ class SearchResultScreen extends Component {
                         }}>
                         <Image style={styles.PillImage} source={{uri : "https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/147427430091800120"}} style={{width: 200, height: 125}}/>
                         <View style={styles.TextContainer}>
-                                <Text style={styles.MainText}>{JSON.stringify(this.state.pillData.ITEM_NAME)}</Text> 
-                                <Text style={styles.SubText}>{JSON.stringify(this.state.pillData.CLASS_NAME)}</Text>
-                                <Text style={styles.SubText}>{JSON.stringify(this.state.pillData.FORM_CODE_NAME)}</Text>
+                                <Text style={styles.MainText}>{JSON.stringify(testData[0].ITEM_NAME)}</Text> 
+                                <Text style={styles.SubText}>{JSON.stringify(testData[0].CLASS_NAME)}</Text>
+                                <Text style={styles.SubText}>{JSON.stringify(testData[0].FORM_CODE_NAME)}</Text>
                         </View>
                     </TouchableOpacity>
-                    <View style= {styles.hr} />        
+                    <View style= {styles.hr} />
                 </View>
             </View>
              
