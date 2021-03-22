@@ -39,7 +39,6 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         return next(loginError);
       }
       const token = jwt.sign({userId:user.id},jwtkey);
-      console.log(user.id);
       res.send({token});
     });
   })(req, res, next); 
@@ -51,6 +50,14 @@ router.get('/logout', isLoggedIn, (req, res) => {
   res.redirect('/');
 });
 
+
+router.get('/test', passport.authenticate('jwt', { session: false }),
+    (req, res)=> {
+        res.json( {
+          "success" : true
+      });
+    }
+);
 
 
 module.exports = router;
