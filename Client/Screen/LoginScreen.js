@@ -63,7 +63,8 @@ class LoginScreen extends Component {
 
                 <View style={styles.RegisterButtonView}>
                     <TouchableOpacity
-                        style={styles.RegisterButton}>
+                        style={styles.RegisterButton}
+                        onPress={() => this.props.navigation.navigate('Register')}>
                         <Text style={styles.RegisterButton}>회원가입</Text>
                     </TouchableOpacity>
                 </View>

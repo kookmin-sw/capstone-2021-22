@@ -18,8 +18,12 @@ class MainScreen extends Component {
                     <View style={styles.MainButtonContainer}>
                         <Image style={styles.LogoImage}
                             source={logo}/>
-                        <TouchableOpacity style={styles.MainButton}>
-                          <Text style={styles.MainButtonText}>알약 사진 찍기 ></Text>
+                        <TouchableOpacity 
+                            style={styles.MainButton}
+                            onPress={()=>{
+                                this.props.navigation.navigate('Search')
+                            }}>
+                            <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -29,7 +33,8 @@ class MainScreen extends Component {
                     <TouchableOpacity
                         style={styles.MyPillButton}
                         onPress={()=>{
-                            this.props.navigation.navigate('MyPill')
+                            /*this.props.navigation.navigate('MyPill')*/
+                            this.props.navigation.navigate('Login')
                         }}>
                         
                         <Text style={styles.MyPillButtonText}>내약통</Text>
@@ -109,9 +114,9 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
     },
     MainButtonText : {
-        width: 157,
         height: 29,
         // fontFamily: "AppleSDGothicNeo",
+        alignItems: 'center',
         fontSize: 24,
         fontWeight: "800",
         fontStyle: "normal",
