@@ -39,16 +39,18 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         return next(loginError);
       }
       const token = jwt.sign({userId:user.id},jwtkey);
-      res.send({token});
+      
+      res.status(200).json(
+        {
+            "token" : token,
+            "name" : user.name,
+            "pill" : "8"
+        }
+    );
     });
   })(req, res, next); 
 });
 
-router.get('/logout', isLoggedIn, (req, res) => {
-  req.logout();
-  req.session.destroy();
-  res.redirect('/');
-});
 
 
 router.get('/test', passport.authenticate('jwt', { session: false }),
