@@ -18,19 +18,11 @@ sequelize.sync({ force: false })
     console.error(err);
   });
 
-  app.use(express.json());
-  app.use(express.urlencoded({extended:false}));
-  app.use(session({
-      resave:false,
-      saveUninitialized:false,
-      secret:'cookie',
-      cookie:{
-          httpOnly:true,
-          secure: false,
-      },
-  }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.use(passport.initialize());
-app.use(passport.session());
+
 
 app.use('/', baseRouter);
 app.use('/auth', authRouter);
@@ -38,6 +30,6 @@ app.use('/auth', authRouter);
 app.set('port', process.env.PORT || 8003);
 app.use(express.json());
 
-app.listen(app.get('port'),() =>{
-    console.log(app.get('port'),"port waiting");
+app.listen(app.get('port'), () => {
+  console.log(app.get('port'), "port waiting");
 });
