@@ -4,7 +4,7 @@ import { StyleSheet, View, TextInput, Image, TouchableOpacity, ScrollView } from
 
 class SearchScreen extends Component {
     state = {
-        searchData: "",
+        searchData: '',
     };
 
     changeSearchData = (text) => {

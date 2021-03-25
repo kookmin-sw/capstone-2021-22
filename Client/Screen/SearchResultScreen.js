@@ -3,15 +3,21 @@ import React, { Component } from 'react';
 import { StyleSheet, View, TextInput, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import testData from '../src/testdata';
 
+import { HeaderBackButton } from '@react-navigation/stack';
+
+const navigationOptions = ({ navigation }) => ({
+    headerLeft: <HeaderBackButton onPress={() => navigation.goBack(null)} />,
+})
+
 class SearchResultScreen extends Component {
     state = {
-        searchData: "",
+        searchData: '',
         pillData :
             {
               ITEM_NAME : '진셀몬정',
-              CLASS_NAME :"혼합비타민제",
-              FORM_CODE_NAME :"필름코팅정",
-              ITEM_IMAGE :"https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/147427430091800120"
+              CLASS_NAME :'혼합비타민제',
+              FORM_CODE_NAME :'필름코팅정',
+              ITEM_IMAGE :'https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/147427430091800120'
             }
     };
 
@@ -45,7 +51,7 @@ class SearchResultScreen extends Component {
                         onPress={()=>{
                             this.props.navigation.navigate('MyPillDetail')
                         }}>
-                        <Image style={styles.PillImage} source={{uri : "https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/147427430091800120"}} style={{width: 200, height: 125}}/>
+                        <Image style={styles.PillImage} source={{uri : 'https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/147427430091800120'}} style={{width: 200, height: 125}}/>
                         <View style={styles.TextContainer}>
                                 <Text style={styles.MainText}>{JSON.stringify(testData[0].ITEM_NAME)}</Text> 
                                 <Text style={styles.SubText}>{JSON.stringify(testData[0].CLASS_NAME)}</Text>
@@ -109,13 +115,13 @@ const styles = StyleSheet.create({
 
         width: 145,
         height: 50,
-        // fontFamily: "AppleSDGothicNeo",
+        // fontFamily: 'AppleSDGothicNeo',
         fontSize: 23,
-        fontWeight: "500",
-        fontStyle: "normal",
+        fontWeight: '500',
+        fontStyle: 'normal',
         letterSpacing: 0,
-        textAlign: "left",
-        color: "#000000",
+        textAlign: 'left',
+        color: '#000000',
         
     },
     SubText : {
@@ -123,13 +129,13 @@ const styles = StyleSheet.create({
         marginTop: 5,
         width: 192,
         height: 17,
-        // fontFamily: "AppleSDGothicNeo",
+        // fontFamily: 'AppleSDGothicNeo',
         fontSize: 16,
-        fontWeight: "300",
-        fontStyle: "normal",
+        fontWeight: '300',
+        fontStyle: 'normal',
         letterSpacing: 0,
-        textAlign: "left",
-        color: "#585858"
+        textAlign: 'left',
+        color: '#585858'
     }
 });
 
