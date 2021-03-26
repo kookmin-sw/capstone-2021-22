@@ -6,6 +6,7 @@ const bcrypt = require('bcrypt');
 const { isLoggedIn, isNotLoggedIn } = require('../middlewares/middlewares');
 const USERS = require('../models').USERS;
 
+
 const router = express.Router();
 
 router.post('/join', isNotLoggedIn, async (req, res, next) => {
@@ -60,6 +61,29 @@ router.get('/test', passport.authenticate('jwt', { session: false }),
       });
     }
 );
+
+router.post('/idCheck' ,   async (req, res, next) => { 
+    try {
+      const exUser = await USERS.findOne({ where: { nick: req.body.nick } });
+      if(exUser) {
+        res.json(
+          {
+            "idCheck": true
+          }
+        )
+      }
+      else{
+        res.json(
+          {
+            "idCheck": false
+          }
+        )
+      }
+    }catch {
+      console.error(error);
+      done(error);
+    }
+});
 
 
 module.exports = router;
