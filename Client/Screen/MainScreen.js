@@ -61,13 +61,13 @@ const styles = StyleSheet.create({
     Text: {
         width: 287,
         // height: 78,
-        // fontFamily: "AppleSDGothicNeo",
+        // fontFamily: 'AppleSDGothicNeo',
         fontSize: 32,
-        fontWeight: "300",
-        fontStyle: "normal",
+        fontWeight: '300',
+        fontStyle: 'normal',
         letterSpacing: -0.64,
-        textAlign: "left",
-        color: "#525252"
+        textAlign: 'left',
+        color: '#525252'
 
     }, 
 
@@ -79,10 +79,10 @@ const styles = StyleSheet.create({
         // height: 294,
         // // opacity: 0.14,
         // borderRadius: 27,
-        // backgroundColor: "black",  //ffffff
-        // borderStyle: "solid",
+        // backgroundColor: 'black',  //ffffff
+        // borderStyle: 'solid',
         // borderWidth: 1,
-        // borderColor: "#cccccc"
+        // borderColor: '#cccccc'
         
     },
 
@@ -99,30 +99,30 @@ const styles = StyleSheet.create({
         height: 294,
         // opacity: 0.14,
         borderRadius: 27,
-        // backgroundColor: "black",
-        borderStyle: "solid",
+        // backgroundColor: 'black',
+        borderStyle: 'solid',
         borderWidth: 1,
-        borderColor: "#D5D5D5"
+        borderColor: '#D5D5D5'
     },
 
     MainButton : {
         width: 256,
         height: 56,
         borderRadius: 28,
-        backgroundColor: "#c86e65",
+        backgroundColor: '#c86e65',
         alignItems: 'center',
         justifyContent : 'center',
     },
     MainButtonText : {
         height: 29,
-        // fontFamily: "AppleSDGothicNeo",
+        // fontFamily: 'AppleSDGothicNeo',
         alignItems: 'center',
         fontSize: 24,
-        fontWeight: "800",
-        fontStyle: "normal",
+        fontWeight: '800',
+        fontStyle: 'normal',
         letterSpacing: -0.48,
-        textAlign: "left",
-        color: "#ffffff"
+        textAlign: 'left',
+        color: '#ffffff'
 
     },
        
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
     MyPillButton : {
         width: 322,
         height: 97.9,
-        backgroundColor: "#f0f2f0",
+        backgroundColor: '#f0f2f0',
         alignItems: 'center',
         justifyContent : 'center',
         borderRadius: 20,
@@ -143,24 +143,24 @@ const styles = StyleSheet.create({
     MyPillButtonText : {
         width: 67,
         height: 29,
-        // fontFamily: "AppleSDGothicNeo",
+        // fontFamily: 'AppleSDGothicNeo',
         fontSize: 24,
-        fontWeight: "bold",
-        fontStyle: "normal",
+        fontWeight: 'bold',
+        fontStyle: 'normal',
         letterSpacing: -0.48,
-        textAlign: "left",
-        color: "#404040"
+        textAlign: 'left',
+        color: '#404040'
     },
     highlight : {
         width: 287,
         height: 78,
-        // fontFamily: "AppleSDGothicNeo",
+        // fontFamily: 'AppleSDGothicNeo',
         fontSize: 32,
-        fontWeight: "800",
-        fontStyle: "normal",
+        fontWeight: '800',
+        fontStyle: 'normal',
         letterSpacing: -0.64,
-        textAlign: "left",
-        color: "#a7484d"
+        textAlign: 'left',
+        color: '#a7484d'
     }
 });
 

@@ -25,49 +25,49 @@ export default class RegisterFinishScreen extends Component {
                 </View>
             </View>
             
-          );
+        );
     }
 
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+    },
 
-  Text: {
-    marginTop: 300,
-    fontSize: 24,
-    color: '#707070'
-  },
+    Text: {
+        marginTop: 300,
+        fontSize: 24,
+        color: '#707070'
+    },
 
-  ButtonView : {
-    marginTop: 120,
-    alignItems: 'center',
-    justifyContent : 'center',
-  },
+    ButtonView : {
+        marginTop: 120,
+        alignItems: 'center',
+        justifyContent : 'center',
+    },
 
-  ButtonText : {
-    width: 100,
-    height: 30,
-    // fontFamily: "AppleSDGothicNeo",
-    fontSize: 24,
-    fontWeight: "800",
-    textAlign: "center",
-    color: "#c86e65"
-  },
+    ButtonText : {
+        width: 100,
+        height: 30,
+        // fontFamily: 'AppleSDGothicNeo',
+        fontSize: 24,
+        fontWeight: '800',
+        textAlign: 'center',
+        color: '#c86e65'
+    },
 
-  Button: {
-    margin: 10,
-    alignItems: 'center',
-    justifyContent : 'center',
-    width: 180,
-    height: 56,
-    borderRadius: 28,
-    borderWidth: 2,
-    borderColor: "#c86e65",
-    backgroundColor: "#ffffff"
-  }
+    Button: {
+        margin: 10,
+        alignItems: 'center',
+        justifyContent : 'center',
+        width: 180,
+        height: 56,
+        borderRadius: 28,
+        borderWidth: 2,
+        borderColor: '#c86e65',
+        backgroundColor: '#ffffff'
+    }
 });

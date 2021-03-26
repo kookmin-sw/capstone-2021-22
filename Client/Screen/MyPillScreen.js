@@ -75,13 +75,13 @@ const styles = StyleSheet.create({
 
     },
     titleText : {
-        // fontFamily: "AppleSDGothicNeo",
+        // fontFamily: 'AppleSDGothicNeo',
         fontSize: 20,
-        fontWeight: "bold",
-        fontStyle: "normal",
+        fontWeight: 'bold',
+        fontStyle: 'normal',
         letterSpacing: -0.4,
-        textAlign: "left",
-        color: "#404040"
+        textAlign: 'left',
+        color: '#404040'
     },
     pillContainer : {
         height: 125,
@@ -107,13 +107,13 @@ const styles = StyleSheet.create({
 
         width: 145,
         height: 50,
-        // fontFamily: "AppleSDGothicNeo",
+        // fontFamily: 'AppleSDGothicNeo',
         fontSize: 23,
-        fontWeight: "500",
-        fontStyle: "normal",
+        fontWeight: '500',
+        fontStyle: 'normal',
         letterSpacing: 0,
-        textAlign: "left",
-        color: "#000000",
+        textAlign: 'left',
+        color: '#000000',
         
     },
     subText : {
@@ -121,13 +121,13 @@ const styles = StyleSheet.create({
         marginTop: 5,
         width: 192,
         height: 17,
-        // fontFamily: "AppleSDGothicNeo",
+        // fontFamily: 'AppleSDGothicNeo',
         fontSize: 16,
-        fontWeight: "300",
-        fontStyle: "normal",
+        fontWeight: '300',
+        fontStyle: 'normal',
         letterSpacing: 0,
-        textAlign: "left",
-        color: "#585858"
+        textAlign: 'left',
+        color: '#585858'
     }
 
 });
