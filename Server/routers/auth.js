@@ -18,7 +18,9 @@ router.post('/join', isNotLoggedIn, async (req, res, next) => {
       nick,
       password: hash,
     });
-    res.send('join success');
+    res.status(200).json( {
+      "join" : true
+  });
   } catch (error) {
     console.error(error);
     return next(error);
@@ -56,7 +58,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 
 router.get('/test', passport.authenticate('jwt', { session: false }),
     (req, res)=> {
-        res.json( {
+        res.status(200).json( {
           "success" : true
       });
     }
@@ -66,14 +68,14 @@ router.post('/idCheck' ,   async (req, res, next) => {
     try {
       const exUser = await USERS.findOne({ where: { nick: req.body.nick } });
       if(exUser) {
-        res.json(
+        res.status(200).json(
           {
             "idCheck": true
           }
         )
       }
       else{
-        res.json(
+        res.status(422).json(
           {
             "idCheck": false
           }
