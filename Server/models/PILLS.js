@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
       comment: "알약 고유번호"
     },
     class: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(200),
       allowNull: false,
       comment: "분류명"
     },
@@ -16,6 +16,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(45),
       allowNull: false,
       comment: "제형코드명"
+    },
+    name: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "알약 이름"
     }
   }, {
     sequelize,
