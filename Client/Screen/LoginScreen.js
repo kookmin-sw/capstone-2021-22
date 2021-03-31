@@ -9,7 +9,7 @@ export function LoginScreen() {
     const [password, setPassword] = useState('');
     const navigation = useNavigation();
 
-    sendCred=() => {
+    sendInfo=() => {
         console.log(id, password);
         // navigation.navigate('MainFinish');
     }
@@ -45,7 +45,7 @@ export function LoginScreen() {
             <View style={styles.LoginButtonView}>
                 <TouchableOpacity
                     style={styles.LoginButton}
-                    onPress={() => sendCred()}>
+                    onPress={() => sendInfo()}>
                     <Text style={styles.LoginButtonText}>로그인</Text>
                 </TouchableOpacity>
             </View>
