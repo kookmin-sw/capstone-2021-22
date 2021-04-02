@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
 import logo from './images/pill.png';
+import MyPillLogo from './images/pills-bottle.png';
+
 
 class MainScreen extends Component {
 
@@ -36,8 +38,12 @@ class MainScreen extends Component {
                             /*this.props.navigation.navigate('MyPill')*/
                             this.props.navigation.navigate('Login')
                         }}>
-                        
-                        <Text style={styles.MyPillButtonText}>내약통</Text>
+                        <View style={styles.MyPillLogoView}>
+                            <Image style={styles.MyPillLogoImage}
+                                source={MyPillLogo}/>
+                        </View>
+                        <Text style={styles.MyPillButtonText}>내 약통</Text>
+                        <Text style={styles.MyPillNumText}>></Text>
                     </TouchableOpacity>
                 </View>
 
@@ -133,15 +139,30 @@ const styles = StyleSheet.create({
         
     },
     MyPillButton : {
+        flexDirection: 'row',
         width: 322,
         height: 97.9,
         backgroundColor: '#f0f2f0',
         alignItems: 'center',
-        justifyContent : 'center',
         borderRadius: 20,
     },
+    MyPillLogoView : {
+        width: 60,
+        height: 60,
+        backgroundColor: '#ffff',
+        borderRadius: 12,
+        margin : 25,
+        marginRight : 15,
+        alignItems: 'center',
+        justifyContent : 'center',
+
+    },
+    MyPillLogoImage : {
+        width: 36,
+        height: 36
+    },
     MyPillButtonText : {
-        width: 67,
+        width: 165,
         height: 29,
         // fontFamily: 'AppleSDGothicNeo',
         fontSize: 24,
@@ -150,6 +171,17 @@ const styles = StyleSheet.create({
         letterSpacing: -0.48,
         textAlign: 'left',
         color: '#404040'
+    },
+    MyPillNumText : {
+        width: 26,
+        height: 24,
+        // fontFamily: "AppleSDGothicNeo",
+        fontSize: 20,
+        fontWeight: "100",
+        fontStyle: "normal",
+        letterSpacing: -0.4,
+        textAlign: "left",
+        color: "#404040"
     },
     highlight : {
         width: 287,
