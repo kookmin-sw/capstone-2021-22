@@ -3,8 +3,9 @@
 **팀페이지 주소** -> https://kookmin-sw.github.io/capstone-2021-22
 
 ## 1. 프로젝트 소개
-<img src="https://user-images.githubusercontent.com/28584226/113485856-b5e6ec00-94ea-11eb-9d25-0cd26f2a658d.png" alt="logo" width=50%/><br>
-현대 의학이 발전하면서 시중의 의약품의 종류도 많아졌다. 각 의약품마다 용도와 용법이 존재하고, 복용하는 약의 종류가 많아질수록 자신이 무슨 약을 복용하는지 헷갈리는 경우가 생긴다. 우리는 사진 촬영만으로 알약 검색이 가능한 이미지 기반 알약 식별 모바일 애플리케이션 개발하려고 한다.
+<img src="https://user-images.githubusercontent.com/28584226/113487557-be8ff000-94f3-11eb-978b-a53a3580be7f.png" alt="logo" width=50%/>  
+
+현대 의학이 발전하면서 시중의 의약품의 종류도 많아졌다. 각 의약품마다 용도와 용법이 존재하고, 복용하는 약의 종류가 많아질수록 자신이 무슨 약을 복용하는지 헷갈리는 경우가 생긴다. 우리는 사진 촬영만으로 알약 검색이 가능한 이미지 기반 알약 식별 모바일 애플리케이션 개발하려고 한다.  
 
 주요 기능 
 1. 알약 검색
@@ -23,7 +24,7 @@
 
 #### 김윤정
 
-<img src="https://user-images.githubusercontent.com/28584226/113485108-f80e2e80-94e6-11eb-903b-1b324d57382f.jpeg" alt="image-yunjeong" width= 35%/>
+<img src="https://user-images.githubusercontent.com/28584226/113485108-f80e2e80-94e6-11eb-903b-1b324d57382f.jpeg" alt="image-yunjeong" width= 30%/>
 
 ~~~
 Student ID: 20171600
@@ -33,7 +34,7 @@ Role: 팀장, AI 모델 개발, 데이터 라벨링
 
 #### 고지원
 
-<img src="https://user-images.githubusercontent.com/28584226/113485623-82579200-94e9-11eb-8fbb-02e12f73396c.jpeg" alt="image-jiwon" width= 35% />
+<img src="https://user-images.githubusercontent.com/28584226/113485623-82579200-94e9-11eb-8fbb-02e12f73396c.jpeg" alt="image-jiwon" width= 30% />
 
 ~~~
 Student ID: 20171577
@@ -43,7 +44,7 @@ Role: UI/UX 디자인 및 앱 기획, 클라이언트 개발
 
 #### 김규리
 
-<img src="https://user-images.githubusercontent.com/28584226/113485312-d1042c80-94e7-11eb-8c78-f04a80c1a268.jpeg" alt="image-gyuri"  width= 35%/>
+<img src="https://user-images.githubusercontent.com/28584226/113485312-d1042c80-94e7-11eb-8c78-f04a80c1a268.jpeg" alt="image-gyuri"  width= 30%/>
 
 ~~~
 Student ID: 20171582
@@ -53,7 +54,7 @@ Role: AI 모델 개발, 데이터 라벨링
 
 #### 김민주
 
-<img src="https://user-images.githubusercontent.com/28584226/113485307-ca75b500-94e7-11eb-9d06-70d290733e90.jpeg" alt="image-minju" width= 35%/>
+<img src="https://user-images.githubusercontent.com/28584226/113485307-ca75b500-94e7-11eb-9d06-70d290733e90.jpeg" alt="image-minju" width= 30%/>
 
 ~~~
 Student ID: 20171590
@@ -63,7 +64,7 @@ Role: 클라이언트 개발
 
 #### 송준호
 
-<img src="https://user-images.githubusercontent.com/28584226/113485619-7ec40b00-94e9-11eb-8f68-c8ed81c3b492.jpeg" alt="image-junho" width= 35%/>
+<img src="https://user-images.githubusercontent.com/28584226/113485619-7ec40b00-94e9-11eb-8f68-c8ed81c3b492.jpeg" alt="image-junho" width= 30%/>
 
 ~~~
 Student ID: 20153190
