@@ -1,37 +1,81 @@
-## Welcome to GitHub Pages
+# 이게뭐약 ?
 
-You can use the [editor on GitHub](https://github.com/kookmin-sw/cap-template/edit/master/index.md) to maintain and preview the content for your website in Markdown files.
+**팀페이지 주소** -> https://kookmin-sw.github.io/capstone-2021-22
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## 1. 프로젝트 소개
+<img src="https://user-images.githubusercontent.com/28584226/113487557-be8ff000-94f3-11eb-978b-a53a3580be7f.png" alt="logo" width=50%/>  
 
-### Markdown
+현대 의학이 발전하면서 시중의 의약품의 종류도 많아졌다. 각 의약품마다 용도와 용법이 존재하고, 복용하는 약의 종류가 많아질수록 자신이 무슨 약을 복용하는지 헷갈리는 경우가 생긴다. 우리는 사진 촬영만으로 알약 검색이 가능한 이미지 기반 알약 식별 모바일 애플리케이션 개발하려고 한다.  
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+주요 기능 
+1. 알약 검색
+    - 알약 사진 촬영을 통한 검색
+    - 텍스트 정보(이름, 효능 등)를 통한 검색
+3. 내 약통 기능
+    - 사용자가 복용하고 있는 약의 종류를 관리할 수 있는 즐겨찾기 기능
 
-```markdown
-Syntax highlighted code block
+'이게뭐약?' 개발을 통해 일상생활에서 누구나 의약품을 쉽고 빠르게 식별 가능하도록 하여 의약품 정보 활용의 기회를 넓힌다. 또한 얻은 의약품의 정보를 통해 비슷한 약의 중복 처방으로 인한 오남용, 잘못된 알약 복용 등의 문제를 미리 방지하여 사용자의 안전하고 건강한 의약품 소비를 기대해 볼 수 있다.
 
-# Header 1
-## Header 2
-### Header 3
+## 2. 소개 영상
 
-- Bulleted
-- List
+프로젝트 소개하는 영상을 추가하세요
 
-1. Numbered
-2. List
+## 3. 팀 소개
 
-**Bold** and _Italic_ and `Code` text
+#### 김윤정
 
-[Link](url) and ![Image](src)
-```
+<img src="https://user-images.githubusercontent.com/28584226/113485108-f80e2e80-94e6-11eb-903b-1b324d57382f.jpeg" alt="image-yunjeong" width= 30%/>
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+~~~
+Student ID: 20171600
+E-mail: jje0ng@kookmin.ac.kr
+Role: 팀장, AI 모델 개발, 데이터 라벨링
+~~~
 
-### Jekyll Themes
+#### 고지원
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/kookmin-sw/cap-template/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+<img src="https://user-images.githubusercontent.com/28584226/113485623-82579200-94e9-11eb-8fbb-02e12f73396c.jpeg" alt="image-jiwon" width= 30% />
 
-### Support or Contact
+~~~
+Student ID: 20171577
+E-mail: gggoe@kookmin.ac.kr
+Role: UI/UX 디자인 및 앱 기획, 클라이언트 개발
+~~~
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+#### 김규리
+
+<img src="https://user-images.githubusercontent.com/28584226/113485312-d1042c80-94e7-11eb-8c78-f04a80c1a268.jpeg" alt="image-gyuri"  width= 30%/>
+
+~~~
+Student ID: 20171582
+E-mail: rosa980309@kookmin.ac.kr
+Role: AI 모델 개발, 데이터 라벨링
+~~~
+
+#### 김민주
+
+<img src="https://user-images.githubusercontent.com/28584226/113485307-ca75b500-94e7-11eb-9d06-70d290733e90.jpeg" alt="image-minju" width= 30%/>
+
+~~~
+Student ID: 20171590
+E-mail: rlaalswn3282@kookmin.ac.kr
+Role: 클라이언트 개발
+~~~
+
+#### 송준호
+
+<img src="https://user-images.githubusercontent.com/28584226/113485619-7ec40b00-94e9-11eb-8f68-c8ed81c3b492.jpeg" alt="image-junho" width= 30%/>
+
+~~~
+Student ID: 20153190
+E-mail: wgzero@kookmin.ac.kr
+Role: 데이터베이스 구축, 서버 개발, Git 관리
+~~~
+
+### 4. 사용법
+
+소스코드제출시 설치법이나 사용법을 작성하세요.
+
+### 5. 기타
+
+추가적인 내용은 자유롭게 작성하세요.
