@@ -4,6 +4,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
 import logo from './images/pill.png';
 import MyPillLogo from './images/pills-bottle.png';
+import { Button } from 'react-native-elements/dist/buttons/Button';
 
 
 class MainScreen extends Component {
@@ -28,7 +29,16 @@ class MainScreen extends Component {
                             <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
                         </TouchableOpacity>
                     </View>
+                </View>
 
+                <View style={styles.SearchButtonView}>
+                    <TouchableOpacity
+                        onPress={()=>{
+                            this.props.navigation.reset({routes: [{name: 'Search'}]})
+                        }}>
+                        <Text style={styles.SearchButton}>알약 이름을 알고 계신가요?</Text>
+                        <View style={styles.hr} />
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.MyPillButtonView}>
@@ -81,15 +91,6 @@ const styles = StyleSheet.create({
         flex : 3,
         alignItems: 'center',
         justifyContent : 'center',
-        // width: 314,
-        // height: 294,
-        // // opacity: 0.14,
-        // borderRadius: 27,
-        // backgroundColor: 'black',  //ffffff
-        // borderStyle: 'solid',
-        // borderWidth: 1,
-        // borderColor: '#cccccc'
-        
     },
 
     LogoImage : {
@@ -193,7 +194,29 @@ const styles = StyleSheet.create({
         letterSpacing: -0.64,
         textAlign: 'left',
         color: '#a7484d'
-    }
+    },
+    SearchButtonView : { 
+        alignItems: 'center',
+        justifyContent : 'center',
+    },
+    SearchButton : {
+        width: 158,
+        height: 19,
+        // fontFamily: "AppleSDGothicNeo",
+        fontSize: 15,
+        fontWeight: "normal",
+        fontStyle: "normal",
+        lineHeight: 25,
+        letterSpacing: -0.3,
+        textAlign: "center",
+        color: "#a2a2a2"
+    },
+    hr : {
+        width: 158,
+        height: 5,
+        borderBottomWidth: 1,
+        borderBottomColor: '#cccccc'
+    },
 });
 
 export default MainScreen;
