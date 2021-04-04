@@ -23,7 +23,7 @@
 
 #### 김윤정
 
-![yunjeong](https://user-images.githubusercontent.com/28584226/113500310-ddc06900-9557-11eb-88a4-c3da299ae02a.jpeg)
+![yunjeong](https://user-images.githubusercontent.com/28584226/113500722-40ffca80-955b-11eb-8d49-f90634764494.jpeg)
 
 ~~~
 Student ID: 20171600
@@ -33,7 +33,7 @@ Role: 팀장, AI 모델 개발, 데이터 라벨링
 
 #### 고지원
 
-![jiwon](https://user-images.githubusercontent.com/28584226/113500307-db5e0f00-9557-11eb-9412-cc49789991a0.jpeg)
+![jiwon](https://user-images.githubusercontent.com/28584226/113500719-3e9d7080-955b-11eb-9fd1-90ca1932437d.jpeg)
 
 ~~~
 Student ID: 20171577
@@ -43,7 +43,7 @@ Role: UI/UX 디자인 및 앱 기획, 클라이언트 개발
 
 #### 김규리
 
-![gyurl](https://user-images.githubusercontent.com/28584226/113500305-d7ca8800-9557-11eb-8557-728b98fad8d9.jpeg)
+![gyurl](https://user-images.githubusercontent.com/28584226/113500718-3cd3ad00-955b-11eb-96ec-cf1217d45017.jpeg)
 
 ~~~
 Student ID: 20171582
@@ -53,7 +53,7 @@ Role: AI 모델 개발, 데이터 라벨링
 
 #### 김민주
 
-![minju](https://user-images.githubusercontent.com/28584226/113500309-ddc06900-9557-11eb-8ba6-27934e45403c.jpeg)
+![minju](https://user-images.githubusercontent.com/28584226/113500721-40673400-955b-11eb-988d-b77a5124f736.jpeg)
 
 ~~~
 Student ID: 20171590
@@ -63,7 +63,7 @@ Role: 클라이언트 개발
 
 #### 송준호
 
-![junho](https://user-images.githubusercontent.com/28584226/113500308-dc8f3c00-9557-11eb-8f0d-507e34d71aa0.jpeg)
+![junho](https://user-images.githubusercontent.com/28584226/113500720-3fce9d80-955b-11eb-8c92-a1681278236f.jpeg)
 
 ~~~
 Student ID: 20153190
