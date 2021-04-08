@@ -1,7 +1,9 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Image, TouchableOpacity, ScrollView, Button } from 'react-native';
 import testData from '../src/testdata';
+import icon from './images/star.png';
+
 
 import { HeaderBackButton } from '@react-navigation/stack';
 
@@ -53,9 +55,17 @@ class SearchResultScreen extends Component {
                         }}>
                         <Image style={styles.PillImage} source={{uri : 'https://nedrug.mfds.go.kr/pbp/cmn/itemImageDownload/147427430091800120'}} style={{width: 200, height: 125}}/>
                         <View style={styles.TextContainer}>
+                            <View style={{flexDirection: 'row'}}>
                                 <Text style={styles.MainText}>{JSON.stringify(testData[0].ITEM_NAME)}</Text> 
-                                <Text style={styles.SubText}>{JSON.stringify(testData[0].CLASS_NAME)}</Text>
-                                <Text style={styles.SubText}>{JSON.stringify(testData[0].FORM_CODE_NAME)}</Text>
+                                <TouchableOpacity>
+                                    <Image
+                                    style={styles.icon}
+                                    source={icon}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <Text style={styles.SubText}>{JSON.stringify(testData[0].CLASS_NAME)}</Text>
+                            <Text style={styles.SubText}>{JSON.stringify(testData[0].FORM_CODE_NAME)}</Text>
                         </View>
                     </TouchableOpacity>
                     <View style= {styles.hr} />
@@ -136,7 +146,14 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         textAlign: 'left',
         color: '#585858'
-    }
+    },
+    icon : {
+        width: 23,
+        height: 23,
+        marginTop : 10
+
+
+    },
 });
 
 export default SearchResultScreen;
