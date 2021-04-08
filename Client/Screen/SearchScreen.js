@@ -1,40 +1,57 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
 
-class SearchScreen extends Component {
-    state = {
-        searchData: '',
-    };
+import testData from '../src/testdata';
+
+import { PillList } from '../component/PillList';
+
+export function SearchScreen() {
+
+    const [value, onChangeText] = useState('');
+    const [pillList, setPillList] = useState([]);
 
     changeSearchData = (text) => {
         this.setState({ searchData : text });
-      };
+    };
 
-    render () {
-        return (
-            <View style={styles.container}>
-                <View style={styles.inputBox}>
-                    <TextInput
-                    placeholder='알약 이름을 입력하세요'
-                    style={styles.textinput}
-                    onChangeText={this.changeSearchData}
-                    value={this.state.searchData}
-                    />
-                    <TouchableOpacity 
-                    onPress={()=>{
-                        this.props.navigation.navigate('SearchResult')
-                    }}>
-                        <Image
-                        source={require('../src/icon/search.png')}
-                        />
-                    </TouchableOpacity>
-                </View>
-            </View>
-             
-            
-        )
+    search = (data, value) => {
+        setPillList(data.filter((element) => element.ITEM_NAME.includes(value)));
+        // console.log(pillList)
     }
+    
+    return (
+        <View style={styles.container}>
+            <View style={styles.inputBox}>
+                <TextInput
+                placeholder='알약 이름을 입력하세요'
+                autoCapitalize='none'
+                autoCorrect={false}
+                style={styles.textinput}
+                onChangeText={(text) => onChangeText(text)}
+                />
+                <TouchableOpacity 
+                onPress={async()=>{
+                    if (value == "") {
+                        setPillList([])
+                    } else {
+                        search(testData, value)
+                        console.log(pillList)
+                    }
+                }}>
+                    <Image
+                    source={require('../src/icon/search.png')}
+                    />
+                </TouchableOpacity>
+            </View>
+            <View>
+                {pillList.map((pill,index) => ( <PillList key={index} data={pillList} imgUrl= {pill.IMAGE_URL} name = {pill.ITEM_NAME} className = {pill.CLASS_NAME} codeName = {pill.FORM_CODE_NAME} />))}
+            </View>
+        </View>
+            
+        
+    )
+    
 }
 
 const styles = StyleSheet.create({

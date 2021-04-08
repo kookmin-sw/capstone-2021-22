@@ -26,7 +26,12 @@ class MainScreen extends Component {
                             <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
                         </TouchableOpacity>
                     </View>
-
+                    <TouchableOpacity 
+                        onPress={()=>{
+                            this.props.navigation.navigate('Search')
+                        }}>
+                        <Text style={styles.searchText}>알약 직접 검색하기</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.MyPillButtonView}>
@@ -40,7 +45,6 @@ class MainScreen extends Component {
                         <Text style={styles.MyPillButtonText}>내약통</Text>
                     </TouchableOpacity>
                 </View>
-
             </View>
             
         )
@@ -132,6 +136,12 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         
     },
+    searchText: {
+        marginTop: 15,
+        fontSize: 16,
+        color: '#525252'
+    },
+
     MyPillButton : {
         width: 322,
         height: 97.9,

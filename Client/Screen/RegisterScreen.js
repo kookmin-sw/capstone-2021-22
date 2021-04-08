@@ -25,9 +25,10 @@ export function RegisterScreen() {
                 placeholder='이름'
                 value={name}
                 autoCapitalize='none'
+                autoCorrect='false'
                 onChangeText={(text) => {setName(text);}}
                 />
-                <View style={styles.hr} />
+                <View style={styles.hr}/>
 
                 <View style={styles.idView}>
                     <TextInput style={styles.idTextInput}
