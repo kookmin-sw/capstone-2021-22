@@ -26,7 +26,7 @@ export function SearchScreen() {
                 <TextInput
                 placeholder='알약 이름을 입력하세요'
                 autoCapitalize='none'
-                autoCorrect='false'
+                autoCorrect={false}
                 style={styles.textinput}
                 onChangeText={(text) => onChangeText(text)}
                 />
@@ -45,7 +45,7 @@ export function SearchScreen() {
                 </TouchableOpacity>
             </View>
             <View>
-                {pillList.map((pill,index) => ( <PillList data={pillList} imgUrl= {pill.IMAGE_URL} name = {pill.ITEM_NAME} className = {pill.CLASS_NAME} codeName = {pill.FORM_CODE_NAME} />))}
+                {pillList.map((pill,index) => ( <PillList key={index} data={pillList} imgUrl= {pill.IMAGE_URL} name = {pill.ITEM_NAME} className = {pill.CLASS_NAME} codeName = {pill.FORM_CODE_NAME} />))}
             </View>
         </View>
             

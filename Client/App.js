@@ -4,6 +4,8 @@ import { StyleSheet, View, Text, TextComponent, Image } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import SplashScreen from 'react-native-splash-screen';
+
 import MainScreen from './screen/MainScreen';
 import LoginScreen from './screen/LoginScreen';
 import RegisterScreen from './screen/RegisterScreen';
@@ -32,8 +34,14 @@ function BackBtn() {
     );
 }
 
-class App extends Component {
+class App extends Component 
+{
     render () {
+
+        setTimeout(() => {
+            SplashScreen.hide();
+        }, 1000);
+        
         return (
             <NavigationContainer>
                 <Stack.Navigator initialRouteName="Main">
