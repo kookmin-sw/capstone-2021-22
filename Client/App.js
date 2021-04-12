@@ -6,14 +6,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import SplashScreen from 'react-native-splash-screen';
 
-import MainScreen from './Screen/MainScreen';
-import LoginScreen from './Screen/LoginScreen';
-import RegisterScreen from './Screen/RegisterScreen';
-import RegisterFinishScreen from './Screen/RegisterFinishScreen';
-import SearchScreen from './Screen/SearchScreen';
-import SearchResultScreen from './Screen/SearchResultScreen';
-import MyPillScreen from './Screen/MyPillScreen';
-import MyPillDetailScreen from './Screen/MyPillDetailScreen';
+import MainScreen from './screen/MainScreen';
+import LoginScreen from './screen/LoginScreen';
+import RegisterScreen from './screen/RegisterScreen';
+import RegisterFinishScreen from './screen/RegisterFinishScreen';
+import SearchScreen from './screen/SearchScreen';
+import MyPillScreen from './screen/MyPillScreen';
+import MyPillDetailScreen from './screen/MyPillDetailScreen';
 
 const Stack = createStackNavigator();
 
@@ -91,21 +90,6 @@ class App extends Component
                     <Stack.Screen
                     name="Search"
                     component={SearchScreen}
-                    options={{ 
-                        title: '알약 검색' ,
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
-                            fontSize: 20,
-                            color: "#707070"
-                        },
-                        headerBackTitleVisible: false,
-                        headerBackImage: HomeBtn,
-                    }}
-                    />
-
-                    <Stack.Screen
-                    name="SearchResult"
-                    component={SearchResultScreen}
                     options={{ 
                         title: '알약 검색' ,
                         headerTitleStyle: {

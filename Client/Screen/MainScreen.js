@@ -41,6 +41,7 @@ class MainScreen extends Component {
                         }}>
                         <Text style={styles.SearchButton}>알약 이름을 알고 계신가요?</Text>
                         <View style={styles.hr} />
+
                     </TouchableOpacity>
                 </View>
 
@@ -59,7 +60,6 @@ class MainScreen extends Component {
                         <Text style={styles.MyPillNumText}>></Text>
                     </TouchableOpacity>
                 </View>
-
             </View>
             
         )
@@ -142,6 +142,12 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         
     },
+    searchText: {
+        marginTop: 15,
+        fontSize: 16,
+        color: '#525252'
+    },
+
     MyPillButton : {
         flexDirection: 'row',
         width: 322,
