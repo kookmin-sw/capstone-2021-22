@@ -1,8 +1,31 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, View, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, TextInput, Image, TouchableOpacity, ScrollView, Button } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
+
+function HomeBtn() {
+    return (
+        <Image
+        source={require('./images/home.png')}
+        style={{marginLeft: 16, width: 24, height: 24}}
+        />
+    );  
+}
 
 class SearchScreen extends Component {
+    headerStyle = () => {
+        this.props.navigation.setOptions({
+            headerLeft: () => (
+                <Button
+                    title="goMain"
+                    onPress={()=>{
+                        this.props.navigation.reset({routes: [{name: 'Main'}]})
+                    }} 
+                /> 
+            ),
+        })   
+    }
+
     state = {
         searchData: '',
     };
@@ -12,6 +35,7 @@ class SearchScreen extends Component {
       };
 
     render () {
+        this.headerStyle();
         return (
             <View style={styles.container}>
                 <View style={styles.inputBox}>

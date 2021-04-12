@@ -34,7 +34,10 @@ class MainScreen extends Component {
                 <View style={styles.SearchButtonView}>
                     <TouchableOpacity
                         onPress={()=>{
-                            this.props.navigation.reset({routes: [{name: 'Search'}]})
+                            this.props.navigation.reset({
+                                index: 0,
+                                routes: [{name: 'Search'}]
+                            })
                         }}>
                         <Text style={styles.SearchButton}>알약 이름을 알고 계신가요?</Text>
                         <View style={styles.hr} />

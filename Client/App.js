@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextComponent, Image } from 'react-native';
+import { StyleSheet, View, Text, TextComponent, Image, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -99,7 +99,7 @@ class App extends Component
                             color: "#707070"
                         },
                         headerBackTitleVisible: false,
-                        headerBackImage: HomeBtn
+                        headerBackImage: HomeBtn,
                     }}
                     />
 
