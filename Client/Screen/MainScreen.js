@@ -2,8 +2,8 @@ import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
-import logo from './images/pill.png';
-import MyPillLogo from './images/pills-bottle.png';
+import  logo  from './images/pill.png';
+import  MyPillLogo  from './images/pills-bottle.png';
 import { Button } from 'react-native-elements/dist/buttons/Button';
 
 
@@ -24,8 +24,11 @@ class MainScreen extends Component {
                         <TouchableOpacity 
                             style={styles.MainButton}
                             onPress={()=>{
-                                this.props.navigation.navigate('Search')
-                            }}>
+                            this.props.navigation.reset({
+                                index: 0,
+                                routes: [{name: 'Search'}]
+                            })
+                        }}>
                             <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
                         </TouchableOpacity>
                     </View>
