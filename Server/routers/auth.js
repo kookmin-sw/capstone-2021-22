@@ -41,7 +41,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
       return next(authError);
     }
     if (!user) {
-      return res.status(422).send({ error: `${info.message}` })
+      return res.status(401).send({ error: `${info.message}` })
     }
     return req.login(user, (loginError) => {
       if (loginError) {
@@ -82,7 +82,7 @@ router.post('/isExistId', async (req, res, next) => {
       )
     }
     else {
-      res.status(422).json(
+      res.status(401).json(
         {
           "isExistId": false
         }
