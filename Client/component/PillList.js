@@ -6,25 +6,7 @@ import icon from '../src/icon/star.png';
 
 export function PillList(props) {
     const navigation = useNavigation();
-    console.log(props.name)
 
-    if (props.name == '') {
-        return (
-            <View style={{
-                width : '100%',
-                marginTop: 500,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <Text style={{
-                  fontWeight: '600',
-                  fontSize: 20
-                }}>검색 결과가 없습니다.</Text>
-            </View>
-        )
-    }
-    
-    else if (props.data != []){
         return(
             <View>
                 <TouchableOpacity 
@@ -48,10 +30,9 @@ export function PillList(props) {
                         <Text style={styles.SubText}>{props.codeName}</Text>
                     </View>
                 </TouchableOpacity>
-                <View style= {styles.hr} />
+                <View style= {styles.hr}></View>
             </View>
         )
-    }
 }
 
 const styles = StyleSheet.create({

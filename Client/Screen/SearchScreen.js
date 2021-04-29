@@ -1,13 +1,13 @@
 import 'react-native-gesture-handler';
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 
 import testData from '../src/testdata';
 
 import { PillList } from '../component/PillList';
 
 export function SearchScreen() {
-
+    
     const [value, onChangeText] = useState('');
     const [pillList, setPillList] = useState([]);
 
@@ -44,9 +44,12 @@ export function SearchScreen() {
                     />
                 </TouchableOpacity>
             </View>
-            <View>
-                {pillList.map((pill,index) => ( <PillList key={index} data={pillList} imgUrl= {pill.IMAGE_URL} name = {pill.ITEM_NAME} className = {pill.CLASS_NAME} codeName = {pill.FORM_CODE_NAME} />))}
-            </View>
+            {pillList.length == 0 &&
+                <Text style={styles.text}>검색결과가 없습니다.</Text>
+            }
+            {pillList.map((pill,index) => ( 
+                <PillList key={index} data={pillList} imgUrl= {pill.IMAGE_URL} name = {pill.ITEM_NAME} className = {pill.CLASS_NAME} codeName = {pill.FORM_CODE_NAME} />
+            ))}
         </View>
             
         
@@ -73,7 +76,14 @@ const styles = StyleSheet.create({
     },
     textinput: {
         fontSize: 18,
-        color: '#707070'
+        color: '#3c3c3c'
+    },
+    text: {
+        fontSize: 22,
+        width: '90%',
+        marginTop: 20,
+        marginLeft: 20,
+        color: '#3c3c3c'
     }
 });
 
