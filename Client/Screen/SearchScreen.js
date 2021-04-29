@@ -8,21 +8,6 @@ import { PillList } from '../component/PillList';
 import { CommonActions } from '@react-navigation/native';
 
 
-// class SearchScreen extends Component {
-//     headerStyle = () => {
-//         this.props.navigation.setOptions({
-//             headerLeft: () => (
-//                 <Button
-//                     title="goMain"
-//                     onPress={()=>{
-//                         this.props.navigation.reset({routes: [{name: 'Main'}]})
-//                     }} 
-//                 /> 
-//             ),
-//         })   
-//     }
-
-
 export function SearchScreen() {
 
     const [value, onChangeText] = useState('');

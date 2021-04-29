@@ -24,11 +24,8 @@ class MainScreen extends Component {
                         <TouchableOpacity 
                             style={styles.MainButton}
                             onPress={()=>{
-                            this.props.navigation.reset({
-                                index: 0,
-                                routes: [{name: 'Search'}]
-                            })
-                        }}>
+                                this.props.navigation.navigate('PhotoGuide')
+                            }}>
                             <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
                         </TouchableOpacity>
                     </View>
