@@ -2,7 +2,10 @@ import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
-import logo from './images/pill.png';
+import  logo  from './images/pill.png';
+import  MyPillLogo  from './images/pills-bottle.png';
+import { Button } from 'react-native-elements/dist/buttons/Button';
+
 
 class MainScreen extends Component {
 
@@ -21,16 +24,24 @@ class MainScreen extends Component {
                         <TouchableOpacity 
                             style={styles.MainButton}
                             onPress={()=>{
-                                this.props.navigation.navigate('Search')
+                                this.props.navigation.navigate('PhotoGuide')
                             }}>
                             <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity 
+                </View>
+
+                <View style={styles.SearchButtonView}>
+                    <TouchableOpacity
                         onPress={()=>{
-                            this.props.navigation.navigate('Search')
+                            this.props.navigation.reset({
+                                index: 0,
+                                routes: [{name: 'Search'}]
+                            })
                         }}>
-                        <Text style={styles.searchText}>알약 직접 검색하기</Text>
+                        <Text style={styles.SearchButton}>알약 이름을 알고 계신가요?</Text>
+                        <View style={styles.hr} />
+
                     </TouchableOpacity>
                 </View>
 
@@ -41,8 +52,12 @@ class MainScreen extends Component {
                             /*this.props.navigation.navigate('MyPill')*/
                             this.props.navigation.navigate('Login')
                         }}>
-                        
-                        <Text style={styles.MyPillButtonText}>내약통</Text>
+                        <View style={styles.MyPillLogoView}>
+                            <Image style={styles.MyPillLogoImage}
+                                source={MyPillLogo}/>
+                        </View>
+                        <Text style={styles.MyPillButtonText}>내 약통</Text>
+                        <Text style={styles.MyPillNumText}>></Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -79,15 +94,6 @@ const styles = StyleSheet.create({
         flex : 3,
         alignItems: 'center',
         justifyContent : 'center',
-        // width: 314,
-        // height: 294,
-        // // opacity: 0.14,
-        // borderRadius: 27,
-        // backgroundColor: 'black',  //ffffff
-        // borderStyle: 'solid',
-        // borderWidth: 1,
-        // borderColor: '#cccccc'
-        
     },
 
     LogoImage : {
@@ -143,15 +149,30 @@ const styles = StyleSheet.create({
     },
 
     MyPillButton : {
+        flexDirection: 'row',
         width: 322,
         height: 97.9,
         backgroundColor: '#f0f2f0',
         alignItems: 'center',
-        justifyContent : 'center',
         borderRadius: 20,
     },
+    MyPillLogoView : {
+        width: 60,
+        height: 60,
+        backgroundColor: '#ffff',
+        borderRadius: 12,
+        margin : 25,
+        marginRight : 15,
+        alignItems: 'center',
+        justifyContent : 'center',
+
+    },
+    MyPillLogoImage : {
+        width: 36,
+        height: 36
+    },
     MyPillButtonText : {
-        width: 67,
+        width: 165,
         height: 29,
         // fontFamily: 'AppleSDGothicNeo',
         fontSize: 24,
@@ -160,6 +181,17 @@ const styles = StyleSheet.create({
         letterSpacing: -0.48,
         textAlign: 'left',
         color: '#404040'
+    },
+    MyPillNumText : {
+        width: 26,
+        height: 24,
+        // fontFamily: "AppleSDGothicNeo",
+        fontSize: 20,
+        fontWeight: "100",
+        fontStyle: "normal",
+        letterSpacing: -0.4,
+        textAlign: "left",
+        color: "#404040"
     },
     highlight : {
         width: 287,
@@ -171,7 +203,29 @@ const styles = StyleSheet.create({
         letterSpacing: -0.64,
         textAlign: 'left',
         color: '#a7484d'
-    }
+    },
+    SearchButtonView : { 
+        alignItems: 'center',
+        justifyContent : 'center',
+    },
+    SearchButton : {
+        width: 158,
+        height: 19,
+        // fontFamily: "AppleSDGothicNeo",
+        fontSize: 15,
+        fontWeight: "normal",
+        fontStyle: "normal",
+        lineHeight: 25,
+        letterSpacing: -0.3,
+        textAlign: "center",
+        color: "#a2a2a2"
+    },
+    hr : {
+        width: 158,
+        height: 5,
+        borderBottomWidth: 1,
+        borderBottomColor: '#cccccc'
+    },
 });
 
 export default MainScreen;
