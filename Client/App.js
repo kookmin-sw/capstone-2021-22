@@ -10,6 +10,7 @@ import MainScreen from './screen/MainScreen';
 import LoginScreen from './screen/LoginScreen';
 import RegisterScreen from './screen/RegisterScreen';
 import RegisterFinishScreen from './screen/RegisterFinishScreen';
+import CameraScreen from './screen/CameraScreen';
 import SearchScreen from './screen/SearchScreen';
 import MyPillScreen from './screen/MyPillScreen';
 import MyPillDetailScreen from './screen/MyPillDetailScreen';
@@ -86,6 +87,18 @@ class App extends Component
                         headerShown : false
                     }}
                     />
+                    <Stack.Screen
+                    name="Camera"
+                    component={CameraScreen}
+                    options={{
+                        title: '사진촬영' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                    }}
+                    /> 
 
                     <Stack.Screen
                     name="Search"

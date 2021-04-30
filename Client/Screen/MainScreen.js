@@ -21,7 +21,7 @@ class MainScreen extends Component {
                         <TouchableOpacity 
                             style={styles.MainButton}
                             onPress={()=>{
-                                this.props.navigation.navigate('Search')
+                                this.props.navigation.navigate('Camera')
                             }}>
                             <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
                         </TouchableOpacity>
