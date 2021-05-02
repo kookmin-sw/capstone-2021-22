@@ -5,6 +5,8 @@ import { StyleSheet, View, TextInput, Image, TouchableOpacity, ScrollView } from
 import testData from '../src/testdata';
 
 import { PillList } from '../component/PillList';
+import { CommonActions } from '@react-navigation/native';
+
 
 export function SearchScreen() {
 
@@ -41,6 +43,7 @@ export function SearchScreen() {
                 }}>
                     <Image
                     source={require('../src/icon/search.png')}
+
                     />
                 </TouchableOpacity>
             </View>

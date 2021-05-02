@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TextComponent, Image } from 'react-native';
+import { StyleSheet, View, Text, TextComponent, Image, Button, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -16,14 +16,6 @@ import MyPillDetailScreen from './screen/MyPillDetailScreen';
 
 const Stack = createStackNavigator();
 
-function HomeBtn() {
-    return (
-        <Image
-        source={require('./src/icon/home.png')}
-        style={{marginLeft: 16, width: 24, height: 24}}
-        />
-    );  
-}
 
 function BackBtn() {
     return (
@@ -90,7 +82,7 @@ class App extends Component
                     <Stack.Screen
                     name="Search"
                     component={SearchScreen}
-                    options={{ 
+                    options={({ navigation }) => ({
                         title: '알약 검색' ,
                         headerTitleStyle: {
                             fontWeight: 'bold',
@@ -98,8 +90,20 @@ class App extends Component
                             color: "#707070"
                         },
                         headerBackTitleVisible: false,
-                        headerBackImage: HomeBtn
-                    }}
+                        headerLeft: () => (
+                            <TouchableOpacity
+                            onPress={()=>{
+                                navigation.reset({routes: [{name: 'Main'}]})
+                            }}>
+                                <Image
+                                    source={require('./src/icon/home.png')}
+                                    style={{marginLeft: 16, width: 24, height: 24}}
+                                />
+                            </TouchableOpacity>
+                             
+                        ),
+                    })}
+
                     />
 
                     <Stack.Screen
