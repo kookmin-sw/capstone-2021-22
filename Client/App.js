@@ -13,6 +13,9 @@ import RegisterFinishScreen from './screen/RegisterFinishScreen';
 import SearchScreen from './screen/SearchScreen';
 import MyPillScreen from './screen/MyPillScreen';
 import MyPillDetailScreen from './screen/MyPillDetailScreen';
+import PhotoGuideScreen from './screen/PhotoGuideScreen';
+import PhotoScreen from './screen/PhotoScreen';
+import ConfirmScreen from './screen/ConfirmScreen';
 
 const Stack = createStackNavigator();
 
@@ -77,7 +80,7 @@ class App extends Component
                         },
                         headerShown : false
                     }}
-                    />
+                    /> 
 
                     <Stack.Screen
                     name="Search"
@@ -141,6 +144,51 @@ class App extends Component
                     component={MyPillDetailScreen}
                     options={{ 
                         title: '내약통' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerBackImage: BackBtn,
+                    }}
+                    />
+
+                    <Stack.Screen
+                    name="PhotoGuide"
+                    component={PhotoGuideScreen}
+                    options={{ 
+                        title: '알약 촬영 안내' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerBackImage: BackBtn,
+                    }}
+                    />
+
+                    <Stack.Screen
+                    name="Photo"
+                    component={PhotoScreen}
+                    options={{ 
+                        title: '알약 촬영' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerBackImage: BackBtn,
+                    }}
+                    />
+
+                    <Stack.Screen
+                    name="Confirm"
+                    component={ConfirmScreen}
+                    options={{ 
+                        title: '알약 촬영' ,
                         headerTitleStyle: {
                             fontWeight: 'bold',
                             fontSize: 20,
