@@ -7,32 +7,32 @@ import icon from '../src/icon/star.png';
 export function PillList(props) {
     const navigation = useNavigation();
 
-        return(
-            <View>
-                <TouchableOpacity 
-                    style={styles.PillContainer}
-                    onPress={()=>{
-                        navigation.navigate('MyPillDetail')
-                    }}>
-                    <Image source={{uri:props.imgUrl}} style={styles.imageStyle}
-                    />
-                    <View  style={{width: 170}}>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <Text style={styles.MainText} numberOfLines={2} ellipsizeMode="tail">{props.name}</Text>
-                            <TouchableOpacity>
-                                <Image
-                                style={styles.icon}
-                                source={icon}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                        <Text style={styles.SubText}>{props.className}</Text>
-                        <Text style={styles.SubText}>{props.codeName}</Text>
+    return(
+        <View>
+            <TouchableOpacity 
+                style={styles.PillContainer}
+                onPress={()=>{
+                    navigation.navigate('MyPillDetail')
+                }}>
+                <Image source={{uri:props.imgUrl}} style={styles.imageStyle}
+                />
+                <View  style={{width: 170}}>
+                    <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <Text style={styles.MainText} numberOfLines={2} ellipsizeMode="tail">{props.name}</Text>
+                        <TouchableOpacity>
+                            <Image
+                            style={styles.icon}
+                            source={icon}
+                            />
+                        </TouchableOpacity>
                     </View>
-                </TouchableOpacity>
-                <View style= {styles.hr}></View>
-            </View>
-        )
+                    <Text style={styles.SubText}>{props.className}</Text>
+                    <Text style={styles.SubText}>{props.codeName}</Text>
+                </View>
+            </TouchableOpacity>
+            <View style= {styles.hr}></View>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({

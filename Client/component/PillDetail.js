@@ -6,65 +6,65 @@ import icon from '../src/icon/star.png';
 
 export function PillDetail(props) {
 
-        return(
-            <View>
-                <Image source={{uri:props.imgUrl}} style={styles.image}/>
-                <View style={styles.mainContainer}>
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.titleText}>알약 이름</Text>
-                        <TouchableOpacity>
-                            <Image
-                            style={styles.icon}
-                            source={icon}
-                            />
-                        </TouchableOpacity>
-                    </View>      
+    return(
+        <View>
+            <Image source={{uri:props.imgUrl}} style={styles.image}/>
+            <View style={styles.mainContainer}>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.titleText}>알약 이름</Text>
+                    <TouchableOpacity>
+                        <Image
+                        style={styles.icon}
+                        source={icon}
+                        />
+                    </TouchableOpacity>
+                </View>      
 
-                    <View style= {styles.hr} />            
-                    <View style={styles.textContainer}>
-                        <View style={styles.key}>
-                            <Text style={styles.keyText}>제조수입사</Text>
-                            <Text style={styles.keyText}>분류명</Text>
-                            <Text style={styles.keyText}>제형코드명</Text>
-                        </View>
-                        <View style={styles.value}>
-                            <Text style={styles.valueText}>제조수입사</Text>
-                            <Text style={styles.valueText}>분류명</Text>
-                            <Text style={styles.valueText}>제형코드명</Text>
-                        </View>
+                <View style= {styles.hr} />            
+                <View style={styles.textContainer}>
+                    <View style={styles.key}>
+                        <Text style={styles.keyText}>제조수입사</Text>
+                        <Text style={styles.keyText}>분류명</Text>
+                        <Text style={styles.keyText}>제형코드명</Text>
                     </View>
-                    <View style= {styles.hr} />            
+                    <View style={styles.value}>
+                        <Text style={styles.valueText}>제조수입사</Text>
+                        <Text style={styles.valueText}>분류명</Text>
+                        <Text style={styles.valueText}>제형코드명</Text>
+                    </View>
                 </View>
+                <View style= {styles.hr} />            
+            </View>
 
-                <View style={styles.body}>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  효능 효과</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  용법 용량</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  주의사항</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  복약정보</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  제조수입사</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
+            <View style={styles.body}>
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.sectionTitle}>■  효능 효과</Text>
+                    <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
+                    <View style= {styles.hr} />                
+                </View>
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.sectionTitle}>■  용법 용량</Text>
+                    <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
+                    <View style= {styles.hr} />                
+                </View>
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.sectionTitle}>■  주의사항</Text>
+                    <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
+                    <View style= {styles.hr} />                
+                </View>
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.sectionTitle}>■  복약정보</Text>
+                    <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
+                    <View style= {styles.hr} />                
+                </View>
+                <View style={styles.sectionContainer}>
+                    <Text style={styles.sectionTitle}>■  제조수입사</Text>
+                    <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
+                    <View style= {styles.hr} />                
                 </View>
             </View>
-        )
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
