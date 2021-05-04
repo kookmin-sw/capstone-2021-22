@@ -5,12 +5,12 @@ conn = pymysql.connect(host='localhost', user='root', password='password', db='d
 
 
 curs = conn.cursor()
-sql = """insert into PILLS(id, name,class,shape) values (%s,%s, %s, %s)"""
+sql = """insert into PILLS(id, name,class,shape,company) values (%s,%s, %s, %s,%s)"""
 select = """ SELECT * FROM PILLS WHERE id = %s"""
 
 for index in range(0,len(xlsx)):
     try:
-        curs.execute(sql, (int(xlsx['품목일련번호'][index]),xlsx['품목명'][index], xlsx['분류명'][index], xlsx['제형코드명'][index]))
+        curs.execute(sql, (int(xlsx['품목일련번호'][index]),xlsx['품목명'][index], xlsx['분류명'][index], xlsx['제형코드명'][index],xlsx['업소명'][index]))
 
     except pymysql.err.IntegrityError:
         #고유번호 중복 예외처리

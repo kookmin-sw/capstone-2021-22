@@ -17,6 +17,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       comment: "제형코드명"
     },
+    company: {
+      type: DataTypes.STRING(200),
+      allowNull: false,
+      comment: "제조\/수입사 이름"
+    },
     name: {
       type: DataTypes.STRING(200),
       allowNull: false,

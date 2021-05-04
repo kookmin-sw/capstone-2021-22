@@ -2,76 +2,18 @@ import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
 
-import testImage from './images/test.jpg';
+import testData from '../src/testdata';
+
 import icon from './images/star.png';
+import { PillDetail } from '../component/PillDetail';
 
-class MyPillDetailScreen extends Component {
+export function MyPillDetailScreen() {
 
-    render () {
-        return (
-            <ScrollView style={styles.scrollView}>
-                <Image
-                        style={styles.image}
-                        source={testImage}
-                    />
-                <View style={styles.mainContainer}>
-                    <View style={styles.titleContainer}>
-                        <Text style={styles.titleText}>알약 이름</Text>
-                        <TouchableOpacity>
-                            <Image
-                            style={styles.icon}
-                            source={icon}
-                            />
-                        </TouchableOpacity>
-                    </View>      
-
-                    <View style= {styles.hr} />            
-                    <View style={styles.textContainer}>
-                        <View style={styles.key}>
-                            <Text style={styles.keyText}>제조수입사</Text>
-                            <Text style={styles.keyText}>분류명</Text>
-                            <Text style={styles.keyText}>제형코드명</Text>
-                        </View>
-                        <View style={styles.value}>
-                            <Text style={styles.valueText}>제조수입사</Text>
-                            <Text style={styles.valueText}>분류명</Text>
-                            <Text style={styles.valueText}>제형코드명</Text>
-                        </View>
-                    </View>
-                    <View style= {styles.hr} />            
-                </View>
-
-                <View style={styles.body}>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  효능 효과</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  용법 용량</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  주의사항</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  복약정보</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
-                    <View style={styles.sectionContainer}>
-                        <Text style={styles.sectionTitle}>■  제조수입사</Text>
-                        <Text style={styles.sectionDescription}>이 약은 이런 효과가 있습니다</Text>       
-                        <View style= {styles.hr} />                
-                    </View>
-                </View>
-            
-            </ScrollView>  
-        )
-    }
+    return (
+        <ScrollView style={styles.scrollView}>
+            <PillDetail imgUrl={'../screen/images/test.jpg'}/>
+        </ScrollView>  
+    )
 }
 
 const styles = StyleSheet.create({
