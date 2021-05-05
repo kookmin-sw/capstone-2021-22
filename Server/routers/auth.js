@@ -41,7 +41,11 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
       return next(authError);
     }
     if (!user) {
-      return res.status(401).send({ error: `${info.message}` })
+      return res.status(401).json(
+        {
+          "isLogin":false,
+        }
+      );
     }
     return req.login(user, (loginError) => {
       if (loginError) {
@@ -52,6 +56,7 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
 
       res.status(200).json(
         {
+          "isLogin":true,
           "token": token,
           "name": user.name,
           "pill": "8"
