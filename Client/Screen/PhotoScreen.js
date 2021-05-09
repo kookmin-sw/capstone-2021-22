@@ -3,8 +3,6 @@ import * as ImagePicker from 'react-native-image-picker';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
-import pill from './images/pill.png';
-
 export function PhotoScreen(){
 
     const navigation = useNavigation();
@@ -61,21 +59,20 @@ export function PhotoScreen(){
         });
     }
     const renderImage = (order) => {
-        if (order == 1) {
+        if (firstImage & order == 1) {
             return <Image
                 source={{ uri:firstImage.uri }}
                 style={styles.images}
             />
-        } else if (order == 2) {
+        } else if (secondImage & order == 2) {
             return <Image
                 source={{ uri:secondImage.uri }}
                 style={styles.images}
             />
         } else {
-            return <Image
-                source={ pill }
-                style={styles.images}
-            />
+            return <Text style={styles.images}>
+                +
+            </Text>
         }
     }
     
@@ -131,11 +128,17 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     images: {
+        alignItems: 'center', 
+        justifyContent: 'center',
         marginBottom: 30,
         width: 235,
         height: 235,
         borderWidth: 1,
-        borderColor: "#707070"
+        borderColor: "#cccccc"
+    },
+    nullImages: {
+        width: 90,
+        height: 90,
     },
     TextView : {
         alignItems: "center",

@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
         color: '#3c3c3c'
     },
     text: {
-        fontSize: 22,
+        fontSize: 20,
         width: '90%',
         marginTop: 20,
         marginLeft: 20,
