@@ -92,9 +92,9 @@ export function RegisterScreen() {
             <View style={styles.InputTextView}>
                 <TextInput style={styles.textinput}
                 placeholder='이름'
+                placeholderTextColor = '#cccccc'
                 value={name}
                 autoCapitalize='none'
-                autoCorrect='false'
                 onChangeText={(text) => {setName(text);}}
                 />
                 <View style={styles.hr}/>
@@ -102,6 +102,7 @@ export function RegisterScreen() {
                 <View style={styles.idView}>
                     <TextInput style={styles.idTextInput}
                     placeholder='아이디'
+                    placeholderTextColor = '#cccccc'
                     value={id}
                     autoCapitalize='none'
                     onChangeText={(text) => {setId(text);}}
@@ -116,6 +117,7 @@ export function RegisterScreen() {
 
                 <TextInput style={styles.textinput}
                 placeholder='비밀번호'
+                placeholderTextColor = '#cccccc'
                 value={password}
                 autoCapitalize='none'
                 secureTextEntry={true}
@@ -157,7 +159,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         height: 40,
         fontSize: 24,
-        color: '#707070'
+        color: '#5c5c5c'
     },
 
     idView: {
@@ -171,7 +173,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         height: 40,
         fontSize: 24,
-        color: '#707070'
+        color: '#5c5c5c',
     },
 
     idCheckButtonText : {

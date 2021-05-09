@@ -58,7 +58,7 @@ class MainScreen extends Component {
                                 source={MyPillLogo}/>
                         </View>
                         <Text style={styles.MyPillButtonText}>내 약통</Text>
-                        <Text style={styles.MyPillNumText}>></Text>
+                        <Text style={styles.MyPillNumText}></Text>
                     </TouchableOpacity>
                 </View>
             </View>

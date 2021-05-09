@@ -20,7 +20,7 @@ class PhotoGuideScreen extends Component {
                         onPress={()=>{
                             this.props.navigation.reset({
                                 index: 0,
-                                routes: [{name: 'Photo'}]
+                                routes: [{name: "Photo"}]
                             })
                     }}>
                         <Text style={styles.ButtonText}>촬영하기</Text>

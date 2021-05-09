@@ -114,7 +114,7 @@ class App extends Component
                         },
                         headerShown : false
                     }}
-                    />
+                    /> 
 
                     <Stack.Screen
                     name="Search"
