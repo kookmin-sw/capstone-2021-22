@@ -72,7 +72,6 @@ const styles = StyleSheet.create({
         width: 23,
         height: 23,
         marginTop : 10, 
-
     },
     titleText : {
         // fontFamily: 'AppleSDGothicNeo',

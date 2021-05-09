@@ -2,8 +2,8 @@ import 'react-native-gesture-handler';
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
-import logo from './images/pill.png';
-import MyPillLogo from './images/pills-bottle.png';
+import  logo  from './images/pill.png';
+import  MyPillLogo  from './images/pills-bottle.png';
 import { Button } from 'react-native-elements/dist/buttons/Button';
 
 
@@ -24,7 +24,7 @@ class MainScreen extends Component {
                         <TouchableOpacity 
                             style={styles.MainButton}
                             onPress={()=>{
-                                this.props.navigation.navigate('Search')
+                                this.props.navigation.navigate('PhotoGuide')
                             }}>
                             <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
                         </TouchableOpacity>
@@ -34,10 +34,14 @@ class MainScreen extends Component {
                 <View style={styles.SearchButtonView}>
                     <TouchableOpacity
                         onPress={()=>{
-                            this.props.navigation.reset({routes: [{name: 'Search'}]})
+                            this.props.navigation.reset({
+                                index: 0,
+                                routes: [{name: 'Search'}]
+                            })
                         }}>
                         <Text style={styles.SearchButton}>알약 이름을 알고 계신가요?</Text>
                         <View style={styles.hr} />
+
                     </TouchableOpacity>
                 </View>
 
@@ -53,10 +57,9 @@ class MainScreen extends Component {
                                 source={MyPillLogo}/>
                         </View>
                         <Text style={styles.MyPillButtonText}>내 약통</Text>
-                        <Text style={styles.MyPillNumText}>></Text>
+                        <Text style={styles.MyPillNumText}></Text>
                     </TouchableOpacity>
                 </View>
-
             </View>
             
         )
@@ -139,6 +142,12 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         
     },
+    searchText: {
+        marginTop: 15,
+        fontSize: 16,
+        color: '#525252'
+    },
+
     MyPillButton : {
         flexDirection: 'row',
         width: 322,

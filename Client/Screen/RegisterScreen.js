@@ -9,9 +9,13 @@ export function RegisterScreen() {
     const [password, setPassword] = useState('');
     const navigation = useNavigation();
 
-    sendCred=() => {
+    sendInfo=() => {
         console.log(name, id, password);
         navigation.navigate('RegisterFinish');
+    }
+
+    idCheck=() => {
+
     }
 
     return (
@@ -19,22 +23,32 @@ export function RegisterScreen() {
             <View style={styles.InputTextView}>
                 <TextInput style={styles.textinput}
                 placeholder='이름'
+                placeholderTextColor = '#cccccc'
                 value={name}
                 autoCapitalize='none'
                 onChangeText={(text) => {setName(text);}}
                 />
-                <View style={styles.hr} />
+                <View style={styles.hr}/>
 
-                <TextInput style={styles.textinput}
-                placeholder='아이디'
-                value={id}
-                autoCapitalize='none'
-                onChangeText={(text) => {setId(text);}}
-                />
-                <View style={styles.hr} />
+                <View style={styles.idView}>
+                    <TextInput style={styles.idTextInput}
+                    placeholder='아이디'
+                    placeholderTextColor = '#cccccc'
+                    value={id}
+                    autoCapitalize='none'
+                    onChangeText={(text) => {setId(text);}}
+                    />
+                    <TouchableOpacity
+                        style={styles.idCheckButton}
+                        onPress={() => idCheck()}>
+                        <Text style={styles.idCheckButtonText}>중복확인</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={styles.idhr} />
 
                 <TextInput style={styles.textinput}
                 placeholder='비밀번호'
+                placeholderTextColor = '#cccccc'
                 value={password}
                 autoCapitalize='none'
                 secureTextEntry={true}
@@ -43,13 +57,12 @@ export function RegisterScreen() {
                 <View style={styles.hr} />
             </View>
 
-            <View style={styles.registerButtonView}>
-                <TouchableOpacity
-                    style={styles.registerButton}
-                    onPress={() => sendCred()}>
-                    <Text style={styles.registerButtonText}>가입하기</Text>
-                </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+                style={styles.registerButton}
+                onPress={() => sendInfo()}>
+                <Text style={styles.registerButtonText}>가입하기</Text>
+            </TouchableOpacity>
+            
         </View>
     );
 }
@@ -77,18 +90,51 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         height: 40,
         fontSize: 24,
-        color: '#707070'
+        color: '#5c5c5c'
     },
 
-    registerButtonView : {
-        flex : 2,
+    idView: {
+        flexDirection: 'row',
+    },
+
+    idTextInput: {
+        marginTop: 60,
+        marginRight: 15,
+        width: 175,
+        marginBottom: 10,
+        height: 40,
+        fontSize: 24,
+        color: '#5c5c5c',
+    },
+
+    idCheckButtonText : {
+        width: 70,
+        // fontFamily: 'AppleSDGothicNeo',
+        fontSize: 17,
+        fontWeight: '800',
+        textAlign: 'center',
+        color: '#c86e65'
+    },
+
+    idCheckButton: {
+        marginTop: 60,
         alignItems: 'center',
         justifyContent : 'center',
+        width: 80,
+        height: 40,
+        borderWidth: 2,
+        borderColor: '#c86e65',
+        backgroundColor: '#ffffff'
+    },
+
+    idhr : {
+        width: 175,
+        borderBottomWidth: 1,
+        borderBottomColor: '#cccccc'
     },
 
     registerButtonText : {
         width: 100,
-        height: 30,
         // fontFamily: 'AppleSDGothicNeo',
         fontSize: 24,
         fontWeight: '800',
@@ -97,6 +143,7 @@ const styles = StyleSheet.create({
     },
 
     registerButton: {
+        marginTop: 100,
         alignItems: 'center',
         justifyContent : 'center',
         width: 180,
