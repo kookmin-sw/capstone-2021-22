@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
-import * as ImagePicker from 'react-native-image-picker';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 export function PhotoScreen(){
 
@@ -11,60 +11,43 @@ export function PhotoScreen(){
     const [secondImage, setSecondImage] = useState({});
     
     runFirstCamera = async () => {
-        let options = {
-            storageOptions: {
-                skipBackup: true,
-                path: "images",
-            },
-            includeBase64: true,
-            maxWidth: 1080,
-            maxHeight: 1080,
-            quality: 0.7,
-        };
-        ImagePicker.launchCamera(options, (response) => {
-            if (response.didCancel) {
-                console.log("User cancelled image picker");
-            } else if (response.error) {
-                console.log("ImagePicker Error: ", response.error);
-            } else if (response.customButton) {
-                console.log("User tapped custom button: ", response.customButton);
-                alert(response.customButton);
-            } else {
-                setFirstImage(response);
-            }
-        });
+        ImageCropPicker.openCamera({
+            width: 400,
+            height: 400,
+            cropping: true
+          }).then(image => {
+              console.log(image);
+              setFirstImage({
+                uri: image.path,
+                width: image.width,
+                height: image.height,
+                mime: image.mime
+              });
+          });
     }
     runSecondCamera = async () => {
-        let options = {
-            storageOptions: {
-                skipBackup: true,
-                path: "images",
-            },
-            includeBase64: true,
-            maxWidth: 1080,
-            maxHeight: 1080,
-            quality: 0.7,
-        };
-        ImagePicker.launchCamera(options, (response) => {
-            if (response.didCancel) {
-                console.log("User cancelled image picker");
-            } else if (response.error) {
-                console.log("ImagePicker Error: ", response.error);
-            } else if (response.customButton) {
-                console.log("User tapped custom button: ", response.customButton);
-                alert(response.customButton);
-            } else {
-                setSecondImage(response);
-            }
-        });
+        ImageCropPicker.openCamera({
+            width: 400,
+            height: 400,
+            cropping: true
+          }).then(image => {
+              console.log(image);
+              setSecondImage({
+                uri: image.path,
+                width: image.width,
+                height: image.height,
+                mime: image.mime
+              });
+              console.log(secondImage);
+          });
     }
     const renderImage = (order) => {
-        if (firstImage & order == 1) {
+        if (order == 1) {
             return <Image
                 source={{ uri:firstImage.uri }}
                 style={styles.images}
             />
-        } else if (secondImage & order == 2) {
+        } else if (order == 2) {
             return <Image
                 source={{ uri:secondImage.uri }}
                 style={styles.images}
