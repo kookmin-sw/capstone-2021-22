@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import * as config from '../src/config';
 
 import logo from './images/pills-bottle.png';
 import icon from './images/star.png';
@@ -36,6 +37,7 @@ class MyPillScreen extends Component {
                                     onPress: () => {
                                         console.log("로그아웃 한대!");
                                         AsyncStorage.clear();
+                                        config.IS_LOGIN = false;
                                         this.props.navigation.reset({
                                             index: 0,
                                             routes: [{name: 'Main'}]

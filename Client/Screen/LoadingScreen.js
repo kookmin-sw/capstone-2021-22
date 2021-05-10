@@ -10,7 +10,7 @@ const LoadingScreen = ({navigation}) => {
     setTimeout(() => {
       setAnimating(false);
       AsyncStorage.getItem('user').then((value) =>
-        navigation.replace(value === null ? 'Main' : 'UserMain'),
+        navigation.replace('Main'),
       );
     }, 10);
   }, []);

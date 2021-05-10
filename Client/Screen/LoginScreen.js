@@ -18,20 +18,22 @@ export function LoginScreen() {
             headers: {
                 'Content-Type' : 'application/json'
             },
-            body:JSON.stringify({
-                "nick":id,
-                "password":password,
+            body: JSON.stringify({
+                "nick" : id,
+                "password" : password,
             })
         }).then(res => res.json())
         .then(response => {
-            console.log(response)
+            // console.log(response)
             if(response.isLogin){
                 console.log('로그인 성공')
-                AsyncStorage.setItem('user', JSON.stringify(response),()=>{
-                })
+                AsyncStorage.setItem('token',response.token);
+                // AsyncStorage.setItem('user', JSON.stringify(response),()=>{
+                // })
+                // config.IS_LOGIN = true;
                 navigation.reset({
                     index: 0,
-                    routes: [{name: 'UserMain'}]
+                    routes: [{name: 'Main'}]
                 })
             } else {
                 Alert.alert(

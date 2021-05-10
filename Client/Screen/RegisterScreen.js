@@ -22,7 +22,7 @@ export function RegisterScreen() {
                     'Content-Type' : 'application/json'
                 },
                 body:JSON.stringify({
-                    "nick":id,
+                    "nick" : id,
                 })
             })
             .then(res => res.json())
@@ -40,7 +40,7 @@ export function RegisterScreen() {
                 'Content-Type' : 'application/json'
             },
             body:JSON.stringify({
-                "nick":id,
+                "nick" : id,
             })
         }).then(res => res.json())
         .then(response => {
@@ -67,10 +67,10 @@ export function RegisterScreen() {
                     'Content-Type' : 'application/json'
                 },
                 body:JSON.stringify({
-                    "name":name,
-                    "nick":id,
-                    "password":password,
-                    "isExistId": false
+                    "name" : name,
+                    "nick" : id,
+                    "password" : password,
+                    "isExistId" : false
                 })
             }).then(res => res.json())
             .then(response => { 
