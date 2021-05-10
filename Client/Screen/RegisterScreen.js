@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export function RegisterScreen() {
 
@@ -9,23 +10,91 @@ export function RegisterScreen() {
     const [password, setPassword] = useState('');
     const navigation = useNavigation();
 
-    sendInfo=() => {
-        console.log(name, id, password);
-        navigation.navigate('RegisterFinish');
+    isExistId().then((response) => { // state에 아이디 존재 여부 상태 저장
+        state = response
+    })
+
+    async function isExistId()  { // 아이디 존재 여부 판별
+        return (
+            fetch("http://3.34.96.230/auth/isExistId", {
+                method : "POST",
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body:JSON.stringify({
+                    "nick":id,
+                })
+            })
+            .then(res => res.json())
+            .then(data => { 
+                return data.isExistId
+            })
+            .catch(error => console.error('Error:', error))
+        )
     }
 
-    idCheck=() => {
+    async function idCheck()  { // 아이디 중복 확인 alert
+        fetch("http://3.34.96.230/auth/isExistId", {
+            method : "POST",
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body:JSON.stringify({
+                "nick":id,
+            })
+        }).then(res => res.json())
+        .then(response => {
+            if(response.isExistId){
+                Alert.alert('이미 존재하는 아이디 입니다.')
+            } else {
+                Alert.alert('사용할 수 있는 아이디 입니다.')
+            }
+        })
+        .catch(error => console.error('Error:', error));
+        }
 
+
+    async function register()  { // 회원 등록
+        
+        if(!name || !id || !password){
+            Alert.alert('정보를 모두 입력해주세요.')
+        } else if(state === true){ // 중복 아이디 판별
+            Alert.alert('아이디 중복확인을 해주세요.')
+        } else {
+            fetch("http://3.34.96.230/auth/join", {
+                method : "POST",
+                headers: {
+                    'Content-Type' : 'application/json'
+                },
+                body:JSON.stringify({
+                    "name":name,
+                    "nick":id,
+                    "password":password,
+                    "isExistId": false
+                })
+            }).then(res => res.json())
+            .then(response => { 
+                console.log(response)
+                navigation.reset({
+                    index: 0,
+                    routes: [{name: 'RegisterFinish'}]
+                })
+            })
+            .catch(error => console.error('Error:', error));
+            
+        }
     }
+
+    
 
     return (
         <View style={styles.container}>
             <View style={styles.InputTextView}>
                 <TextInput style={styles.textinput}
                 placeholder='이름'
+                placeholderTextColor = '#cccccc'
                 value={name}
                 autoCapitalize='none'
-                autoCorrect='false'
                 onChangeText={(text) => {setName(text);}}
                 />
                 <View style={styles.hr}/>
@@ -33,6 +102,7 @@ export function RegisterScreen() {
                 <View style={styles.idView}>
                     <TextInput style={styles.idTextInput}
                     placeholder='아이디'
+                    placeholderTextColor = '#cccccc'
                     value={id}
                     autoCapitalize='none'
                     onChangeText={(text) => {setId(text);}}
@@ -47,6 +117,7 @@ export function RegisterScreen() {
 
                 <TextInput style={styles.textinput}
                 placeholder='비밀번호'
+                placeholderTextColor = '#cccccc'
                 value={password}
                 autoCapitalize='none'
                 secureTextEntry={true}
@@ -57,7 +128,7 @@ export function RegisterScreen() {
 
             <TouchableOpacity
                 style={styles.registerButton}
-                onPress={() => sendInfo()}>
+                onPress={() => register()}>
                 <Text style={styles.registerButtonText}>가입하기</Text>
             </TouchableOpacity>
             
@@ -88,7 +159,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         height: 40,
         fontSize: 24,
-        color: '#707070'
+        color: '#5c5c5c'
     },
 
     idView: {
@@ -102,7 +173,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         height: 40,
         fontSize: 24,
-        color: '#707070'
+        color: '#5c5c5c',
     },
 
     idCheckButtonText : {
