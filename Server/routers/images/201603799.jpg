@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko"
+	>
+	<head>
+		<title>의약품안전정보포털</title>
+		<meta charset="UTF-8">
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link rel="stylesheet" href="//staticnedrug.mfds.go.kr/resources/css/import.css?v=20200120" />
+		<script type="text/javascript" src="//staticnedrug.mfds.go.kr/static/lib/jquery/jquery-1.12.4.min.js"></script>
+		<script type="text/javascript" src="//staticnedrug.mfds.go.kr/static/lib/jquery-ui/jquery-ui.js" charset="utf-8"></script>
+		<script type="text/javascript" src="//staticnedrug.mfds.go.kr/resources/js/front_script.js"></script>
+		<script type="text/javascript" src="//staticnedrug.mfds.go.kr/static/lib/colResizeable/colResizable-1.6.min.js"></script>
+		<script type="text/javascript" src="//staticnedrug.mfds.go.kr/resources/js/common-pbp.js"></script>
+		<script type="text/javascript" src="//staticnedrug.mfds.go.kr/static/lib/bootstrap-3.3.7/js/bootstrap.js"></script>
+		<script type="text/javascript" src="//staticnedrug.mfds.go.kr/static/lib/bootbox.js"></script>
+		<script type="text/javascript" src="//staticnedrug.mfds.go.kr/static/lib/jquery/jquery.maskedinput.min.js"></script>
+		<link rel="stylesheet" href="/static/lib/bootstrap-3.3.7/css/bootstrap.min.css"/>
+		<link rel="stylesheet" href="/static/css/int_import.css?v=20200120"/>
+
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+
+	<style>
+            /* 서브메인을 위함*/
+            .container_wrap #content_wrap #snb{display:none;}
+            .container_wrap #content_wrap #content{float:none; width:100%;}
+            .container_wrap .ext_main:before {background: none;}
+        </style>
+
+	<link rel="stylesheet" href="//staticnedrug.mfds.go.kr/resources/css/mobile.css" >
+
+	</head>
+	<body>
+        <body>
+        <!-- 오류페이지 시작  -->
+        <div class="mpage_errwrap">
+            <div class="mpage_errarea">
+                <div>
+                    <div class="mpage_errt">
+                        <h1 class="mpage_logo">
+                            <img src="/resources/images/layout/img_header_logo.gif" alt="식품의약품안전처 의약품통합정보시스템" />
+                        </h1>
+                    </div>
+                    <div class="mpage_errm">
+                        <p class="mpage_errm_p01">오류가 발생하였습니다</p>
+                        <p class="mpage_errm_p02">해당 화면 혹은 기능을 찾을 수 없습니다.<br />관리자에게 문의하세요.</p>
+                    </div>
+                    <div class="mpage_errmb">
+                        <a href="/" target="_self" class="btn_normal btn_base btn_point2">메인 바로가기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 
+        <div th:text="${status}"></div>
+        <div th:text="${url}"></div>
+        <div th:text="${exception?.message}"></div>
+        -->
+    </body>
+        <div/>
+	</body>
+</html>
