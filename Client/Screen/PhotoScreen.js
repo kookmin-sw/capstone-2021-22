@@ -70,20 +70,10 @@ export function PhotoScreen(){
                 </TouchableOpacity>
             </View>
             <View style={styles.TextView}>
-                <Text style={styles.text}>해당 사진으로 검색하시겠습니까?</Text>
+                <Text style={styles.text}>+를 터치하여 알약의 <Text style={styles.highlight}>양쪽 면</Text>을 찍어주세요</Text>
             </View>
                 
             <View style={styles.ButtonView}>
-                <TouchableOpacity 
-                    style={styles.Button}
-                    onPress={()=>{
-                        navigation.reset({
-                            index: 0,
-                            routes: [{name: "PhotoGuide"}]
-                        })
-                }}>
-                    <Text style={styles.ButtonText}>다시 찍기</Text>
-                </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.Button}
                     onPress={()=>{
@@ -128,11 +118,11 @@ const styles = StyleSheet.create({
         justifyContent : "center",
     },
     text : {
-        width: 262,
-        height: 24,
+        width: 266,
+        height: 19,
         // fontFamily: "AppleSDGothicNeo",
-        fontSize: 20,
-        fontWeight: "500",
+        fontSize: 16,
+        fontWeight: "200",
         fontStyle: "normal",
         letterSpacing: 0,
         textAlign: "center",
@@ -147,27 +137,38 @@ const styles = StyleSheet.create({
     Button : {
         alignItems: "center",
         justifyContent : "center",
-        width: 140,
-        height: 43,
-        borderRadius: 22,
+        width: 240,
+        height: 53,
+        borderRadius: 32,
         backgroundColor: "#ffffff",
         borderStyle: "solid",
-        borderWidth: 1,
+        borderWidth: 2,
         borderColor: "#c86e65",
         margin : 10
     },
     ButtonText : {
-        width: 96,
-        height: 21,
+        width: 82,
         // fontFamily: "AppleSDGothicNeo",
-        fontSize: 18,
-        fontWeight: "500",
+        fontSize: 22,
+        fontWeight: "800",
         fontStyle: "normal",
-        letterSpacing: -0.36,
+        letterSpacing: -0.48,
         textAlign: "center",
         color: "#c86e65"
 
     },
+    highlight : {
+        width: 266,
+        height: 19,
+        // fontFamily: "AppleSDGothicNeo",
+        fontSize: 16,
+        fontWeight: "500",
+        fontStyle: "normal",
+        letterSpacing: 0,
+        textAlign: "center",
+        color: "#707070"
+
+    }
 })
 
 export default PhotoScreen;
