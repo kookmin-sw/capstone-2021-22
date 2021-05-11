@@ -10,7 +10,7 @@ const ps ='./test.png';
 
 router.get('/',  async (req, res) => {
    
-   const { pillName } = req.body;
+   const  pillName  = req.query.pillName;
 
 
 
