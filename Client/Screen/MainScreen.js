@@ -1,70 +1,89 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import  logo  from './images/pill.png';
 import  MyPillLogo  from './images/pills-bottle.png';
 import { Button } from 'react-native-elements/dist/buttons/Button';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import * as config from '../src/config';
 
 
-class MainScreen extends Component {
+export function MainScreen(props) {
 
-    render () {
-        return (
-            <View style={styles.MainView}>
-                <View style={styles.TextView}>
-                    <Text style={styles.Text}><Text style={styles.highlight}>사진</Text>을 찍어서</Text>
-                    <Text style={styles.Text}>무슨 약인지 알아보세요</Text>
-                </View>
+    const navigation = useNavigation();
+    const [myPillText, setMyPillText] = useState('');
+    const [navScreen, setNavScreen] = useState('');
 
-                <View style={styles.MainButtonView}>
-                    <View style={styles.MainButtonContainer}>
-                        <Image style={styles.LogoImage}
-                            source={logo}/>
-                        <TouchableOpacity 
-                            style={styles.MainButton}
-                            onPress={()=>{
-                                this.props.navigation.navigate('PhotoGuide')
-                            }}>
-                            <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
-                        </TouchableOpacity>
-                    </View>
-                </View>
+    useEffect(() => {
+        AsyncStorage.getItem('token', (err, result) => {
+            if (result !== null) {
+                config.IS_LOGIN = true;
+                setMyPillText("지원님의 약통");
+                setNavScreen("MyPill")
+                console.log(config.IS_LOGIN);
+            } else {
+                config.IS_LOGIN = false;
+                setMyPillText("내 약통");
+                setNavScreen("Login")
+                console.log(config.IS_LOGIN);
+            }
+        });
+    }, []);
 
-                <View style={styles.SearchButtonView}>
-                    <TouchableOpacity
+    return (
+        <View style={styles.MainView}>
+            <View style={styles.TextView}>
+                <Text style={styles.Text}><Text style={styles.highlight}>사진</Text>을 찍어서</Text>
+                <Text style={styles.Text}>무슨 약인지 알아보세요</Text>
+            </View>
+
+            <View style={styles.MainButtonView}>
+                <View style={styles.MainButtonContainer}>
+                    <Image style={styles.LogoImage}
+                        source={logo}/>
+                    <TouchableOpacity 
+                        style={styles.MainButton}
                         onPress={()=>{
-                            this.props.navigation.reset({
-                                index: 0,
-                                routes: [{name: 'Search'}]
-                            })
+                            navigation.navigate('PhotoGuide')
                         }}>
-                        <Text style={styles.SearchButton}>알약 이름을 알고 계신가요?</Text>
-                        <View style={styles.hr} />
-
-                    </TouchableOpacity>
-                </View>
-
-                <View style={styles.MyPillButtonView}>
-                    <TouchableOpacity
-                        style={styles.MyPillButton}
-                        onPress={()=>{
-                            this.props.navigation.navigate('Login')
-                        }}>
-                        <View style={styles.MyPillLogoView}>
-                            <Image style={styles.MyPillLogoImage}
-                                source={MyPillLogo}/>
-                        </View>
-                        <Text style={styles.MyPillButtonText}>내 약통</Text>
-                        <Text style={styles.MyPillNumText}></Text>
+                        <Text style={styles.MainButtonText}>알약 사진 찍기</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-            
-        )
-    }
+
+            <View style={styles.SearchButtonView}>
+                <TouchableOpacity
+                    onPress={()=>{
+                        navigation.reset({
+                            index: 0,
+                            routes: [{name: 'Search'}]
+                        })
+                    }}>
+                    <Text style={styles.SearchButton}>알약 이름을 알고 계신가요?</Text>
+                    <View style={styles.hr} />
+
+                </TouchableOpacity>
+            </View>
+            <View style={styles.MyPillButtonView}>
+                <TouchableOpacity
+                    style={styles.MyPillButton}
+                    onPress={()=>{
+                        navigation.navigate(navScreen)
+                    }}>
+                    <View style={styles.MyPillLogoView}>
+                        <Image style={styles.MyPillLogoImage}
+                            source={MyPillLogo}/>
+                    </View>
+                    <Text style={styles.MyPillButtonText}>{myPillText}</Text>
+                    <Text style={styles.MyPillNumText}>{'>'}</Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+        
+    )
 }
 
 const styles = StyleSheet.create({
@@ -136,19 +155,16 @@ const styles = StyleSheet.create({
         color: '#ffffff'
 
     },
-       
-    MyPillButtonView : {
-        flex : 2,
-        alignItems: 'center',
-        justifyContent : 'center',
-        
-    },
     searchText: {
         marginTop: 15,
         fontSize: 16,
         color: '#525252'
     },
-
+    MyPillButtonView : {
+        flex : 2,
+        alignItems: 'center',
+        justifyContent : 'center',
+    },
     MyPillButton : {
         flexDirection: 'row',
         width: 322,
