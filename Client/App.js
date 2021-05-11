@@ -17,13 +17,6 @@ import PhotoGuideScreen from './screen/PhotoGuideScreen';
 import PhotoScreen from './screen/PhotoScreen';
 import ConfirmScreen from './screen/ConfirmScreen';
 
-import AsyncStorage from '@react-native-community/async-storage';
-import UserMainScreen from './screen/UserMainScreen';
-
-import LoadingScreen from './screen/LoadingScreen';
-
-
-
 const Stack = createStackNavigator();
 
 
@@ -46,37 +39,11 @@ class App extends Component
 
         return (
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="Loading">
-
-                    <Stack.Screen
-                    name="Loading"
-                    component={LoadingScreen}
-                    options={{
-                        title: '이게뭐약?' ,
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
-                            fontSize: 20,
-                            color: "#707070"
-                        },
-                    }}
-                    />
+                <Stack.Navigator initialRouteName="Main">
 
                     <Stack.Screen
                     name="Main"
                     component={MainScreen}
-                    options={{
-                        title: '이게뭐약?' ,
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
-                            fontSize: 20,
-                            color: "#707070"
-                        },
-                    }}
-                    />
-
-                    <Stack.Screen
-                    name="UserMain"
-                    component={UserMainScreen}
                     options={{
                         title: '이게뭐약?' ,
                         headerTitleStyle: {
@@ -130,10 +97,10 @@ class App extends Component
                         headerLeft: () => (
                             <TouchableOpacity
                             onPress={()=>{
-                                AsyncStorage.getItem('user').then((value) =>
-                                    navigation.replace(value === null ? 'Main' : 'LoginMain'),
-                                );
-                                // navigation.reset({routes: [{name: 'Main'}]})
+                                // AsyncStorage.getItem('user').then((value) =>
+                                //     navigation.replace(value === null ? 'Main' : 'UserMain'),
+                                // );
+                                navigation.reset({routes: [{name: 'Main'}]})
                             }}>
                                 <Image
                                     source={require('./src/icon/home.png')}

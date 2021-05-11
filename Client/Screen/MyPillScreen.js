@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 
 import AsyncStorage from '@react-native-community/async-storage';
+import * as config from '../src/config';
 
 import logo from './images/pills-bottle.png';
 import icon from './images/star.png';

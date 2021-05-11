@@ -82,7 +82,7 @@ export function PhotoScreen(){
                             routes: [{name: "PhotoGuide"}]
                         })
                 }}>
-                    <Text style={styles.ButtonText}>다시 촬영하기</Text>
+                    <Text style={styles.ButtonText}>다시 찍기</Text>
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.Button}

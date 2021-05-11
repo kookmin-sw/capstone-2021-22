@@ -41,16 +41,13 @@ const styles = StyleSheet.create({
     },
     image : {
         flex : 1,
-        width: "100%",
-        alignItems: 'center',
-        justifyContent : 'center',
-        padding : 50
+        width: '90%',
+        margin : 20
     },
     ButtonView : {
         alignItems: 'center',
         justifyContent : 'center',
         padding : 50
-        
     },
     Button : {
         alignItems: 'center',
