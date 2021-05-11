@@ -37,7 +37,6 @@ class MyPillScreen extends Component {
                                     onPress: () => {
                                         console.log("로그아웃 한대!");
                                         AsyncStorage.clear();
-                                        config.IS_LOGIN = false;
                                         this.props.navigation.reset({
                                             index: 0,
                                             routes: [{name: 'Main'}]

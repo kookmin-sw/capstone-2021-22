@@ -5,35 +5,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export function RegisterScreen() {
 
+    const navigation = useNavigation();
     const [name, setName] = useState('');
     const [id, setId] = useState('');
     const [password, setPassword] = useState('');
-    const navigation = useNavigation();
+    const [validateId, setValidateId] = useState(false);
 
-    isExistId().then((response) => { // state에 아이디 존재 여부 상태 저장
-        state = response
-    })
-
-    async function isExistId()  { // 아이디 존재 여부 판별
-        return (
-            fetch("http://3.34.96.230/auth/isExistId", {
-                method : "POST",
-                headers: {
-                    'Content-Type' : 'application/json'
-                },
-                body:JSON.stringify({
-                    "nick" : id,
-                })
-            })
-            .then(res => res.json())
-            .then(data => { 
-                return data.isExistId
-            })
-            .catch(error => console.error('Error:', error))
-        )
-    }
-
-    async function idCheck()  { // 아이디 중복 확인 alert
+    async function idCheck()  { // 아이디 중복 확인
         fetch("http://3.34.96.230/auth/isExistId", {
             method : "POST",
             headers: {
@@ -45,20 +23,20 @@ export function RegisterScreen() {
         }).then(res => res.json())
         .then(response => {
             if(response.isExistId){
+                setValidateId(false)
                 Alert.alert('이미 존재하는 아이디 입니다.')
             } else {
+                setValidateId(true)
                 Alert.alert('사용할 수 있는 아이디 입니다.')
             }
         })
         .catch(error => console.error('Error:', error));
-        }
-
+    }
 
     async function register()  { // 회원 등록
-        
-        if(!name || !id || !password){
+        if (!name || !id || !password) {
             Alert.alert('정보를 모두 입력해주세요.')
-        } else if(state === true){ // 중복 아이디 판별
+        } else if (validateId === false) { // 중복 아이디 판별
             Alert.alert('아이디 중복확인을 해주세요.')
         } else {
             fetch("http://3.34.96.230/auth/join", {
@@ -81,11 +59,8 @@ export function RegisterScreen() {
                 })
             })
             .catch(error => console.error('Error:', error));
-            
         }
     }
-
-    
 
     return (
         <View style={styles.container}>

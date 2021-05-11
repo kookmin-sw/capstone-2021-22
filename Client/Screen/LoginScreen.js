@@ -30,7 +30,6 @@ export function LoginScreen() {
                 AsyncStorage.setItem('token',response.token);
                 // AsyncStorage.setItem('user', JSON.stringify(response),()=>{
                 // })
-                // config.IS_LOGIN = true;
                 navigation.reset({
                     index: 0,
                     routes: [{name: 'Main'}]
