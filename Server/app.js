@@ -8,6 +8,7 @@ const passportConfig = require('./passport');
 const baseRouter = require('./routers/baseRouter');
 const authRouter = require('./routers/auth');
 const searchRouter = require('./routers/search');
+const favoriteRouter = require('./routers/favorite');
 
 const app = express();
 passportConfig();
@@ -28,6 +29,7 @@ app.use(passport.initialize());
 app.use('/', baseRouter);
 app.use('/auth', authRouter);
 app.use('/search', searchRouter);
+app.use('/favorite', favoriteRouter);
 
 app.set('port', process.env.PORT || 8003);
 app.use(express.json());
