@@ -41,7 +41,7 @@ class App extends Component
 
         setTimeout(() => {
             SplashScreen.hide();
-        }, 1000);
+        }, 500);
 
         return (
             <NavigationContainer>

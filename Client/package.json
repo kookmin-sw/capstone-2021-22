@@ -15,6 +15,7 @@
     "@react-navigation/compat": "^5.3.14",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
+    "buffer": "^6.0.3",
     "hosted-git-info": "^2.8.9",
     "node-notifier": "^9.0.0",
     "react": "16.13.1",
