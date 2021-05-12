@@ -1,87 +1,97 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import { Buffer } from 'buffer'
+
 
 import icon from '../src/icon/star.png';
 
 export function PillList(props) {
     const navigation = useNavigation();
-    console.log(props.name)
 
-    if (props.name == '') {
-        return (
-            <View style={{
-                width : '100%',
-                marginTop: 500,
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}>
-                <Text style={{
-                  fontWeight: '600',
-                  fontSize: 20
-                }}>검색 결과가 없습니다.</Text>
-            </View>
-        )
-    }
-    
-    else if (props.data != []){
+    arrayBufferToBase64 = buffer => {
+        let binary = '';
+        let bytes = new Uint8Array(buffer);
+        let len = bytes.byteLength;
+        for (let i = 0; i < len; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        return Buffer.from(binary, 'binary').toString('base64');
+    };
+
+    function showImage() {
         return(
-            <View>
-                <TouchableOpacity 
-                    style={styles.PillContainer}
-                    onPress={()=>{
-                        navigation.navigate('MyPillDetail')
-                    }}>
-                    <Image source={{uri:props.imgUrl}} style={styles.imageStyle}
-                    />
-                    <View  style={{width: 170}}>
-                        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                            <Text style={styles.MainText} numberOfLines={2} ellipsizeMode="tail">{props.name}</Text>
-                            <TouchableOpacity>
-                                <Image
-                                style={styles.icon}
-                                source={icon}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                        <Text style={styles.SubText}>{props.className}</Text>
-                        <Text style={styles.SubText}>{props.codeName}</Text>
-                    </View>
-                </TouchableOpacity>
-                <View style= {styles.hr} />
-            </View>
+            <Image source={{
+                uri:
+                  'data:image/jpeg;base64,' +
+                  arrayBufferToBase64(props.imgUrl.data),
+              }} style={styles.imageStyle} resizeMode="contain"
+            />
         )
     }
+
+    return(
+        <View>
+            <TouchableOpacity 
+                style={styles.PillContainer}
+                onPress={()=>{
+                    navigation.navigate('MyPillDetail')
+                }}>
+                {showImage()}
+                <View style={{width: '50%'}}>
+                    <View style={styles.nameContainer}>
+                        <Text style={styles.MainText} numberOfLines={2} ellipsizeMode="tail">{props.name}</Text>
+                        <TouchableOpacity>
+                            <Image
+                            style={styles.icon}
+                            source={icon}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                    <Text style={styles.SubText}>{props.className}</Text>
+                    <Text style={styles.SubText}>{props.codeName}</Text>
+                </View>
+            </TouchableOpacity>
+            <View style= {styles.hr}></View>
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({
     PillContainer : {
+        width: '95%',
         height: 125,
         flexDirection: 'row',
         alignItems: 'center',
-        marginTop: 5,
-        marginBottom: 5
+        justifyContent: 'center',
+        marginTop: 2,
+        marginBottom: 2
     },
     hr : {
         width: '100%',
         borderBottomWidth: 1,
         borderBottomColor: '#D5D5D5',
     },
+    nameContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
     imageStyle: {
-        width: 200, 
-        height: 110,
+        width: '55%', 
+        height: '90%',
     },
     icon : {
-        width: 22,
-        height: 22,
+        width: 20,
+        height: 20,
     },
     MainText : {
         marginBottom : 5, 
         marginLeft : 15,
-        width: 120,
+        width: '70%',
         height: 52,
         // fontFamily: 'AppleSDGothicNeo',
-        fontSize: 23,
+        fontSize: 21,
         fontWeight: '500',
         fontStyle: 'normal',
         letterSpacing: 0,
@@ -92,9 +102,9 @@ const styles = StyleSheet.create({
         marginLeft : 15,
         marginTop: 5,
         width: 150,
-        height: 17,
+        height: 16,
         // fontFamily: 'AppleSDGothicNeo',
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: '300',
         fontStyle: 'normal',
         letterSpacing: 0,

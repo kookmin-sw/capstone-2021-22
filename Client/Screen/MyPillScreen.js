@@ -1,14 +1,20 @@
 import 'react-native-gesture-handler';
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
+
+import AsyncStorage from '@react-native-community/async-storage';
+import * as config from '../src/config';
 
 import logo from './images/pills-bottle.png';
 import icon from './images/star.png';
 
 import testImage from './images/test.jpg';
+import { Button } from 'react-native-elements';
+
 
 
 class MyPillScreen extends Component {
+    
     
     render () {
 
@@ -20,6 +26,33 @@ class MyPillScreen extends Component {
                         source={logo}
                     />
                     <Text style={styles.titleText}>지원님의 약통</Text>
+                    <TouchableOpacity
+                        onPress={()=>{
+                            Alert.alert(
+                                "logout",  
+                                "로그아웃 하시겠습니까?" ,
+                                [
+                                    {
+                                    text: "네", 
+                                    onPress: () => {
+                                        console.log("로그아웃 한대!");
+                                        AsyncStorage.clear();
+                                        this.props.navigation.reset({
+                                            index: 0,
+                                            routes: [{name: 'Main'}]
+                                        })
+                                    },
+                                    },
+                                    { 
+                                    text: "아니요", 
+                                    onPress: () => 
+                                        console.log("로그아웃 안한대!") 
+                                    },
+                                ]
+                              )
+                        }}>
+                        <Text>로그아웃</Text>
+                    </TouchableOpacity>
                 </View>
 
                 <View style={styles.pillList}>
