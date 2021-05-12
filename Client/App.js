@@ -11,6 +11,7 @@ import LoginScreen from './screen/LoginScreen';
 import RegisterScreen from './screen/RegisterScreen';
 import RegisterFinishScreen from './screen/RegisterFinishScreen';
 import SearchScreen from './screen/SearchScreen';
+import SearchFailScreen from './screen/SearchFailScreen';
 import MyPillScreen from './screen/MyPillScreen';
 import MyPillDetailScreen from './screen/MyPillDetailScreen';
 import PhotoGuideScreen from './screen/PhotoGuideScreen';
@@ -111,6 +112,21 @@ class App extends Component
                         ),
                     })}
 
+                    />
+
+                    <Stack.Screen
+                    name="SearchFail"
+                    component={SearchFailScreen}
+                    options={{ 
+                        title: '알약 검색',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerBackImage: BackBtn,
+                    }}
                     />
 
                     <Stack.Screen
