@@ -11,17 +11,12 @@ import LoginScreen from './screen/LoginScreen';
 import RegisterScreen from './screen/RegisterScreen';
 import RegisterFinishScreen from './screen/RegisterFinishScreen';
 import SearchScreen from './screen/SearchScreen';
+import SearchFailScreen from './screen/SearchFailScreen';
 import MyPillScreen from './screen/MyPillScreen';
 import MyPillDetailScreen from './screen/MyPillDetailScreen';
 import PhotoGuideScreen from './screen/PhotoGuideScreen';
 import PhotoScreen from './screen/PhotoScreen';
 import ConfirmScreen from './screen/ConfirmScreen';
-
-import AsyncStorage from '@react-native-community/async-storage';
-
-import LoadingScreen from './screen/LoadingScreen';
-
-
 
 const Stack = createStackNavigator();
 
@@ -45,20 +40,7 @@ class App extends Component
 
         return (
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="Loading">
-
-                    <Stack.Screen
-                    name="Loading"
-                    component={LoadingScreen}
-                    options={{
-                        title: '이게뭐약?' ,
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
-                            fontSize: 20,
-                            color: "#707070"
-                        },
-                    }}
-                    />
+                <Stack.Navigator initialRouteName="Main">
 
                     <Stack.Screen
                     name="Main"
@@ -130,6 +112,21 @@ class App extends Component
                         ),
                     })}
 
+                    />
+
+                    <Stack.Screen
+                    name="SearchFail"
+                    component={SearchFailScreen}
+                    options={{ 
+                        title: '알약 검색',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerBackImage: BackBtn,
+                    }}
                     />
 
                     <Stack.Screen
