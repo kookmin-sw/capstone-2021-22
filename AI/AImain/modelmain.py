@@ -10,6 +10,33 @@ import cv2
 import os
 import pandas as pd
 from PIL import Image
+import io
+
+from google.cloud import vision
+from google.cloud.vision_v1 import types
+
+def findtext(img_dir) :
+    client = vision.ImageAnnotatorClient()
+
+    # file_name = os.path.join(os.path.dirname(__file__), img_dir)
+    file_name = os.path.join(os.path.abspath("__file__"), img_dir)
+
+    file_name = img_dir
+    with io.open(file_name, 'rb') as image_file:
+        content = image_file.read()
+
+    image = types.Image(content=content)
+
+    respose = client.text_detection(image=image)
+    labels = respose.text_annotations
+
+    for label in labels:
+        # print(label.description)
+        textlist.append(label.description)
+
+    return textlist
+
+
 
 
 def test(img_dir):
@@ -30,8 +57,9 @@ def test(img_dir):
     # # 확률이 가장 높은 두 개의 클래스 라벨을 출력
     print("[INFO] classifying image...")
     proba = model.predict(image)[0]
-    idxs = np.argsort(proba)[::-1][:2]
+    idxs = np.argsort(proba)[::-1][:4]
     for (i, j) in enumerate(idxs):
+
         label = "{}: {:.2f}%".format(mlb.classes_[j], proba[j] * 100)
         # cv2.putText(output, label, (10, (i * 30) + 25),
         #   cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
@@ -58,19 +86,65 @@ def mergeimg(img1_dir,img2_dir) :
 
 if __name__ == "__main__":
 
-    mergeimg('./image/2.jpg','./image/22.jpg')
-    os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep bbd-fastrcnn -postp rtb-bnb")
-    shapecolor = []
-    shapecolor = test('./input-out.png')
-    # test('./input-out.png')
-    print(shapecolor)
-    xlsx = pd.read_excel('pillist.xlsx', usecols='A,H,I', engine='openpyxl')
+    mergeimg('./image/IMG_5004.jpg','./image/IMG_5005.jpg')
+
+
+    img = Image.open('input.jpeg')
+
+    img_resize = img.resize((int(img.width / 2), int(img.height / 2)))
+    img_resize.save('input2.jpeg')
+    # os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep bbd-fastrcnn -postp rtb-bnb")
+    os.system("python3 main.py -i input2.jpeg -o input-out.png -m u2net")
+    textlist = []
+    textlist = findtext('input-out.png')
+    ######################
+    print(textlist)
+    xlsx = pd.read_excel('pillist.xlsx', usecols='A,H,I,F,G', engine='openpyxl')
+    print(type(xlsx['표시앞'][0]))
     pilllist = []
-    for index in range(20000):
-        if xlsx['의약품제형'][index] == shapecolor[0] and xlsx['색상앞'][index] == shapecolor[1] :
-            pilllist.append(xlsx['품목일련번호'][index])
+    for index in range(23000):
+        for c in range(len(textlist)):
+            if (textlist[c] in str(xlsx['표시앞'][index])) or (textlist[c] == str(xlsx['표시뒤'][index])):
+                pilllist.append(xlsx['품목일련번호'][index])
 
     print(len(pilllist))
     print(pilllist)
+
+    ############################
+    shapecolor = []
+    shapecolor = test('input-out.png')
+    print(shapecolor)
+
+    # test('./input-out.png')
+    print(shapecolor)
+    shape = []
+    color = []
+    # print(shapecolor[0][-1])
+    for a in range(len(shapecolor)) :
+        if shapecolor[a][-1] == '형':
+            shape.append(shapecolor[a])
+        else :
+            color.append(shapecolor[a])
+
+    print(color)
+    print(shape)
+    ############################
+    showpilllist = []
+
+    for index in range(23000):
+        for c in range(len(color)) :
+            for s in range(len(shape)) :
+                if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]) :
+                    if xlsx['품목일련번호'][index] in pilllist:
+                        showpilllist.append(xlsx['품목일련번호'][index])
+
+    print(len(showpilllist))
+    print(showpilllist)
+
+
+    if not showpilllist :
+        showpilllist = pilllist
+    print(len(showpilllist))
+    print(showpilllist)
 
 
