@@ -11,7 +11,7 @@ import os
 import pandas as pd
 from PIL import Image
 import io
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-a6a1b7680b12.json"
+
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 import unicodedata
@@ -88,7 +88,7 @@ def mergeimg(img1_dir,img2_dir) :
 
 if __name__ == "__main__":
 
-    mergeimg('./image/IMG_5006.jpg','./image/IMG_5007.jpg')
+    mergeimg('./image/IMG_5008.jpg','./image/IMG_5009.jpg')
 
 
     img = Image.open('input.jpeg')
