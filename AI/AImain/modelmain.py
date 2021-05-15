@@ -11,7 +11,7 @@ import os
 import pandas as pd
 from PIL import Image
 import io
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-a6a1b7680b12.json"
+
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 import unicodedata
@@ -94,9 +94,9 @@ if __name__ == "__main__":
     img = Image.open('input.jpeg')
 
     img_resize = img.resize((int(img.width / 2), int(img.height / 2)))
-    img_resize.save('input2.jpeg')
+    img_resize.save('input.jpeg')
     # os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep bbd-fastrcnn -postp rtb-bnb")
-    os.system("python3 main.py -i input2.jpeg -o input-out.png -m u2net")
+    os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
     textlist = []
     textlist = findtext('input-out.png')
     ######################
@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     xlsx = pd.read_excel('pillist.xlsx', usecols='A,H,I,F,G', engine='openpyxl')
     pilllist = []
-
+    indexlist = []
     ###전체인덱스 일치하는지 찾기###
     for index in range(23000):
         if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])):
@@ -118,6 +118,7 @@ if __name__ == "__main__":
             for c in range(len(textlist)):
                 if (textlist[c] == str(xlsx['표시앞'][index])) or (textlist[c] == str(xlsx['표시뒤'][index])) :
                     pilllist.append(xlsx['품목일련번호'][index])
+                    indexlist.append(index)
 
     print(len(pilllist))
     print(pilllist)
@@ -126,6 +127,7 @@ if __name__ == "__main__":
     if len(pilllist) == 1 :
         showpilllist = pilllist
     else :
+
         shapecolor = []
         shapecolor = test('input-out.png')
 
@@ -145,16 +147,14 @@ if __name__ == "__main__":
         ############################
         for c in range(len(color)):
             for s in range(len(shape)):
-                for index in range(23000):
+                for index in range(len(indexlist)):
                     if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]) :
                         if xlsx['품목일련번호'][index] in pilllist:
                             showpilllist.append(xlsx['품목일련번호'][index])
-                            print(color[c], shape[s], xlsx['품목일련번호'][index])
-
-
 
     if not showpilllist :
         print('일치하는 알약을 찾지못하였습니다.')
+        print(pilllist[:5])
     else :
         print(len(showpilllist))
         print(showpilllist)
