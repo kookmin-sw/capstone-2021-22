@@ -11,9 +11,11 @@ import os
 import pandas as pd
 from PIL import Image
 import io
-
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-a6a1b7680b12.json"
 from google.cloud import vision
 from google.cloud.vision_v1 import types
+import unicodedata
+import difflib
 
 def findtext(img_dir) :
     client = vision.ImageAnnotatorClient()
@@ -99,52 +101,59 @@ if __name__ == "__main__":
     textlist = findtext('input-out.png')
     ######################
     print(textlist)
+    for a in range(len(textlist)):
+        textlist[a] = textlist[a].replace('\n', '')
+
     xlsx = pd.read_excel('pillist.xlsx', usecols='A,H,I,F,G', engine='openpyxl')
-    print(type(xlsx['표시앞'][0]))
     pilllist = []
+
+    ###전체인덱스 일치하는지 찾기###
     for index in range(23000):
-        for c in range(len(textlist)):
-            if (textlist[c] in str(xlsx['표시앞'][index])) or (textlist[c] == str(xlsx['표시뒤'][index])):
-                pilllist.append(xlsx['품목일련번호'][index])
+        if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])):
+            pilllist.append(xlsx['품목일련번호'][index])
+
+    ##전체인덱스 일치하는것 없으면 텍스트 포함하고 있는 모든 알약추출
+    if not pilllist :
+        for index in range(23000):
+            for c in range(len(textlist)):
+                if (textlist[c] == str(xlsx['표시앞'][index])) or (textlist[c] == str(xlsx['표시뒤'][index])) :
+                    pilllist.append(xlsx['품목일련번호'][index])
 
     print(len(pilllist))
     print(pilllist)
-
     ############################
-    shapecolor = []
-    shapecolor = test('input-out.png')
-    print(shapecolor)
-
-    # test('./input-out.png')
-    print(shapecolor)
-    shape = []
-    color = []
-    # print(shapecolor[0][-1])
-    for a in range(len(shapecolor)) :
-        if shapecolor[a][-1] == '형':
-            shape.append(shapecolor[a])
-        else :
-            color.append(shapecolor[a])
-
-    print(color)
-    print(shape)
-    ############################
-    showpilllist = []
-
-    for index in range(23000):
-        for c in range(len(color)) :
-            for s in range(len(shape)) :
-                if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]) :
-                    if xlsx['품목일련번호'][index] in pilllist:
-                        showpilllist.append(xlsx['품목일련번호'][index])
-
-    print(len(showpilllist))
-    print(showpilllist)
-
-
-    if not showpilllist :
+    if len(pilllist) == 1 :
         showpilllist = pilllist
+    else :
+        shapecolor = []
+        shapecolor = test('input-out.png')
+
+        print(shapecolor)
+        # test('./input-out.png')
+        print(shapecolor)
+        shape = []
+        color = []
+        # print(shapecolor[0][-1])
+        for a in range(len(shapecolor)) :
+            if shapecolor[a][-1] == '형':
+                shape.append(shapecolor[a])
+            else :
+                color.append(shapecolor[a])
+
+        print(color)
+        print(shape)
+        ############################
+        showpilllist = []
+
+        for index in range(23000):
+            for c in range(len(color)) :
+                for s in range(len(shape)) :
+                    if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]) :
+                        if xlsx['품목일련번호'][index] in pilllist:
+                            showpilllist.append(xlsx['품목일련번호'][index])
+
     print(len(showpilllist))
     print(showpilllist)
+
 
 
