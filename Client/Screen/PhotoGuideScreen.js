@@ -20,7 +20,7 @@ class PhotoGuideScreen extends Component {
                         onPress={()=>{
                             this.props.navigation.reset({
                                 index: 0,
-                                routes: [{name: 'Photo'}]
+                                routes: [{name: "Photo"}]
                             })
                     }}>
                         <Text style={styles.ButtonText}>촬영하기</Text>
@@ -41,27 +41,24 @@ const styles = StyleSheet.create({
     },
     image : {
         flex : 1,
-        width: "100%",
-        alignItems: 'center',
-        justifyContent : 'center',
-        padding : 50
+        width: '90%',
+        margin : 20
     },
     ButtonView : {
         alignItems: 'center',
         justifyContent : 'center',
         padding : 50
-        
     },
     Button : {
-        alignItems: 'center',
-        justifyContent : 'center',
-        width: 193,
-        height: 56,
-        borderRadius: 28,
+        alignItems: "center",
+        justifyContent : "center",
+        width: 240,
+        height: 53,
+        borderRadius: 32,
         backgroundColor: "#ffffff",
         borderStyle: "solid",
         borderWidth: 2,
-        borderColor: "#c86e65"
+        borderColor: "#c86e65",
     },
     ButtonText : {
         width: 82,

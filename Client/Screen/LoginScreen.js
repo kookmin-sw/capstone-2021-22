@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
+
+import AsyncStorage from '@react-native-community/async-storage';
 
 export function LoginScreen() {
 
@@ -9,10 +11,41 @@ export function LoginScreen() {
     const [password, setPassword] = useState('');
     const navigation = useNavigation();
 
-    sendInfo=() => {
-        console.log(id, password);
-        // navigation.navigate('MainFinish');
+    
+    logIn= async () => { 
+        fetch("http://3.34.96.230/auth/login", {
+            method : "POST",
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify({
+                "nick" : id,
+                "password" : password,
+            })
+        }).then(res => res.json())
+        .then(response => {
+            // console.log(response)
+            if(response.isLogin){
+                console.log('로그인 성공')
+                AsyncStorage.setItem('token',response.token);
+                // AsyncStorage.setItem('user', JSON.stringify(response),()=>{
+                // })
+                navigation.reset({
+                    index: 0,
+                    routes: [{name: 'Main'}]
+                })
+            } else {
+                Alert.alert(
+                    "아이디와 비밀번호를 다시 확인해주세요"
+                  );
+                console.log('로그인 실패')
+            }
+        })
+        .catch((error) => {
+            console.error(error);
+        });
     }
+    
 
     return (
         <View style={styles.MainView}>
@@ -45,7 +78,7 @@ export function LoginScreen() {
             <View style={styles.LoginButtonView}>
                 <TouchableOpacity
                     style={styles.LoginButton}
-                    onPress={() => sendInfo()}>
+                    onPress={() => logIn()}>
                     <Text style={styles.LoginButtonText}>로그인</Text>
                 </TouchableOpacity>
             </View>

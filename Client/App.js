@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TextComponent, Image, Button, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -11,8 +11,12 @@ import LoginScreen from './screen/LoginScreen';
 import RegisterScreen from './screen/RegisterScreen';
 import RegisterFinishScreen from './screen/RegisterFinishScreen';
 import SearchScreen from './screen/SearchScreen';
+import SearchFailScreen from './screen/SearchFailScreen';
 import MyPillScreen from './screen/MyPillScreen';
 import MyPillDetailScreen from './screen/MyPillDetailScreen';
+import PhotoGuideScreen from './screen/PhotoGuideScreen';
+import PhotoScreen from './screen/PhotoScreen';
+import ConfirmScreen from './screen/ConfirmScreen';
 
 const Stack = createStackNavigator();
 
@@ -32,11 +36,12 @@ class App extends Component
 
         setTimeout(() => {
             SplashScreen.hide();
-        }, 1000);
-        
+        }, 500);
+
         return (
             <NavigationContainer>
                 <Stack.Navigator initialRouteName="Main">
+
                     <Stack.Screen
                     name="Main"
                     component={MainScreen}
@@ -77,7 +82,7 @@ class App extends Component
                         },
                         headerShown : false
                     }}
-                    />
+                    /> 
 
                     <Stack.Screen
                     name="Search"
@@ -93,6 +98,9 @@ class App extends Component
                         headerLeft: () => (
                             <TouchableOpacity
                             onPress={()=>{
+                                // AsyncStorage.getItem('user').then((value) =>
+                                //     navigation.replace(value === null ? 'Main' : 'UserMain'),
+                                // );
                                 navigation.reset({routes: [{name: 'Main'}]})
                             }}>
                                 <Image
@@ -104,6 +112,21 @@ class App extends Component
                         ),
                     })}
 
+                    />
+
+                    <Stack.Screen
+                    name="SearchFail"
+                    component={SearchFailScreen}
+                    options={{ 
+                        title: '알약 검색',
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerBackImage: BackBtn,
+                    }}
                     />
 
                     <Stack.Screen
@@ -150,6 +173,52 @@ class App extends Component
                         headerBackImage: BackBtn,
                     }}
                     />
+
+                    <Stack.Screen
+                    name="PhotoGuide"
+                    component={PhotoGuideScreen}
+                    options={{ 
+                        title: '알약 촬영 안내' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerBackImage: BackBtn,
+                    }}
+                    />
+
+                    <Stack.Screen
+                    name="Photo"
+                    component={PhotoScreen}
+                    options={{ 
+                        title: '알약 촬영' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerBackImage: BackBtn,
+                    }}
+                    />
+
+                    <Stack.Screen
+                    name="Confirm"
+                    component={ConfirmScreen}
+                    options={{ 
+                        title: '알약 촬영' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerBackImage: BackBtn,
+                    }}
+                    />
+
                 </Stack.Navigator>
             </NavigationContainer>
             
