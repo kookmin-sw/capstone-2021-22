@@ -88,7 +88,7 @@ def mergeimg(img1_dir,img2_dir) :
 
 if __name__ == "__main__":
 
-    mergeimg('./image/IMG_5004.jpg','./image/IMG_5005.jpg')
+    mergeimg('./image/IMG_5006.jpg','./image/IMG_5007.jpg')
 
 
     img = Image.open('input.jpeg')
@@ -121,6 +121,7 @@ if __name__ == "__main__":
 
     print(len(pilllist))
     print(pilllist)
+    showpilllist = []
     ############################
     if len(pilllist) == 1 :
         showpilllist = pilllist
@@ -128,7 +129,6 @@ if __name__ == "__main__":
         shapecolor = []
         shapecolor = test('input-out.png')
 
-        print(shapecolor)
         # test('./input-out.png')
         print(shapecolor)
         shape = []
@@ -143,17 +143,21 @@ if __name__ == "__main__":
         print(color)
         print(shape)
         ############################
-        showpilllist = []
-
-        for index in range(23000):
-            for c in range(len(color)) :
-                for s in range(len(shape)) :
+        for c in range(len(color)):
+            for s in range(len(shape)):
+                for index in range(23000):
                     if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]) :
                         if xlsx['품목일련번호'][index] in pilllist:
                             showpilllist.append(xlsx['품목일련번호'][index])
+                            print(color[c], shape[s], xlsx['품목일련번호'][index])
 
-    print(len(showpilllist))
-    print(showpilllist)
+
+
+    if not showpilllist :
+        print('일치하는 알약을 찾지못하였습니다.')
+    else :
+        print(len(showpilllist))
+        print(showpilllist)
 
 
 
