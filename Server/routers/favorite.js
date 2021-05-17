@@ -15,8 +15,8 @@ router.post('/', passport.authenticate('jwt', { session: false }),
     if (isFavorite) {
 
       await FAVORITES.create({
-        pill_id: parseInt(199303108) ,
-        user_id: parseInt(7),
+        pill_id: parseInt(pillId) ,
+        user_id: parseInt(req.user.id),
       });
       res.status(200).json({
         "create": true
@@ -40,7 +40,24 @@ router.post('/', passport.authenticate('jwt', { session: false }),
   }
 );
 
-
+router.get('/', passport.authenticate('jwt', { session: false }),
+async (req, res, next)=> {
+  try{
+    const numOfPill = await FAVORITES.count({where: {
+      user_id:req.user.id
+    }});
+    res.status(200).json({
+      "numOfPill": numOfPill,
+      "name":req.user.name
+    });
+  }
+  catch {
+    console.error(error);
+    return next(error);
+  }
+    
+  }
+);
 
 
 

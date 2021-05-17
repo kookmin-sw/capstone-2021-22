@@ -5,7 +5,7 @@ const { jwtkey } = require('../keys')
 const bcrypt = require('bcrypt');
 const { isLoggedIn, isNotLoggedIn } = require('../middlewares/middlewares');
 const USERS = require('../models').USERS;
-
+const FAVORITES = require('../models').FAVORITES;
 
 const router = express.Router();
 
@@ -47,21 +47,30 @@ router.post('/login', isNotLoggedIn, (req, res, next) => {
         }
       );
     }
-    return req.login(user, (loginError) => {
+    
+    return req.login(user,  async (loginError) => {
+      try {
       if (loginError) {
         console.error(loginError);
         return next(loginError);
       }
       const token = jwt.sign({ userId: user.id }, jwtkey);
-
+      const numOfPill = await FAVORITES.count({where: {
+        user_id:user.id
+      }});
       res.status(200).json(
         {
           "isLogin":true,
           "token": token,
           "name": user.name,
-          "pill": "8"
+          "pill": numOfPill
         }
       );
+      }
+      catch {
+        console.error(error);
+    return next(error);
+      }
     });
   })(req, res, next);
 });
