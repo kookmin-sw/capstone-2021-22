@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TextComponent, Image, Button, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -16,6 +16,13 @@ import MyPillDetailScreen from './screen/MyPillDetailScreen';
 import PhotoGuideScreen from './screen/PhotoGuideScreen';
 import PhotoScreen from './screen/PhotoScreen';
 import ConfirmScreen from './screen/ConfirmScreen';
+
+import AsyncStorage from '@react-native-community/async-storage';
+import UserMainScreen from './screen/UserMainScreen';
+
+import LoadingScreen from './screen/LoadingScreen';
+
+
 
 const Stack = createStackNavigator();
 
@@ -36,13 +43,40 @@ class App extends Component
         setTimeout(() => {
             SplashScreen.hide();
         }, 1000);
-        
+
         return (
             <NavigationContainer>
-                <Stack.Navigator initialRouteName="Main">
+                <Stack.Navigator initialRouteName="Loading">
+
+                    <Stack.Screen
+                    name="Loading"
+                    component={LoadingScreen}
+                    options={{
+                        title: '이게뭐약?' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                    }}
+                    />
+
                     <Stack.Screen
                     name="Main"
                     component={MainScreen}
+                    options={{
+                        title: '이게뭐약?' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                    }}
+                    />
+
+                    <Stack.Screen
+                    name="UserMain"
+                    component={UserMainScreen}
                     options={{
                         title: '이게뭐약?' ,
                         headerTitleStyle: {
@@ -96,7 +130,10 @@ class App extends Component
                         headerLeft: () => (
                             <TouchableOpacity
                             onPress={()=>{
-                                navigation.reset({routes: [{name: 'Main'}]})
+                                AsyncStorage.getItem('user').then((value) =>
+                                    navigation.replace(value === null ? 'Main' : 'LoginMain'),
+                                );
+                                // navigation.reset({routes: [{name: 'Main'}]})
                             }}>
                                 <Image
                                     source={require('./src/icon/home.png')}
@@ -198,6 +235,7 @@ class App extends Component
                         headerBackImage: BackBtn,
                     }}
                     />
+
                 </Stack.Navigator>
             </NavigationContainer>
             

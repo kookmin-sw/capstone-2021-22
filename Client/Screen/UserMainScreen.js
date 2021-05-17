@@ -4,12 +4,9 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 
 import  logo  from './images/pill.png';
 import  MyPillLogo  from './images/pills-bottle.png';
-import { Button } from 'react-native-elements/dist/buttons/Button';
-
-import AsyncStorage from '@react-native-community/async-storage';
 
 
-class MainScreen extends Component {
+class UserMainScreen extends Component {
 
     render () {
         return (
@@ -51,14 +48,14 @@ class MainScreen extends Component {
                     <TouchableOpacity
                         style={styles.MyPillButton}
                         onPress={()=>{
-                            this.props.navigation.navigate('Login')
+                            this.props.navigation.navigate('MyPill')
                         }}>
                         <View style={styles.MyPillLogoView}>
                             <Image style={styles.MyPillLogoImage}
                                 source={MyPillLogo}/>
                         </View>
-                        <Text style={styles.MyPillButtonText}>내 약통</Text>
-                        <Text style={styles.MyPillNumText}></Text>
+                        <Text style={styles.MyPillButtonText}>지원님의 약통</Text>
+                        <Text style={styles.MyPillNumText}>></Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -229,4 +226,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default MainScreen;
+export default UserMainScreen;
