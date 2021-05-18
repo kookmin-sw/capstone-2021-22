@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-webpage = requests.get(" https://nedrug.mfds.go.kr/pbp/CCBBB01/getItemDetail?itemSeq=201306176 ")
+import sys
+pillId=sys.argv[1]
+
+webpage = requests.get(" https://nedrug.mfds.go.kr/pbp/CCBBB01/getItemDetail?itemSeq="+pillId)
 soup = BeautifulSoup(webpage.content, "html.parser")
 new_tag = soup.new_tag("h3")
 for div in soup.find_all("div", {'class':'info_sec notPkInfo scroll_02'}): 
