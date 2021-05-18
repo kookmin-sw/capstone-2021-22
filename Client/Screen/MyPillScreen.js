@@ -6,10 +6,9 @@ import AsyncStorage from '@react-native-community/async-storage';
 import * as config from '../src/config';
 
 import logo from './images/pills-bottle.png';
-import icon from './images/star.png';
+import star from '../src/icon/star.png';
 
 import testImage from './images/test.jpg';
-import { Button } from 'react-native-elements';
 
 
 
@@ -20,17 +19,19 @@ class MyPillScreen extends Component {
 
         return (
             <ScrollView style={styles.scrollView}>
-                <View style={styles.titleContainer}>
-                    <Image
-                        style={styles.logoImage}
-                        source={logo}
-                    />
-                    <Text style={styles.titleText}>지원님의 약통</Text>
+                <View style={styles.titleView}>
+                    <View style={styles.titleContainer}>
+                        <Image
+                            style={styles.logoImage}
+                            source={logo}
+                        />
+                        <Text style={styles.titleText}>지원님의 약통</Text>
+                    </View>
                     <TouchableOpacity
                         onPress={()=>{
                             Alert.alert(
-                                "logout",  
-                                "로그아웃 하시겠습니까?" ,
+                                "로그아웃 하시겠습니까?",  
+                                "" ,
                                 [
                                     {
                                     text: "네", 
@@ -51,7 +52,7 @@ class MyPillScreen extends Component {
                                 ]
                               )
                         }}>
-                        <Text>로그아웃</Text>
+                        <Text style={{fontSize: 15}}>로그아웃</Text>
                     </TouchableOpacity>
                 </View>
 
@@ -68,7 +69,7 @@ class MyPillScreen extends Component {
                                 <TouchableOpacity>
                                     <Image
                                     style={styles.icon}
-                                    source={icon}
+                                    source={star}
                                     />
                                 </TouchableOpacity>
                             </View>
@@ -91,10 +92,16 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
     },
+    titleView : {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        padding : 20,
+    },
     titleContainer : {
         flexDirection: 'row',
         alignItems: 'center',
-        padding : 20,
+        // padding : 20,
     },
     logoImage : {
         width: 30,

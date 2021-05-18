@@ -124,8 +124,7 @@ class App extends Component
                             fontSize: 20,
                             color: "#707070"
                         },
-                        headerBackTitleVisible: false,
-                        headerBackImage: BackBtn,
+                        headerShown : false
                     }}
                     />
 

@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, TextInput, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, View, TextInput, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 
 import { PillList } from '../component/PillList';
 
@@ -9,16 +9,20 @@ export function SearchScreen() {
     const [keyword, setKeyword] = useState('');
     const [pillList, setPillList] = useState([]);
     const [flag, setFlag] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     async function search() {
+        setFlag(false);
+        setPillList([]);
+        setLoading(true);
         fetch("http://3.34.96.230/search/?pillName=" + keyword, {
             method : "GET",
         }).then(res => res.json())
         .then(response => {
             // console.log(response)
-            setFlag(true)
-            setPillList(response)
-            
+            setFlag(true);
+            setPillList(response);
+            setLoading(false);
         })
         .catch(error => console.error('Error:', error));
     }
@@ -30,9 +34,10 @@ export function SearchScreen() {
                 <Text style={styles.text}>검색결과가 없습니다.</Text>
             )
         } else {
+            // console.log(pillList)
             return (
                 pillList.map((pill,index) => ( 
-                    <PillList key={index} data={pillList} imgUrl={pill.image} name={pill.name} className={pill.class} codeName={pill.shape} />
+                    <PillList key={index} data={pillList} imgUrl={pill.image} name={pill.name} className={pill.class} codeName={pill.shape} id={pill.id}/>
                 ))
             )
         }
@@ -49,13 +54,14 @@ export function SearchScreen() {
                 style={styles.textinput}
                 onChangeText={(text) => {setKeyword(text);}}
                 />
-                <TouchableOpacity 
+                <TouchableOpacity style={{width: 30, height: 45, justifyContent: 'center'}}
                 onPress={() => search()}>
-                    <Image
+                    <Image 
                     source={require('../src/icon/search.png')}
                     />
                 </TouchableOpacity>
             </View>
+            <ActivityIndicator animating={loading} size="large" style={styles.loadingStyle} color="#c86e65"/>
             <ScrollView style={styles.scrollView}>
                 {showResult()}
             </ScrollView>
@@ -76,7 +82,7 @@ const styles = StyleSheet.create({
         marginBottom: 2,
         width: '95%',
         height: 45,
-        padding: 10,
+        // padding: 10,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -88,13 +94,20 @@ const styles = StyleSheet.create({
     },
     textinput: {
         fontSize: 18,
-        color: '#3c3c3c'
+        color: '#3c3c3c',
+        margin: 10,
+        width: 300
     },
     text: {
         fontSize: 18,
         marginTop: 20,
         marginLeft: 10,
         color: '#3c3c3c'
+    },
+    loadingStyle: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });
 
