@@ -9,6 +9,8 @@ const baseRouter = require('./routers/baseRouter');
 const authRouter = require('./routers/auth');
 const searchRouter = require('./routers/search');
 const favoriteRouter = require('./routers/favorite');
+const pillDetailRouter = require('./routers/pillDetail');
+
 
 const app = express();
 passportConfig();
@@ -30,6 +32,7 @@ app.use('/', baseRouter);
 app.use('/auth', authRouter);
 app.use('/search', searchRouter);
 app.use('/favorite', favoriteRouter);
+app.use('/pillDetail', pillDetailRouter);
 
 app.set('port', process.env.PORT || 8003);
 app.use(express.json());
