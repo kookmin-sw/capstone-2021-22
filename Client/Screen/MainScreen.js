@@ -5,7 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 
 import  logo  from './images/pill.png';
 import  MyPillLogo  from './images/pills-bottle.png';
-import { Button } from 'react-native-elements/dist/buttons/Button';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import * as config from '../src/config';
@@ -15,15 +14,28 @@ export function MainScreen(props) {
 
     const navigation = useNavigation();
     const [myPillText, setMyPillText] = useState('');
+    const [myPillNum, setMyPillNum] = useState('')
     const [navScreen, setNavScreen] = useState('');
 
     useEffect(() => {
-        AsyncStorage.getItem('token', (err, result) => {
-            if (result !== null) {
+        AsyncStorage.getItem('token', (err, token) => {
+            if (token !== null) {
                 config.IS_LOGIN = true;
-                setMyPillText("지원님의 약통");
-                setNavScreen("MyPill")
-                console.log(config.IS_LOGIN);
+                fetch("http://3.34.96.230/favorite", {
+                    method : "GET",
+                    headers : {
+                        'Content-Type' : 'application/json',
+                        Authorization : `Bearer ${token}`
+                    },
+                }).then(res => res.json())
+                .then(response => { 
+                    console.log(response)
+                    setMyPillText(response.name + "님의 약통");
+                    setMyPillNum(response.numOfPill);
+                    setNavScreen("MyPill")
+                    console.log(config.IS_LOGIN);
+                })
+                .catch(error => console.error('Error:', error));
             } else {
                 config.IS_LOGIN = false;
                 setMyPillText("내 약통");
@@ -78,7 +90,7 @@ export function MainScreen(props) {
                             source={MyPillLogo}/>
                     </View>
                     <Text style={styles.MyPillButtonText}>{myPillText}</Text>
-                    <Text style={styles.MyPillNumText}>{'>'}</Text>
+                    <Text style={styles.MyPillNumText}>{myPillNum + ' >'}</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -192,7 +204,7 @@ const styles = StyleSheet.create({
         width: 165,
         height: 29,
         // fontFamily: 'AppleSDGothicNeo',
-        fontSize: 24,
+        fontSize: 22,
         fontWeight: 'bold',
         fontStyle: 'normal',
         letterSpacing: -0.48,
@@ -203,10 +215,9 @@ const styles = StyleSheet.create({
         width: 26,
         height: 24,
         // fontFamily: "AppleSDGothicNeo",
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: "100",
         fontStyle: "normal",
-        letterSpacing: -0.4,
         textAlign: "left",
         color: "#404040"
     },
