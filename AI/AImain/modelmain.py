@@ -74,16 +74,31 @@ def test(img_dir):
     return shapecolor
 
 def mergeimg(img1_dir,img2_dir) :
+
     image1 = Image.open(img1_dir)
     # image1.show()
     image2 = Image.open(img2_dir)
     # image2.show()
+
     image1_size = image1.size
-    image2_size = image2.size
+
     new_image = Image.new('RGB', (2 * image1_size[0], image1_size[1]), (250, 250, 250))
     new_image.paste(image1, (0, 0))
     new_image.paste(image2, (image1_size[0], 0))
     new_image.save("input.jpeg", "JPEG")
+    # image1 = Image.open(img1_dir)
+    # # image1.show()
+    # image2 = Image.open(img2_dir)
+    # # image2.show()
+    #
+    # image1_size = image1.size
+    # # image2.resize = (image1_size[0],image1_size[1])
+    # image2_size = image2.size
+    # image_size = max(image1_size, image2_size)
+    # new_image = Image.new('RGB', (2 * image_size[0], image_size[1]), (250, 250, 250))
+    # new_image.paste(image1, (0, 0))
+    # new_image.paste(image2, (image_size[0], 0))
+    # new_image.save("input.jpeg", "JPEG")
 
 def get_jaccard_sim(str1, str2):
     a = set(str1)
@@ -95,7 +110,7 @@ def get_jaccard_sim(str1, str2):
 
 if __name__ == "__main__":
 
-    mergeimg('./image/200806190_2_4_1.png','./image/200806190_2_4_2.png')
+    mergeimg('./image/201907831_3_2.png','./image/201907831_2_2.png')
 
     img = Image.open('input.jpeg')
 
@@ -108,6 +123,7 @@ if __name__ == "__main__":
     # textlist = findtext('input-out.png')
     textlist = findtext('input.jpeg')
     ######################
+    textlist = ['ID\n', 'ID']
     print(textlist)
     xlsx = pd.read_excel('pillist.xlsx', usecols='A,H,I,F,G', engine='openpyxl')
     showpilllist = []
@@ -117,14 +133,15 @@ if __name__ == "__main__":
     if not textlist : #텍스트 찾지 못했을때 모양/색깔만 일치하는 알약 찾
         print('음각을 찾을 수 없습니다')
         shapecolor = []
-        # shapecolor = test('input-out.png')
-        shapecolor = test('input.jpeg')
+        os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
+        shapecolor = test('input-out.png')
+        # shapecolor = test('input.jpeg')
 
         # test('./input-out.png')
         print(shapecolor)
         shape = []
         color = []
-        # print(shapecolor[0][-1])
+
         for a in range(len(shapecolor)):
             if shapecolor[a][-1] == '형':
                 shape.append(shapecolor[a])
@@ -136,43 +153,60 @@ if __name__ == "__main__":
         ############################
         for c in range(len(color)):
             for s in range(len(shape)):
-                for index in range(23000):
+                for index in range(23936):
                     if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]):
                             pilllist.append(xlsx['품목일련번호'][index])
 
         print(len(pilllist))
+        print(pilllist[:5])
         print(pilllist)
 
     else : #음각 찾았을 떄
-
+        check = 0
         for a in range(len(textlist)):
-            textlist[a] = textlist[a].replace('\n', '')
+            textlist[a] = textlist[a].rstrip('\n')
+            textlist[a] = textlist[a].replace('\n', ' ')
             textlist[a] = textlist[a].replace('\'', '')
-            textlist[a] = textlist[a].strip()
+            textlist[a] = textlist[a].replace('.', '')
+
             # textlist[a] = unicodedata.normalize('NFC' , textlist[a])
             # import difflib
             # print('\n'.join(difflib.ndiff('СС+', 'CC+')))
             # print('\n'.join(difflib.ndiff('CC+', 'CC+')))
             textlist[a] = textlist[a].replace('СС+', 'CC+')
+        if ' ' in textlist[0] :
+            textlist.append(textlist[0].replace(' ', ''))
+            check = 1
 
         print(textlist)
         #전체 텍스트 일치하는 것 찾
-        for index in range(23000):
-            if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])) :
-                if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 :
-                    if xlsx['품목일련번호'][index] not in pilllist :
+        for index in range(23935):
+            if check == 0 :
+                if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])) :
+                    if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
+                        if xlsx['품목일련번호'][index] not in pilllist :
+                            pilllist.append(xlsx['품목일련번호'][index])
+                            indexlist.append(index)
+                    else :
                         pilllist.append(xlsx['품목일련번호'][index])
                         indexlist.append(index)
-                else :
-                    pilllist.append(xlsx['품목일련번호'][index])
-                    indexlist.append(index)
+            else :
+                if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])) or (textlist[-1] == str(xlsx['표시앞'][index])) or (textlist[-1] == str(xlsx['표시뒤'][index])) :
+                    if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
+                        if xlsx['품목일련번호'][index] not in pilllist :
+                            pilllist.append(xlsx['품목일련번호'][index])
+                            indexlist.append(index)
+                    else :
+                        pilllist.append(xlsx['품목일련번호'][index])
+                        indexlist.append(index)
 
         #모든 텍스트에 대해서 전체 텍스트 일치하는 것 찾
         if not pilllist:
-            for index in range(23000):
+            print('B')
+            for index in range(23935):
                 for c in range(len(textlist)) :
                     if (textlist[c] == str(xlsx['표시앞'][index])) or (textlist[c] == str(xlsx['표시뒤'][index])) :
-                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191:
+                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
                             if xlsx['품목일련번호'][index] not in pilllist:
                                 pilllist.append(xlsx['품목일련번호'][index])
                                 indexlist.append(index)
@@ -182,10 +216,11 @@ if __name__ == "__main__":
 
         ##전체인덱스 일치하는것 없으면 텍스트 포함하고 있는 모든 알약추출
         if not pilllist :
-            for index in range(23000):
+            print('C')
+            for index in range(23935):
                 for c in range(len(textlist)):
                     if (textlist[c] in str(xlsx['표시앞'][index])) or (textlist[c] in str(xlsx['표시뒤'][index])) :
-                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191:
+                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
                             if xlsx['품목일련번호'][index] not in pilllist:
                                 pilllist.append(xlsx['품목일련번호'][index])
                                 indexlist.append(index)
@@ -193,12 +228,12 @@ if __name__ == "__main__":
                             pilllist.append(xlsx['품목일련번호'][index])
                             indexlist.append(index)
 
-        ##알파벳 절이상 일치하면 추출
         if not pilllist :
-            for index in range(23000):
+            print('D')
+            for index in range(23935):
                 for c in range(len(textlist)):
-                    if get_jaccard_sim(textlist[c],str(xlsx['표시앞'][index])) > 0.6 or get_jaccard_sim(textlist[c],str(xlsx['표시뒤'][index])) > 0.6 :
-                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191:
+                    if get_jaccard_sim(textlist[c],str(xlsx['표시앞'][index])) > 0.65 or get_jaccard_sim(textlist[c],str(xlsx['표시뒤'][index])) > 0.65 :
+                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
                             if xlsx['품목일련번호'][index] not in pilllist:
                                 pilllist.append(xlsx['품목일련번호'][index])
                                 indexlist.append(index)
@@ -208,16 +243,16 @@ if __name__ == "__main__":
 
 
         print(len(pilllist))
-        print(pilllist)
+        print(pilllist[:20])
 
         ############################
         if len(pilllist) == 1 :
             showpilllist = pilllist
         elif len(pilllist) > 0 :
-            # os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
+            os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
             shapecolor = []
-            # shapecolor = test('input-out.png')
-            shapecolor = test('input.jpeg')
+            shapecolor = test('input-out.png')
+            # shapecolor = test('input.jpeg')
 
             # test('./input-out.png')
             print(shapecolor)
