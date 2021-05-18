@@ -11,6 +11,7 @@ import os
 import pandas as pd
 from PIL import Image
 import io
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-a6a1b7680b12.json"
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 import unicodedata
@@ -86,8 +87,8 @@ def mergeimg(img1_dir,img2_dir) :
 
 
 if __name__ == "__main__":
-
-    mergeimg('./image/IMG_5006.jpg','./image/IMG_5007.jpg')
+    print("이미지 머지중 ---")
+    mergeimg('./image/IMG_5008.jpg','./image/IMG_5009.jpg')
 
 
     img = Image.open('input.jpeg')
@@ -107,7 +108,7 @@ if __name__ == "__main__":
     pilllist = []
     indexlist = []
     ###전체인덱스 일치하는지 찾기###
-    if len(indexlist) != 0 :
+    if len(textlist) != 0 :
         for index in range(23000):
             if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])):
                 pilllist.append(xlsx['품목일련번호'][index])
@@ -124,7 +125,6 @@ if __name__ == "__main__":
         print(len(pilllist))
         print(pilllist)
         showpilllist = []
-        print(indexlist)
         ############################
         if len(pilllist) == 1 :
             showpilllist = pilllist
