@@ -11,13 +11,11 @@ import os
 import pandas as pd
 from PIL import Image
 import io
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-a6a1b7680b12.json"
+
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 import unicodedata
 import difflib
-from numpy import dot
-from numpy.linalg import norm
 
 def findtext(img_dir) :
     client = vision.ImageAnnotatorClient()
