@@ -11,11 +11,12 @@ import os
 import pandas as pd
 from PIL import Image
 import io
-
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-a6a1b7680b12.json"
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 import unicodedata
 import difflib
+import unicodedata
 
 def findtext(img_dir) :
     client = vision.ImageAnnotatorClient()
@@ -94,7 +95,7 @@ def get_jaccard_sim(str1, str2):
 
 if __name__ == "__main__":
 
-    mergeimg('./image/200610627_6_1.png','./image/200907385_5_1.png')
+    mergeimg('./image/200806190_2_4_1.png','./image/200806190_2_4_2.png')
 
     img = Image.open('input.jpeg')
 
@@ -147,10 +148,22 @@ if __name__ == "__main__":
         for a in range(len(textlist)):
             textlist[a] = textlist[a].replace('\n', '')
             textlist[a] = textlist[a].replace('\'', '')
+            textlist[a] = textlist[a].strip()
+            # textlist[a] = unicodedata.normalize('NFC' , textlist[a])
+            # import difflib
+            # print('\n'.join(difflib.ndiff('СС+', 'CC+')))
+            # print('\n'.join(difflib.ndiff('CC+', 'CC+')))
+            textlist[a] = textlist[a].replace('СС+', 'CC+')
+
+        print(textlist)
         #전체 텍스트 일치하는 것 찾
         for index in range(23000):
             if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])) :
-                if xlsx['품목일련번호'][index] not in pilllist :
+                if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 :
+                    if xlsx['품목일련번호'][index] not in pilllist :
+                        pilllist.append(xlsx['품목일련번호'][index])
+                        indexlist.append(index)
+                else :
                     pilllist.append(xlsx['품목일련번호'][index])
                     indexlist.append(index)
 
@@ -159,7 +172,11 @@ if __name__ == "__main__":
             for index in range(23000):
                 for c in range(len(textlist)) :
                     if (textlist[c] == str(xlsx['표시앞'][index])) or (textlist[c] == str(xlsx['표시뒤'][index])) :
-                        if xlsx['품목일련번호'][index] not in pilllist :
+                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191:
+                            if xlsx['품목일련번호'][index] not in pilllist:
+                                pilllist.append(xlsx['품목일련번호'][index])
+                                indexlist.append(index)
+                        else:
                             pilllist.append(xlsx['품목일련번호'][index])
                             indexlist.append(index)
 
@@ -168,7 +185,11 @@ if __name__ == "__main__":
             for index in range(23000):
                 for c in range(len(textlist)):
                     if (textlist[c] in str(xlsx['표시앞'][index])) or (textlist[c] in str(xlsx['표시뒤'][index])) :
-                        if xlsx['품목일련번호'][index] not in pilllist:
+                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191:
+                            if xlsx['품목일련번호'][index] not in pilllist:
+                                pilllist.append(xlsx['품목일련번호'][index])
+                                indexlist.append(index)
+                        else:
                             pilllist.append(xlsx['품목일련번호'][index])
                             indexlist.append(index)
 
@@ -177,7 +198,11 @@ if __name__ == "__main__":
             for index in range(23000):
                 for c in range(len(textlist)):
                     if get_jaccard_sim(textlist[c],str(xlsx['표시앞'][index])) > 0.6 or get_jaccard_sim(textlist[c],str(xlsx['표시뒤'][index])) > 0.6 :
-                        if xlsx['품목일련번호'][index] not in pilllist:
+                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191:
+                            if xlsx['품목일련번호'][index] not in pilllist:
+                                pilllist.append(xlsx['품목일련번호'][index])
+                                indexlist.append(index)
+                        else:
                             pilllist.append(xlsx['품목일련번호'][index])
                             indexlist.append(index)
 
@@ -207,13 +232,13 @@ if __name__ == "__main__":
 
             print(color)
             print(shape)
-            print(indexlist)
             ############################
             for c in range(len(color)):
                 for s in range(len(shape)):
                     for index in range(len(indexlist)):
                         if (xlsx['의약품제형'][indexlist[index]] == shape[s] and xlsx['색상앞'][indexlist[index]] == color[c]) :
-                            showpilllist.append(xlsx['품목일련번호'][indexlist[index]])
+                            if xlsx['품목일련번호'][indexlist[index]] not in showpilllist:
+                                showpilllist.append(xlsx['품목일련번호'][indexlist[index]])
 
 
 
