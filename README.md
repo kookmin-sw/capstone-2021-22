@@ -5,7 +5,7 @@
 
 ## 1. 프로젝트 소개
 <!-- ![image](https://user-images.githubusercontent.com/28584133/118848501-c40d9200-b909-11eb-86b1-a460692ac6fa.png) -->
-<img src="https://user-images.githubusercontent.com/28584133/118848501-c40d9200-b909-11eb-86b1-a460692ac6fa.png" width="50%">
+<img src="https://user-images.githubusercontent.com/28584133/118848501-c40d9200-b909-11eb-86b1-a460692ac6fa.png" alt="logo" width="50%">
 <!-- <img src="https://user-images.githubusercontent.com/28584226/113487557-be8ff000-94f3-11eb-978b-a53a3580be7f.png" alt="logo" width=50%/>   -->
 
 현대 의학이 발전하면서 시중의 의약품의 종류도 많아졌다.  
@@ -22,8 +22,10 @@
     - 사용자가 복용하고 있는 약의 종류를 관리할 수 있는 즐겨찾기 기능
 
 ### 프로젝트 구성도
-![프로젝트구성도](https://user-images.githubusercontent.com/28584226/113821614-4a856e80-97b7-11eb-94b2-db79284d44df.jpg)
+![프로젝트구성도](https://user-images.githubusercontent.com/28584133/118848870-2070b180-b90a-11eb-8d32-1a6ab983e5e1.png)
 
+<!-- ![프로젝트구성도](https://user-images.githubusercontent.com/28584226/113821614-4a856e80-97b7-11eb-94b2-db79284d44df.jpg)
+ -->
 ### 기대효과
 '이게뭐약?' 개발을 통해 일상생활에서 누구나 의약품을 쉽고 빠르게 식별 가능하도록 하여 의약품 정보 활용의 기회를 넓힌다. 또한 얻은 의약품의 정보를 통해 비슷한 약의 중복 처방으로 인한 오남용, 잘못된 알약 복용 등의 문제를 미리 방지하여 사용자의 안전하고 건강한 의약품 소비를 기대해 볼 수 있다.
 
