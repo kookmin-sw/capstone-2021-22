@@ -4,7 +4,8 @@
 **중간발표 주소**-> https://drive.google.com/file/d/1kPHVM13y5LI24Fdjgq_JBC69lQjyPFsl/view?usp=sharing
 
 ## 1. 프로젝트 소개
-<img src="https://user-images.githubusercontent.com/28584226/113487557-be8ff000-94f3-11eb-978b-a53a3580be7f.png" alt="logo" width=50%/>  
+![image](https://user-images.githubusercontent.com/28584133/118848501-c40d9200-b909-11eb-86b1-a460692ac6fa.png)
+<!-- <img src="https://user-images.githubusercontent.com/28584226/113487557-be8ff000-94f3-11eb-978b-a53a3580be7f.png" alt="logo" width=50%/>   -->
 
 현대 의학이 발전하면서 시중의 의약품의 종류도 많아졌다.  
 각 의약품마다 용도와 용법이 존재하지만, 복용하는 약의 종류가 많아질수록 자신이 무슨 약을 복용하는지 헷갈리는 경우가 생긴다.  
