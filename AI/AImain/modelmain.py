@@ -86,19 +86,6 @@ def mergeimg(img1_dir,img2_dir) :
     new_image.paste(image1, (0, 0))
     new_image.paste(image2, (image1_size[0], 0))
     new_image.save("input.jpeg", "JPEG")
-    # image1 = Image.open(img1_dir)
-    # # image1.show()
-    # image2 = Image.open(img2_dir)
-    # # image2.show()
-    #
-    # image1_size = image1.size
-    # # image2.resize = (image1_size[0],image1_size[1])
-    # image2_size = image2.size
-    # image_size = max(image1_size, image2_size)
-    # new_image = Image.new('RGB', (2 * image_size[0], image_size[1]), (250, 250, 250))
-    # new_image.paste(image1, (0, 0))
-    # new_image.paste(image2, (image_size[0], 0))
-    # new_image.save("input.jpeg", "JPEG")
 
 def get_jaccard_sim(str1, str2):
     a = set(str1)
@@ -110,7 +97,7 @@ def get_jaccard_sim(str1, str2):
 
 if __name__ == "__main__":
 
-    mergeimg('./image/201907831_3_2.png','./image/201907831_2_2.png')
+    mergeimg('./image2/201803236.jpg','./image2/201803236-2.jpg')
 
     img = Image.open('input.jpeg')
 
@@ -123,7 +110,6 @@ if __name__ == "__main__":
     # textlist = findtext('input-out.png')
     textlist = findtext('input.jpeg')
     ######################
-    textlist = ['ID\n', 'ID']
     print(textlist)
     xlsx = pd.read_excel('pillist.xlsx', usecols='A,H,I,F,G', engine='openpyxl')
     showpilllist = []
@@ -232,7 +218,7 @@ if __name__ == "__main__":
             print('D')
             for index in range(23935):
                 for c in range(len(textlist)):
-                    if get_jaccard_sim(textlist[c],str(xlsx['표시앞'][index])) > 0.65 or get_jaccard_sim(textlist[c],str(xlsx['표시뒤'][index])) > 0.65 :
+                    if get_jaccard_sim(textlist[c],str(xlsx['표시앞'][index])) >= 0.5 or get_jaccard_sim(textlist[c],str(xlsx['표시뒤'][index])) >= 0.5 :
                         if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
                             if xlsx['품목일련번호'][index] not in pilllist:
                                 pilllist.append(xlsx['품목일련번호'][index])
@@ -241,7 +227,7 @@ if __name__ == "__main__":
                             pilllist.append(xlsx['품목일련번호'][index])
                             indexlist.append(index)
 
-
+        # get_jaccard_sim('RDUQ','마크DUQ')
         print(len(pilllist))
         print(pilllist[:20])
 
