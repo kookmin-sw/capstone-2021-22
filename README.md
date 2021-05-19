@@ -14,7 +14,8 @@
 이러한 문제점을 해결하기 위해 우리는 사진 촬영만으로 알약 검색이 가능한 이미지 기반 알약 식별 모바일 애플리케이션 개발하려고 한다.   
 
 ### 주요 기능 
-![프로젝트기능](https://user-images.githubusercontent.com/28584226/113821628-4eb18c00-97b7-11eb-9b71-fbaebbfdaaa6.jpg)
+![프로젝트기능](https://user-images.githubusercontent.com/28584133/118849030-48f8ab80-b90a-11eb-862b-81007536fefa.png)
+<!-- ![프로젝트기능](https://user-images.githubusercontent.com/28584226/113821628-4eb18c00-97b7-11eb-9b71-fbaebbfdaaa6.jpg) -->
 1. 알약 검색
     - 알약 사진 촬영을 통한 검색
     - 텍스트 정보(이름, 효능 등)를 통한 검색
