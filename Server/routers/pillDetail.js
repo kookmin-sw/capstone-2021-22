@@ -7,8 +7,13 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const spawn = require('child_process').spawn;
+const request = require('request');
+require('dotenv').config();
+const convert = require('xml-js');
 
+const url = 'http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDrugList';
 
+let queryParams = '?' + encodeURIComponent('ServiceKey') + '='+process.env.API_KEY;
 
 router.post('/', async (req, res) => {
 
@@ -49,7 +54,7 @@ router.post('/code', async (req, res) => {
 
     const { pillId } = req.body;
 
-    const result = spawn('python', [__dirname + '/crawler/crawl.py', pillId]);
+    // const result = spawn('python', [__dirname + '/crawler/crawl.py', pillId]);
 
 
 
@@ -59,12 +64,21 @@ router.post('/code', async (req, res) => {
         
 
         
-        result.stdout.on('data', function (data) {
-            data.toString();
-            res.write(data);
-            res.end();
-         });
-        
+        // result.stdout.on('data', function (data) {
+        //     data.toString();
+        //     res.write(data);
+        //     res.end();
+        //  });
+        queryParams += '&' + encodeURIComponent('itemSeq') + '=' + encodeURIComponent(pillId); 
+
+        request({
+            url: url + queryParams,
+            method: 'GET'
+        }, function (error, response, body) {
+            const xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
+            
+            res.send(xmlToJson);
+        });
        
 
 
