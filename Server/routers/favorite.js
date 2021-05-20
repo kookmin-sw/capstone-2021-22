@@ -6,6 +6,7 @@ const USERS = require('../models').USERS;
 const PILLS = require('../models').PILLS;
 const FAVORITES = require('../models').FAVORITES;
 const router = express.Router();
+const { promises: fs } = require("fs");
 
 router.post('/', passport.authenticate('jwt', { session: false }),
   async (req, res, next) => {
@@ -50,6 +51,37 @@ async (req, res, next)=> {
       "numOfPill": numOfPill,
       "name":req.user.name
     });
+  }
+  catch {
+    console.error(error);
+    return next(error);
+  }
+    
+  }
+);
+
+router.get('/my', passport.authenticate('jwt', { session: false }),
+
+async (req, res, next)=> {
+  const result = [];
+  try{
+
+    const favorites =  await FAVORITES.findAll({where : {  user_id:req.user.id  }, raw: true} );
+   
+
+    for(let i = 0;i<Object.keys(favorites).length;i++){
+        result[i] = await PILLS.findOne({where : {  id: favorites[i].pill_id  }, raw: true} )
+        result[i].image= await fs.readFile(__dirname + '/images'+'/'+favorites[i].pill_id +'.jpg',              //파일 읽기
+             (err, data) =>
+            {
+                
+                return data;
+    
+            }
+        )
+    }
+    result.push(req.user.name);
+    res.json(result);
   }
   catch {
     console.error(error);
