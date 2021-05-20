@@ -11,10 +11,12 @@ import os
 import pandas as pd
 from PIL import Image
 import io
+
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 import unicodedata
 import difflib
+import unicodedata
 
 def findtext(img_dir) :
     client = vision.ImageAnnotatorClient()
@@ -72,66 +74,171 @@ def test(img_dir):
     return shapecolor
 
 def mergeimg(img1_dir,img2_dir) :
+
     image1 = Image.open(img1_dir)
     # image1.show()
     image2 = Image.open(img2_dir)
     # image2.show()
+
     image1_size = image1.size
-    image2_size = image2.size
+
     new_image = Image.new('RGB', (2 * image1_size[0], image1_size[1]), (250, 250, 250))
     new_image.paste(image1, (0, 0))
     new_image.paste(image2, (image1_size[0], 0))
     new_image.save("input.jpeg", "JPEG")
 
+def get_jaccard_sim(str1, str2):
+    a = set(str1)
+    b = set(str2)
+    c = a.intersection(b)
+    return float(len(c)) / (len(a) + len(b) - len(c))
+
 
 
 if __name__ == "__main__":
 
-    mergeimg('./image/IMG_5006.jpg','./image/IMG_5007.jpg')
-
+    mergeimg('./image2/201803236.jpg','./image2/201803236-2.jpg')
 
     img = Image.open('input.jpeg')
 
     img_resize = img.resize((int(img.width / 2), int(img.height / 2)))
     img_resize.save('input.jpeg')
     # os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep bbd-fastrcnn -postp rtb-bnb")
-    os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
+
+    # os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
     textlist = []
-    textlist = findtext('input-out.png')
+    # textlist = findtext('input-out.png')
+    textlist = findtext('input.jpeg')
     ######################
     print(textlist)
-    for a in range(len(textlist)):
-        textlist[a] = textlist[a].replace('\n', '')
-
     xlsx = pd.read_excel('pillist.xlsx', usecols='A,H,I,F,G', engine='openpyxl')
+    showpilllist = []
     pilllist = []
     indexlist = []
-    ###전체인덱스 일치하는지 찾기###
-    if len(indexlist) != 0 :
-        for index in range(23000):
-            if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])):
-                pilllist.append(xlsx['품목일련번호'][index])
-                indexlist.append(index)
 
-        ##전체인덱스 일치하는것 없으면 텍스트 포함하고 있는 모든 알약추출
-        if not pilllist :
-            for index in range(23000):
-                for c in range(len(textlist)):
-                    if (textlist[c] == str(xlsx['표시앞'][index])) or (textlist[c] == str(xlsx['표시뒤'][index])) :
+    if not textlist : #텍스트 찾지 못했을때 모양/색깔만 일치하는 알약 찾
+        print('음각을 찾을 수 없습니다')
+        shapecolor = []
+        os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
+        shapecolor = test('input-out.png')
+        # shapecolor = test('input.jpeg')
+
+        # test('./input-out.png')
+        print(shapecolor)
+        shape = []
+        color = []
+
+        for a in range(len(shapecolor)):
+            if shapecolor[a][-1] == '형':
+                shape.append(shapecolor[a])
+            else:
+                color.append(shapecolor[a])
+
+        print(color)
+        print(shape)
+        ############################
+        for c in range(len(color)):
+            for s in range(len(shape)):
+                for index in range(23936):
+                    if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]):
+                            pilllist.append(xlsx['품목일련번호'][index])
+
+        print(len(pilllist))
+        print(pilllist[:5])
+        print(pilllist)
+
+    else : #음각 찾았을 떄
+        check = 0
+        for a in range(len(textlist)):
+            textlist[a] = textlist[a].rstrip('\n')
+            textlist[a] = textlist[a].replace('\n', ' ')
+            textlist[a] = textlist[a].replace('\'', '')
+            textlist[a] = textlist[a].replace('.', '')
+
+            # textlist[a] = unicodedata.normalize('NFC' , textlist[a])
+            # import difflib
+            # print('\n'.join(difflib.ndiff('СС+', 'CC+')))
+            # print('\n'.join(difflib.ndiff('CC+', 'CC+')))
+            textlist[a] = textlist[a].replace('СС+', 'CC+')
+        if ' ' in textlist[0] :
+            textlist.append(textlist[0].replace(' ', ''))
+            check = 1
+
+        print(textlist)
+        #전체 텍스트 일치하는 것 찾
+        for index in range(23935):
+            if check == 0 :
+                if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])) :
+                    if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
+                        if xlsx['품목일련번호'][index] not in pilllist :
+                            pilllist.append(xlsx['품목일련번호'][index])
+                            indexlist.append(index)
+                    else :
+                        pilllist.append(xlsx['품목일련번호'][index])
+                        indexlist.append(index)
+            else :
+                if (textlist[0] == str(xlsx['표시앞'][index])) or (textlist[0] == str(xlsx['표시뒤'][index])) or (textlist[-1] == str(xlsx['표시앞'][index])) or (textlist[-1] == str(xlsx['표시뒤'][index])) :
+                    if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
+                        if xlsx['품목일련번호'][index] not in pilllist :
+                            pilllist.append(xlsx['품목일련번호'][index])
+                            indexlist.append(index)
+                    else :
                         pilllist.append(xlsx['품목일련번호'][index])
                         indexlist.append(index)
 
+        #모든 텍스트에 대해서 전체 텍스트 일치하는 것 찾
+        if not pilllist:
+            print('B')
+            for index in range(23935):
+                for c in range(len(textlist)) :
+                    if (textlist[c] == str(xlsx['표시앞'][index])) or (textlist[c] == str(xlsx['표시뒤'][index])) :
+                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
+                            if xlsx['품목일련번호'][index] not in pilllist:
+                                pilllist.append(xlsx['품목일련번호'][index])
+                                indexlist.append(index)
+                        else:
+                            pilllist.append(xlsx['품목일련번호'][index])
+                            indexlist.append(index)
+
+        ##전체인덱스 일치하는것 없으면 텍스트 포함하고 있는 모든 알약추출
+        if not pilllist :
+            print('C')
+            for index in range(23935):
+                for c in range(len(textlist)):
+                    if (textlist[c] in str(xlsx['표시앞'][index])) or (textlist[c] in str(xlsx['표시뒤'][index])) :
+                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
+                            if xlsx['품목일련번호'][index] not in pilllist:
+                                pilllist.append(xlsx['품목일련번호'][index])
+                                indexlist.append(index)
+                        else:
+                            pilllist.append(xlsx['품목일련번호'][index])
+                            indexlist.append(index)
+
+        if not pilllist :
+            print('D')
+            for index in range(23935):
+                for c in range(len(textlist)):
+                    if get_jaccard_sim(textlist[c],str(xlsx['표시앞'][index])) >= 0.5 or get_jaccard_sim(textlist[c],str(xlsx['표시뒤'][index])) >= 0.5 :
+                        if xlsx['품목일련번호'][index] != 200806190 and xlsx['품목일련번호'][index] != 200806191 and xlsx['품목일련번호'][index] != 200806192:
+                            if xlsx['품목일련번호'][index] not in pilllist:
+                                pilllist.append(xlsx['품목일련번호'][index])
+                                indexlist.append(index)
+                        else:
+                            pilllist.append(xlsx['품목일련번호'][index])
+                            indexlist.append(index)
+
+        # get_jaccard_sim('RDUQ','마크DUQ')
         print(len(pilllist))
-        print(pilllist)
-        showpilllist = []
-        print(indexlist)
+        print(pilllist[:20])
+
         ############################
         if len(pilllist) == 1 :
             showpilllist = pilllist
         elif len(pilllist) > 0 :
-
+            os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
             shapecolor = []
             shapecolor = test('input-out.png')
+            # shapecolor = test('input.jpeg')
 
             # test('./input-out.png')
             print(shapecolor)
@@ -151,18 +258,23 @@ if __name__ == "__main__":
                 for s in range(len(shape)):
                     for index in range(len(indexlist)):
                         if (xlsx['의약품제형'][indexlist[index]] == shape[s] and xlsx['색상앞'][indexlist[index]] == color[c]) :
-                            if xlsx['품목일련번호'][indexlist[index]] in pilllist:
+                            if xlsx['품목일련번호'][indexlist[index]] not in showpilllist:
                                 showpilllist.append(xlsx['품목일련번호'][indexlist[index]])
 
 
-            if not showpilllist:
-                print(pilllist[:5])
-            else:
-                print(len(showpilllist))
-                print(showpilllist)
 
-    else :
-        print('일치하는 알약을 찾지못하였습니다.')
+    if not showpilllist:
+        # 보여질 알약이 없다면
+        if not pilllist :
+            print('알약을 찾을 수 없습니다.')
+        elif len(pilllist) > 5 : print(pilllist[:5])
+        else : print( pilllist)
+    else:
+        # 보여질 알약이 있다면
+        print(len(showpilllist))
+        print(showpilllist)
+
+
 
 
 
