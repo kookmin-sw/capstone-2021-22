@@ -1,6 +1,7 @@
 const express = require('express');
 const passport = require('passport');
 const PILLS = require('../models').PILLS;
+const FAVORITES = require('../models').FAVORITES;
 const { promises: fs } = require("fs");
 const router = express.Router();
 const path = require('path');
@@ -15,7 +16,7 @@ const url = 'http://apis.data.go.kr/1471000/DrbEasyDrugInfoService/getDrbEasyDru
 
 let queryParams = '?' + encodeURIComponent('ServiceKey') + '='+process.env.API_KEY;
 
-router.post('/', async (req, res) => {
+router.post('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
 
     const { pillId } = req.body;
 
@@ -25,7 +26,14 @@ router.post('/', async (req, res) => {
 
 
     try {
+        const favorites =  await FAVORITES.findAll({where : {  user_id:req.user.id  }, raw: true} );
 
+        const flist = []
+    
+        for(let i = 0;i<Object.keys(favorites).length;i++){
+            flist.push(favorites[i].pill_id);
+        }
+        
         const pillInfo = await PILLS.findOne({ where: { id: pillId }, raw: true });
 
         pillInfo.image = await fs.readFile(__dirname + '/images' + '/' + pillId + '.jpg',              //파일 읽기
@@ -36,8 +44,7 @@ router.post('/', async (req, res) => {
             }
         )
 
-       
-        
+        pillInfo.isFavorite = (flist.indexOf(pillInfo.id) < 0) ? false : true;
         res.json(pillInfo);
 
 
