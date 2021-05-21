@@ -28,8 +28,6 @@ export function LoginScreen() {
             if(response.isLogin){
                 console.log('로그인 성공')
                 AsyncStorage.setItem('token',response.token);
-                // AsyncStorage.setItem('user', JSON.stringify(response),()=>{
-                // })
                 navigation.reset({
                     index: 0,
                     routes: [{name: 'Main'}]

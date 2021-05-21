@@ -13,7 +13,7 @@ import RegisterFinishScreen from './screen/RegisterFinishScreen';
 import SearchScreen from './screen/SearchScreen';
 import SearchFailScreen from './screen/SearchFailScreen';
 import MyPillScreen from './screen/MyPillScreen';
-import MyPillDetailScreen from './screen/MyPillDetailScreen';
+import PillDetailScreen from './screen/PillDetailScreen';
 import PhotoGuideScreen from './screen/PhotoGuideScreen';
 import PhotoScreen from './screen/PhotoScreen';
 import ConfirmScreen from './screen/ConfirmScreen';
@@ -124,8 +124,7 @@ class App extends Component
                             fontSize: 20,
                             color: "#707070"
                         },
-                        headerBackTitleVisible: false,
-                        headerBackImage: BackBtn,
+                        headerShown : false
                     }}
                     />
 
@@ -148,7 +147,7 @@ class App extends Component
                     name="MyPill"
                     component={MyPillScreen}
                     options={{ 
-                        title: '내약통' ,
+                        title: '내 약통' ,
                         headerTitleStyle: {
                             fontWeight: 'bold',
                             fontSize: 20,
@@ -160,10 +159,10 @@ class App extends Component
                     />
 
                     <Stack.Screen
-                    name="MyPillDetail"
-                    component={MyPillDetailScreen}
+                    name="PillDetail"
+                    component={PillDetailScreen}
                     options={{ 
-                        title: '내약통' ,
+                        title: '알약 정보' ,
                         headerTitleStyle: {
                             fontWeight: 'bold',
                             fontSize: 20,

@@ -9,17 +9,17 @@ class SearchFailScreen extends Component {
                 <Text style={styles.mainText}>알약을 찾지 못했습니다.</Text>
                 <Text style={styles.subText}>알약의 <Text style={styles.highlight}>모양</Text>과 <Text style={styles.highlight}>식별문구</Text>가 잘 나오게 찍어주세요.</Text>
 
-                    <TouchableOpacity 
-                        style={styles.mainButton}
-                        onPress={()=>{
-                            this.props.navigation.reset({
-                                index: 0,
-                                routes: [{name: "PhotoGuide"}]
-                            })
-                    }}>
-                        <Text style={styles.mainButtonText}>다시 촬영하기</Text>
-                    </TouchableOpacity>
-                    <View style={styles.ButtonView}>
+                <TouchableOpacity 
+                    style={styles.mainButton}
+                    onPress={()=>{
+                        this.props.navigation.reset({
+                            index: 0,
+                            routes: [{name: "PhotoGuide"}]
+                        })
+                }}>
+                    <Text style={styles.mainButtonText}>다시 촬영하기</Text>
+                </TouchableOpacity>
+                <View style={styles.ButtonView}>
 
                     <TouchableOpacity 
                         style={styles.subButton}
@@ -54,7 +54,7 @@ class SearchFailScreen extends Component {
 
 const styles = StyleSheet.create({
     MainView : {
-        flex : 1,
+        height: '100%',
         backgroundColor : 'white',
         alignItems: 'center',
         justifyContent : 'center',
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
         width: 220,
         height: 54,
         // fontFamily: "AppleSDGothicNeo",
-        fontSize: 22,
+        fontSize: 20,
         fontWeight: "300",
         fontStyle: "normal",
         letterSpacing: 0,
@@ -86,8 +86,8 @@ const styles = StyleSheet.create({
         width: 220,
         height: 54,
         // fontFamily: "AppleSDGothicNeo",
-        fontSize: 22,
-        fontWeight: "500",
+        fontSize: 20,
+        fontWeight: "600",
         fontStyle: "normal",
         letterSpacing: 0,
         textAlign: "center",
