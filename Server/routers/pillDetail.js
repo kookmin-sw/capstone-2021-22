@@ -83,7 +83,7 @@ router.post('/code', async (req, res) => {
             method: 'GET'
         }, function (error, response, body) {
             const xmlToJson = convert.xml2json(body, {compact: true, spaces: 4});
-            
+            console.log(xmlToJson);
             res.send(xmlToJson);
         });
        
