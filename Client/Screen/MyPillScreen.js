@@ -1,90 +1,117 @@
 import 'react-native-gesture-handler';
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import * as config from '../src/config';
 
-import logo from './images/pills-bottle.png';
-import star from '../src/icon/star.png';
+import logo from '../src/icon/pills-bottle.png';
 
-import testImage from './images/test.jpg';
-
+import { PillList } from '../component/PillList';
 
 
-class MyPillScreen extends Component {
-    
-    
-    render () {
+export function MyPillScreen() {
 
-        return (
-            <ScrollView style={styles.scrollView}>
-                <View style={styles.titleView}>
-                    <View style={styles.titleContainer}>
-                        <Image
-                            style={styles.logoImage}
-                            source={logo}
-                        />
-                        <Text style={styles.titleText}>지원님의 약통</Text>
-                    </View>
-                    <TouchableOpacity
-                        onPress={()=>{
-                            Alert.alert(
-                                "로그아웃 하시겠습니까?",  
-                                "" ,
-                                [
-                                    {
-                                    text: "네", 
-                                    onPress: () => {
-                                        console.log("로그아웃 한대!");
-                                        AsyncStorage.clear();
-                                        this.props.navigation.reset({
-                                            index: 0,
-                                            routes: [{name: 'Main'}]
-                                        })
-                                    },
-                                    },
-                                    { 
-                                    text: "아니요", 
-                                    onPress: () => 
-                                        console.log("로그아웃 안한대!") 
-                                    },
-                                ]
-                              )
-                        }}>
-                        <Text style={{fontSize: 15}}>로그아웃</Text>
-                    </TouchableOpacity>
-                </View>
+    const navigation = useNavigation();
 
-                <View style={styles.pillList}>
-                    <TouchableOpacity 
-                        style={styles.pillContainer}
-                        onPress={()=>{
-                            this.props.navigation.navigate('MyPillDetail')
-                        }}>
-                        <Image style={styles.pillImage} source={testImage}/>
-                        <View style={styles.textContainer}>
-                            <View style={{flexDirection: 'row'}}>
-                                <Text style={styles.mainText}>진셀몬정</Text> 
-                                <TouchableOpacity>
-                                    <Image
-                                    style={styles.icon}
-                                    source={star}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <Text style={styles.subText}>혼합비타민제</Text>
-                            <Text style={styles.subText}>필름코팅정</Text>
-                        </View>
-                    </TouchableOpacity>
-                    <View style= {styles.hr} />            
-                </View>
+    const temp = [];
+    const [pillList, setPillList] = useState([]);
+    const [userName, setUserName] = useState("");
+
+    useEffect(() => {
+        AsyncStorage.getItem('token', (err, token) => {
+            config.IS_LOGIN = true;
+            fetch("http://3.34.96.230/favorite/my", {
+                method : "GET",
+                headers : {
+                    'Content-Type' : 'application/json',
+                    Authorization : `Bearer ${token}`
+                },
+            }).then(res => res.json())
+            .then(response => {
+                setUserName(response[response.length-1]);
+                for(let i=0; i<response.length-1; i++) {
+                    temp.push(response[i]);
+                }
+                setPillList(temp);
+            })
+            .catch(error => console.error('Error:', error));
             
-            </ScrollView>
+        });
+    }, []);
+
+    return (
+        <ScrollView style={styles.scrollView}>
+            <View style={styles.titleView}>
+                <View style={styles.titleContainer}>
+                    <Image
+                        style={styles.logoImage}
+                        source={logo}
+                    />
+                    <Text style={styles.titleText}>{userName}님의 약통</Text>
+                </View>
+                <TouchableOpacity
+                    onPress={()=>{
+                        Alert.alert(
+                            "로그아웃 하시겠습니까?",  
+                            "" ,
+                            [
+                                {
+                                text: "네", 
+                                onPress: () => {
+                                    console.log("로그아웃 한대!");
+                                    AsyncStorage.clear();
+                                    navigation.reset({
+                                        index: 0,
+                                        routes: [{name: 'Main'}]
+                                    })
+                                },
+                                },
+                                { 
+                                text: "아니요", 
+                                onPress: () => 
+                                    console.log("로그아웃 안한대!") 
+                                },
+                            ]
+                            )
+                    }}>
+                    <Text style={{fontSize: 15}}>로그아웃</Text>
+                </TouchableOpacity>
+            </View>
+
+            <View>
+                {pillList.map((pill,index) => ( 
+                    <PillList key={index} data={pillList} imgUrl={pill.image} name={pill.name} className={pill.class} codeName={pill.shape} id={pill.id}/>
+                ))}
+                {/* <TouchableOpacity 
+                    style={styles.pillContainer}
+                    onPress={()=>{
+                        this.props.navigation.navigate('MyPillDetail')
+                    }}>
+                    <Image style={styles.pillImage} source={testImage}/>
+                    <View style={styles.textContainer}>
+                        <View style={{flexDirection: 'row'}}>
+                            <Text style={styles.mainText}>진셀몬정</Text> 
+                            <TouchableOpacity>
+                                <Image
+                                style={styles.icon}
+                                source={star}
+                                />
+                            </TouchableOpacity>
+                        </View>
+                        <Text style={styles.subText}>혼합비타민제</Text>
+                        <Text style={styles.subText}>필름코팅정</Text>
+                    </View>
+                </TouchableOpacity> */}
+                <View style= {styles.hr} />            
+            </View>
+        
+        </ScrollView>
              
             
-        )
-    }
+    )
+    
 }
 
 const styles = StyleSheet.create({

@@ -28,7 +28,10 @@ export function LoginScreen() {
             if(response.isLogin){
                 console.log('로그인 성공')
                 AsyncStorage.setItem('token',response.token);
-                navigation.goBack(null)
+                navigation.reset({
+                    index: 0,
+                    routes: [{name: 'Main'}]
+                })
             } else {
                 Alert.alert(
                     "아이디와 비밀번호를 다시 확인해주세요"

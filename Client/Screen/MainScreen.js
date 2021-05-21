@@ -4,7 +4,7 @@ import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import  logo  from './images/pill.png';
-import  MyPillLogo  from './images/pills-bottle.png';
+import  MyPillLogo  from '../src/icon/pills-bottle.png';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import * as config from '../src/config';

@@ -8,6 +8,7 @@ import star from '../src/icon/star.png';
 import fullStar from '../src/icon/full-star.png';
 
 export function PillList(props) {
+
     const navigation = useNavigation();
     const [favorite, setFavorite] = useState(star);
 
@@ -20,17 +21,6 @@ export function PillList(props) {
         }
         return Buffer.from(binary, 'binary').toString('base64');
     };
-
-    function showImage() {
-        return(
-            <Image source={{
-                uri:
-                  'data:image/jpeg;base64,' +
-                  arrayBufferToBase64(props.imgUrl.data),
-              }} style={styles.imageStyle} resizeMode="contain"
-            />
-        )
-    }
     
     async function changeFavorite() {
         AsyncStorage.getItem('token', (err, token) => {
@@ -71,20 +61,6 @@ export function PillList(props) {
                     .catch(error => console.error('Error:', error));
                 }
             } else {
-                // Alert.alert(                    // 말그대로 Alert를 띄운다
-                //     "햑생인가요?",                    // 첫번째 text: 타이틀 제목
-                //     "ㄹㅇ",                         // 두번째 text: 그 밑에 작은 제목
-                //     [                              // 버튼 배열
-                //       {
-                //         text: "아니요",                              // 버튼 제목
-                //         onPress: () => console.log("아니라는데"),     //onPress 이벤트시 콘솔창에 로그를 찍는다
-                //         style: "cancel"
-                //       },
-                //       { text: "네", onPress: () => console.log("그렇다는데") }, //버튼 제목
-                //                                                              // 이벤트 발생시 로그를 찍는다
-                //     ],
-                //     { cancelable: false }
-                //   );
                 Alert.alert("로그인이 필요한 기능입니다.\n로그인 하시겠습니까?", "", [
                     { text: "네", onPress: () => navigation.navigate("Login")},
                     { text: "아니요", onPress: () => console.log("아니라는데") },
@@ -100,10 +76,14 @@ export function PillList(props) {
         <View>
             <TouchableOpacity 
                 style={styles.PillContainer}
-                onPress={()=>{
-                    navigation.navigate('MyPillDetail')
-                }}>
-                {showImage()}
+                onPress={() => navigation.navigate('PillDetail', {id: props.id})
+                }>
+                <Image source={{
+                    uri:
+                    'data:image/jpeg;base64,' +
+                    arrayBufferToBase64(props.imgUrl.data),
+                }} style={styles.imageStyle} resizeMode="contain"
+                />
                 <View style={{width: '50%'}}>
                     <View style={styles.nameContainer}>
                         <Text style={styles.MainText} numberOfLines={2} ellipsizeMode="tail">{props.name}</Text>

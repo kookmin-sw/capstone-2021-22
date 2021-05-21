@@ -1,6 +1,7 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, TextInput, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { PillList } from '../component/PillList';
 
@@ -11,20 +12,27 @@ export function SearchScreen() {
     const [flag, setFlag] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    
     async function search() {
         setFlag(false);
         setPillList([]);
         setLoading(true);
-        fetch("http://3.34.96.230/search/?pillName=" + keyword, {
-            method : "GET",
-        }).then(res => res.json())
-        .then(response => {
-            // console.log(response)
-            setFlag(true);
-            setPillList(response);
-            setLoading(false);
+        AsyncStorage.getItem('token', (err, token) => {
+                fetch("http://3.34.96.230/search/?pillName=" + keyword, {
+                    method : "GET",
+                    headers : {
+                        Authorization : `Bearer ${token}`
+                    },
+                }).then(res => res.json())
+                .then(response => {
+                    // console.log(response)
+                    setFlag(true);
+                    setPillList(response);
+                    setLoading(false);
+                })
+                .catch(error => console.error('Error:', error));
+            
         })
-        .catch(error => console.error('Error:', error));
     }
     
     function showResult() {
@@ -61,7 +69,7 @@ export function SearchScreen() {
                     />
                 </TouchableOpacity>
             </View>
-            <ActivityIndicator animating={loading} size="large" style={styles.loadingStyle} color="#c86e65"/>
+            <ActivityIndicator animating={loading} style={styles.loadingStyle} size="large" color="#c86e65"/>
             <ScrollView style={styles.scrollView}>
                 {showResult()}
             </ScrollView>
@@ -75,7 +83,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#fff',
         alignItems: 'center',
-        width: '100%'
+        width: '100%',
     },
     inputBox: {
         marginTop: 15,
@@ -90,7 +98,8 @@ const styles = StyleSheet.create({
         borderColor: '#d8d8d8'
     },
     scrollView: {
-        width: '95%'
+        width: '95%',
+        height: '100%'
     },
     textinput: {
         fontSize: 18,
@@ -105,9 +114,8 @@ const styles = StyleSheet.create({
         color: '#3c3c3c'
     },
     loadingStyle: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        position: 'absolute',
+        margin: 200,
     }
 });
 
