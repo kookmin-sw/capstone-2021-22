@@ -14,9 +14,11 @@ import io
 
 from google.cloud import vision
 from google.cloud.vision_v1 import types
-import unicodedata
-import difflib
-import unicodedata
+import argparse
+import warnings
+warnings.filterwarnings(action='ignore')
+os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 def findtext(img_dir) :
     client = vision.ImageAnnotatorClient()
@@ -40,8 +42,6 @@ def findtext(img_dir) :
     return textlist
 
 
-
-
 def test(img_dir):
     # 이미지를 로드합니다
     image = cv2.imread(img_dir)
@@ -53,12 +53,12 @@ def test(img_dir):
     image = img_to_array(image)
     image = np.expand_dims(image, axis=0)
     # # 학습된 네트워크와 `MultiLabelBinarizer`를 로드
-    print("[INFO] loading network...")
+    # print("[INFO] loading network...")
     model = load_model('./model/multilabel_model.h5')
     mlb = pickle.loads(open('./model/labelbin.txt', "rb").read())
     # # 이미지에 대한 분류를 수행한 후,
     # # 확률이 가장 높은 두 개의 클래스 라벨을 출력
-    print("[INFO] classifying image...")
+    # print("[INFO] classifying image...")
     proba = model.predict(image)[0]
     idxs = np.argsort(proba)[::-1][:4]
     for (i, j) in enumerate(idxs):
@@ -67,13 +67,20 @@ def test(img_dir):
         # cv2.putText(output, label, (10, (i * 30) + 25),
         #   cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
         shapecolor.append(mlb.classes_[j])
-        print(label)
+        # print(label)
 
 
     cv2.waitKey(0)
     return shapecolor
 
-def mergeimg(img1_dir,img2_dir) :
+def mergeimg() :
+    parser = argparse.ArgumentParser()
+    parser.add_argument('img1_dir', type=str, help="what is the first img")
+    parser.add_argument('img2_dir', type=str, help="what is the second img")
+    args = parser.parse_args()
+
+    img1_dir= args.img1_dir
+    img2_dir =args.img2_dir
 
     image1 = Image.open(img1_dir)
     # image1.show()
@@ -97,7 +104,7 @@ def get_jaccard_sim(str1, str2):
 
 if __name__ == "__main__":
 
-    mergeimg('./image2/201803236.jpg','./image2/201803236-2.jpg')
+    mergeimg()
 
     img = Image.open('input.jpeg')
 
@@ -110,21 +117,21 @@ if __name__ == "__main__":
     # textlist = findtext('input-out.png')
     textlist = findtext('input.jpeg')
     ######################
-    print(textlist)
+    # print(textlist)
     xlsx = pd.read_excel('pillist.xlsx', usecols='A,H,I,F,G', engine='openpyxl')
     showpilllist = []
     pilllist = []
     indexlist = []
 
     if not textlist : #텍스트 찾지 못했을때 모양/색깔만 일치하는 알약 찾
-        print('음각을 찾을 수 없습니다')
+        # print('음각을 찾을 수 없습니다')
         shapecolor = []
         os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
         shapecolor = test('input-out.png')
         # shapecolor = test('input.jpeg')
 
         # test('./input-out.png')
-        print(shapecolor)
+        # print(shapecolor)
         shape = []
         color = []
 
@@ -134,8 +141,8 @@ if __name__ == "__main__":
             else:
                 color.append(shapecolor[a])
 
-        print(color)
-        print(shape)
+        # print(color)
+        # print(shape)
         ############################
         for c in range(len(color)):
             for s in range(len(shape)):
@@ -143,9 +150,8 @@ if __name__ == "__main__":
                     if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]):
                             pilllist.append(xlsx['품목일련번호'][index])
 
-        print(len(pilllist))
-        print(pilllist[:5])
-        print(pilllist)
+        # print(len(pilllist))
+        # print(pilllist[:5])
 
     else : #음각 찾았을 떄
         check = 0
@@ -154,7 +160,6 @@ if __name__ == "__main__":
             textlist[a] = textlist[a].replace('\n', ' ')
             textlist[a] = textlist[a].replace('\'', '')
             textlist[a] = textlist[a].replace('.', '')
-
             # textlist[a] = unicodedata.normalize('NFC' , textlist[a])
             # import difflib
             # print('\n'.join(difflib.ndiff('СС+', 'CC+')))
@@ -164,7 +169,7 @@ if __name__ == "__main__":
             textlist.append(textlist[0].replace(' ', ''))
             check = 1
 
-        print(textlist)
+        # print(textlist)
         #전체 텍스트 일치하는 것 찾
         for index in range(23935):
             if check == 0 :
@@ -188,7 +193,7 @@ if __name__ == "__main__":
 
         #모든 텍스트에 대해서 전체 텍스트 일치하는 것 찾
         if not pilllist:
-            print('B')
+            # print('B')
             for index in range(23935):
                 for c in range(len(textlist)) :
                     if (textlist[c] == str(xlsx['표시앞'][index])) or (textlist[c] == str(xlsx['표시뒤'][index])) :
@@ -202,7 +207,7 @@ if __name__ == "__main__":
 
         ##전체인덱스 일치하는것 없으면 텍스트 포함하고 있는 모든 알약추출
         if not pilllist :
-            print('C')
+            # print('C')
             for index in range(23935):
                 for c in range(len(textlist)):
                     if (textlist[c] in str(xlsx['표시앞'][index])) or (textlist[c] in str(xlsx['표시뒤'][index])) :
@@ -215,7 +220,7 @@ if __name__ == "__main__":
                             indexlist.append(index)
 
         if not pilllist :
-            print('D')
+            # print('D')
             for index in range(23935):
                 for c in range(len(textlist)):
                     if get_jaccard_sim(textlist[c],str(xlsx['표시앞'][index])) >= 0.5 or get_jaccard_sim(textlist[c],str(xlsx['표시뒤'][index])) >= 0.5 :
@@ -227,9 +232,8 @@ if __name__ == "__main__":
                             pilllist.append(xlsx['품목일련번호'][index])
                             indexlist.append(index)
 
-        # get_jaccard_sim('RDUQ','마크DUQ')
-        print(len(pilllist))
-        print(pilllist[:20])
+        # print(len(pilllist))
+        # print(pilllist[:20])
 
         ############################
         if len(pilllist) == 1 :
@@ -241,7 +245,7 @@ if __name__ == "__main__":
             # shapecolor = test('input.jpeg')
 
             # test('./input-out.png')
-            print(shapecolor)
+            # print(shapecolor)
             shape = []
             color = []
             # print(shapecolor[0][-1])
@@ -251,8 +255,8 @@ if __name__ == "__main__":
                 else :
                     color.append(shapecolor[a])
 
-            print(color)
-            print(shape)
+            # print(color)
+            # print(shape)
             ############################
             for c in range(len(color)):
                 for s in range(len(shape)):
@@ -265,13 +269,13 @@ if __name__ == "__main__":
 
     if not showpilllist:
         # 보여질 알약이 없다면
-        if not pilllist :
-            print('알약을 찾을 수 없습니다.')
-        elif len(pilllist) > 5 : print(pilllist[:5])
-        else : print( pilllist)
+        # if not pilllist :
+        #     print('알약을 찾을 수 없습니다.')
+        if len(pilllist) > 5 : print(pilllist[:5])
+        else : print(pilllist)
     else:
         # 보여질 알약이 있다면
-        print(len(showpilllist))
+        # print(len(showpilllist))
         print(showpilllist)
 
 
