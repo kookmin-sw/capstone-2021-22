@@ -140,3 +140,15 @@ tensorboard-data-server==0.6.1
 tensorboard-plugin-wit==1.7.0
 tensorflow==2.4.1
 tensorflow-estimator==2.4.0
+pywebview==3.2
+numpy==1.18.2
+tqdm==4.43.0
+torch==1.5.0
+torchvision==0.2.2.post3
+opencv_contrib_python==4.2.0.34
+scipy==1.4.1
+tensorflow==2.2.1
+gluoncv==0.7.0
+gdown==3.11.1
+scikit_image==0.15.0
+mxnet==1.6.0
