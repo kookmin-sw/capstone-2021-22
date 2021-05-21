@@ -9,6 +9,43 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const ps ='./test.png';
 
+router.get('/unLogged',  async (req, res) => {
+
+    const pillName = req.query.pillName;
+
+
+
+    try {
+       
+
+        const pillInfo = await PILLS.findAll({ where: { name: { [Op.like]: `%${pillName}%` } }, raw: true });
+
+
+        for (let i = 0; i < Object.keys(pillInfo).length; i++) {
+
+            pillInfo[i].image = await fs.readFile(__dirname + '/images' + '/' + pillInfo[i].id + '.jpg',              //파일 읽기
+                (err, data) => {
+                    console.log(data)
+                    return data;
+
+                }
+            )
+
+            pillInfo[i].isFavorite =  false ;
+        }
+
+
+        res.json(pillInfo);
+
+    }
+    catch (error) {
+        console.error(error);
+        done(error);
+    }
+
+
+});
+
 router.get('/', passport.authenticate('jwt', { session: false }), async (req, res) => {
    
    const  pillName  = req.query.pillName;
