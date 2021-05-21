@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id="fileInput">
+    <input type="file" id="fileInput2">
+    <button type="submit" id="tempButton">tempButton</button>
+    <button type="submit" id="sendButton">전송</button>
+ 
+    <script>
+        const formData = new FormData();
+        var fileInput = document.querySelector("#fileInput");
+        var fileInput2 = document.querySelector("#fileInput2");
+        var sendButton = document.querySelector("#sendButton");
+        var tempButton = document.querySelector("#tempButton");
+ 
+        sendButton.addEventListener("click",function(){
+        
+       
+     
+        fetch("http://localhost:8001/imageSearch", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                // Authorization : `Bearer ${token}` 토큰 보내는 이유가 모지 ? 
+            },
+            body: formData,
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log('responseJson',responseJson);
+            return responseJson;
+        })
+        .catch((error) => {
+            console.log('error',error);
+        });
+
+            // form Data 객체 생성
+        
+            // 파일 인풋에 들어간 파일들은 files 라는 리스트로 저장된다.
+            // input에 multiple을 선언해 여러개의 파일을 선택한 경우가 아니라면
+            // files[0] 으로 input에 추가한 파일 객체를 찾을 수 있다.
+            for (var pair of formData.entries()) {
+                console.log(pair[0]+ ', ' + pair[1]); 
+            }
+
+        });
+
+        tempButton.addEventListener("click",function(){
+            formData.append("first",fileInput.files[0] );
+        formData.append("second", fileInput2.files[0] );
+
+        });
+ 
+ 
+    </script>
+</body>
