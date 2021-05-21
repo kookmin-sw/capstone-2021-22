@@ -23,7 +23,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 def findtext(img_dir) :
     client = vision.ImageAnnotatorClient()
 
-    # file_name = os.path.join(os.path.dirname(__file__), img_dir)
     file_name = os.path.join(os.path.abspath("__file__"), img_dir)
 
     file_name = img_dir
@@ -43,17 +42,16 @@ def findtext(img_dir) :
 
 
 def test(img_dir):
-    # 이미지를 로드합니다
+    # 이미지를 로드
     image = cv2.imread(img_dir)
     output = imutils.resize(image, width=400)
 
-    # # 이미지 전처리를 수행
+    # # 이미지 전처리
     image = cv2.resize(image, (96, 96))
     image = image.astype("float") / 255.0
     image = img_to_array(image)
     image = np.expand_dims(image, axis=0)
     # # 학습된 네트워크와 `MultiLabelBinarizer`를 로드
-    # print("[INFO] loading network...")
     model = load_model('./model/multilabel_model.h5')
     mlb = pickle.loads(open('./model/labelbin.txt', "rb").read())
     # # 이미지에 대한 분류를 수행한 후,
@@ -83,9 +81,7 @@ def mergeimg() :
     img2_dir =args.img2_dir
 
     image1 = Image.open(img1_dir)
-    # image1.show()
     image2 = Image.open(img2_dir)
-    # image2.show()
 
     image1_size = image1.size
 
@@ -101,20 +97,13 @@ def get_jaccard_sim(str1, str2):
     return float(len(c)) / (len(a) + len(b) - len(c))
 
 
-
 if __name__ == "__main__":
 
     mergeimg()
-
     img = Image.open('input.jpeg')
-
     img_resize = img.resize((int(img.width / 2), int(img.height / 2)))
     img_resize.save('input.jpeg')
-    # os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep bbd-fastrcnn -postp rtb-bnb")
-
-    # os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
     textlist = []
-    # textlist = findtext('input-out.png')
     textlist = findtext('input.jpeg')
     ######################
     # print(textlist)
@@ -276,7 +265,7 @@ if __name__ == "__main__":
     else:
         # 보여질 알약이 있다면
         # print(len(showpilllist))
-        print(showpilllist)
+        print(showpilllist[:5])
 
 
 
