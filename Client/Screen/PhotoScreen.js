@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ImageCropPicker from 'react-native-image-crop-picker';
+
+import plus from '../src/icon/plus.png';
 
 export function PhotoScreen(){
 
@@ -9,6 +11,29 @@ export function PhotoScreen(){
 
     const [firstImage, setFirstImage] = useState({});
     const [secondImage, setSecondImage] = useState({});
+
+    function uploadImage () {
+        const formData = new FormData();
+        formData.append("first", { uri: firstImage.uri, type: "image/jpeg", name: "first" });
+        formData.append("second", { uri: secondImage.uri, type: "image/jpeg", name: "second" });
+        console.log(formData)
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                // Authorization : `Bearer ${token}` 토큰 보내는 이유가 모지 ? 
+            },
+            body: formData,
+        })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log('responseJson',responseJson);
+            return responseJson;
+        })
+        .catch((error) => {
+            console.log('error',error);
+        });
+    }
     
     runFirstCamera = async () => {
         ImageCropPicker.openCamera({
@@ -38,24 +63,40 @@ export function PhotoScreen(){
                 height: image.height,
                 mime: image.mime
               });
-              console.log(secondImage);
           });
     }
     const renderImage = (order) => {
-        if (order == 1) {
+        if (firstImage.uri != undefined && order == 1) {
             return <Image
                 source={{ uri:firstImage.uri }}
                 style={styles.images}
             />
-        } else if (order == 2) {
+        } else if (secondImage.uri != undefined && order == 2) {
             return <Image
                 source={{ uri:secondImage.uri }}
                 style={styles.images}
             />
         } else {
-            return <Text style={styles.images}>
-                +
-            </Text>
+            return <View style={styles.images}>
+                <Image
+                    source={plus}
+                    style={styles.plusIcon}
+                />
+            </View>
+        }
+    }
+
+    async function searchImage()  { // 서버로 사진 전송
+        if (firstImage.uri === undefined || secondImage.uri === undefined) {
+            console.log("실패")
+            Alert.alert('두 장의 사진을 모두 찍어주세요.')
+        } else {
+            console.log("성공")
+            uploadImage()
+            // navigation.reset({
+            //     index: 0,
+            //     routes: [{name: 'SearchFail'}]
+            // })
         }
     }
     
@@ -74,14 +115,9 @@ export function PhotoScreen(){
             </View>
                 
             <View style={styles.ButtonView}>
-                <TouchableOpacity 
+                <TouchableOpacity
                     style={styles.Button}
-                    onPress={()=>{
-                        navigation.reset({
-                            index: 0,
-                            routes: [{name: "Search"}]
-                        })
-                }}>
+                    onPress={()=>searchImage()}>
                     <Text style={styles.ButtonText}>검색하기</Text>
                 </TouchableOpacity>
             </View>
@@ -101,17 +137,17 @@ const styles = StyleSheet.create({
         marginBottom: 10,
     },
     images: {
-        alignItems: 'center', 
-        justifyContent: 'center',
         marginBottom: 30,
         width: 235,
         height: 235,
         borderWidth: 1,
-        borderColor: "#cccccc"
+        borderColor: "#cccccc",
+        justifyContent: 'center',
+        alignItems: 'center'
     },
-    nullImages: {
-        width: 90,
-        height: 90,
+    plusIcon: {
+        width: 50,
+        height: 50,
     },
     TextView : {
         alignItems: "center",

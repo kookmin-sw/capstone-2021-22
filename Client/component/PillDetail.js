@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView } from 'react-native';
-import {useNavigation} from '@react-navigation/native';
 
 import icon from '../src/icon/star.png';
 
@@ -8,10 +7,13 @@ export function PillDetail(props) {
 
     return(
         <View>
-            <Image source={{uri:props.imgUrl}} style={styles.image}/>
+            <Image source={{
+                uri: props.imgUrl
+              }} style={styles.image} resizeMode="contain"
+            />
             <View style={styles.mainContainer}>
                 <View style={styles.titleContainer}>
-                    <Text style={styles.titleText}>알약 이름</Text>
+                    <Text style={styles.titleText}>{props.name}</Text>
                     <TouchableOpacity>
                         <Image
                         style={styles.icon}
@@ -28,9 +30,9 @@ export function PillDetail(props) {
                         <Text style={styles.keyText}>제형코드명</Text>
                     </View>
                     <View style={styles.value}>
-                        <Text style={styles.valueText}>제조수입사</Text>
-                        <Text style={styles.valueText}>분류명</Text>
-                        <Text style={styles.valueText}>제형코드명</Text>
+                        <Text style={styles.valueText}>{props.company}</Text>
+                        <Text style={styles.valueText}>{props.className}</Text>
+                        <Text style={styles.valueText}>{props.codeName}</Text>
                     </View>
                 </View>
                 <View style= {styles.hr} />            

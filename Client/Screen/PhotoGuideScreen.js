@@ -18,10 +18,7 @@ class PhotoGuideScreen extends Component {
                     <TouchableOpacity 
                         style={styles.Button}
                         onPress={()=>{
-                            this.props.navigation.reset({
-                                index: 0,
-                                routes: [{name: "Photo"}]
-                            })
+                            this.props.navigation.navigate('Photo')
                     }}>
                         <Text style={styles.ButtonText}>촬영하기</Text>
                     </TouchableOpacity>
