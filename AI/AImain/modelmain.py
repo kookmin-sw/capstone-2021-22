@@ -1,3 +1,8 @@
+import os
+import warnings
+warnings.filterwarnings(action='ignore')
+os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from keras.preprocessing.image import img_to_array
 from keras.models import load_model
 import keras
@@ -6,18 +11,18 @@ import argparse
 import imutils
 import pickle
 import cv2
-import os
 import pandas as pd
 from PIL import Image
 import io
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-1479b1324d48.json"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-a6a1b7680b12.json"
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 import argparse
-import warnings
-warnings.filterwarnings(action='ignore')
-os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+import tensorflow as tf
+tf.autograph.set_verbosity(3)
+import logging
+tf.get_logger().setLevel(logging.ERROR)
+
 
 def findtext(img_dir) :
     client = vision.ImageAnnotatorClient()
@@ -121,7 +126,7 @@ if __name__ == "__main__":
         # shapecolor = test('input.jpeg')
 
         # test('./input-out.png')
-        print(shapecolor)
+        # print(shapecolor)
         shape = []
         color = []
 
@@ -140,8 +145,8 @@ if __name__ == "__main__":
                     if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]):
                             pilllist.append(xlsx['품목일련번호'][index])
 
-        print(len(pilllist))
-        print(pilllist[:5])
+        # print(len(pilllist))
+        # print(pilllist[:5])
 
     else : #음각 찾았을 떄
         check = 0
@@ -245,8 +250,8 @@ if __name__ == "__main__":
                 else :
                     color.append(shapecolor[a])
 
-            print(color)
-            print(shape)
+            # print(color)
+            # print(shape)
             ############################
             for c in range(len(color)):
                 for s in range(len(shape)):
