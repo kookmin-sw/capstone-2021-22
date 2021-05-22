@@ -266,12 +266,24 @@ if __name__ == "__main__":
         # 보여질 알약이 없다면
         # if not pilllist :
         #     print('알약을 찾을 수 없습니다.')
-        if len(pilllist) > 5 : print(pilllist[:5])
-        else : print(pilllist)
+        if len(pilllist) > 5 : 
+            temp=''
+            for i in pilllist[:5]:
+                temp=temp+str(i)+','
+            print(temp)
+        else : 
+            temp=''
+            for i in pilllist:
+                temp=temp+str(i)+','
+            print(temp)
     else:
         # 보여질 알약이 있다면
         # print(len(showpilllist))
-        print(showpilllist[:5])
+        temp=''
+        for i in showpilllist[:5]:
+            temp=temp+str(i)+','
+        print(temp)
+       
 
 
 
