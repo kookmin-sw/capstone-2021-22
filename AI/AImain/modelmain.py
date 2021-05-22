@@ -1,4 +1,3 @@
-
 from keras.preprocessing.image import img_to_array
 from keras.models import load_model
 import keras
@@ -11,7 +10,7 @@ import os
 import pandas as pd
 from PIL import Image
 import io
-
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-1479b1324d48.json"
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 import argparse
@@ -71,7 +70,8 @@ def test(img_dir):
     cv2.waitKey(0)
     return shapecolor
 
-def mergeimg() :
+# def mergeimg(img1_dir,img2_dir) :
+def mergeimg():
     parser = argparse.ArgumentParser()
     parser.add_argument('img1_dir', type=str, help="what is the first img")
     parser.add_argument('img2_dir', type=str, help="what is the second img")
@@ -100,6 +100,7 @@ def get_jaccard_sim(str1, str2):
 if __name__ == "__main__":
 
     mergeimg()
+    # mergeimg('./image/199603003_2_1.png','./image/199603003_2_2.png')
     img = Image.open('input.jpeg')
     img_resize = img.resize((int(img.width / 2), int(img.height / 2)))
     img_resize.save('input.jpeg')
@@ -120,7 +121,7 @@ if __name__ == "__main__":
         # shapecolor = test('input.jpeg')
 
         # test('./input-out.png')
-        # print(shapecolor)
+        print(shapecolor)
         shape = []
         color = []
 
@@ -139,8 +140,8 @@ if __name__ == "__main__":
                     if (xlsx['의약품제형'][index] == shape[s] and xlsx['색상앞'][index] == color[c]):
                             pilllist.append(xlsx['품목일련번호'][index])
 
-        # print(len(pilllist))
-        # print(pilllist[:5])
+        print(len(pilllist))
+        print(pilllist[:5])
 
     else : #음각 찾았을 떄
         check = 0
@@ -244,8 +245,8 @@ if __name__ == "__main__":
                 else :
                     color.append(shapecolor[a])
 
-            # print(color)
-            # print(shape)
+            print(color)
+            print(shape)
             ############################
             for c in range(len(color)):
                 for s in range(len(shape)):
