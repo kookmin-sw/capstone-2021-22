@@ -1,4 +1,8 @@
-
+import os
+import warnings
+warnings.filterwarnings(action='ignore')
+os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from keras.preprocessing.image import img_to_array
 from keras.models import load_model
 import keras
@@ -7,18 +11,18 @@ import argparse
 import imutils
 import pickle
 import cv2
-import os
 import pandas as pd
 from PIL import Image
 import io
-
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="whatsthepill-a6a1b7680b12.json"
 from google.cloud import vision
 from google.cloud.vision_v1 import types
 import argparse
-import warnings
-warnings.filterwarnings(action='ignore')
-os.environ['TF_XLA_FLAGS'] = '--tf_xla_enable_xla_devices'
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+import tensorflow as tf
+tf.autograph.set_verbosity(3)
+import logging
+tf.get_logger().setLevel(logging.ERROR)
+
 
 def findtext(img_dir) :
     client = vision.ImageAnnotatorClient()
@@ -71,7 +75,8 @@ def test(img_dir):
     cv2.waitKey(0)
     return shapecolor
 
-def mergeimg() :
+# def mergeimg(img1_dir,img2_dir) :
+def mergeimg():
     parser = argparse.ArgumentParser()
     parser.add_argument('img1_dir', type=str, help="what is the first img")
     parser.add_argument('img2_dir', type=str, help="what is the second img")
@@ -100,6 +105,7 @@ def get_jaccard_sim(str1, str2):
 if __name__ == "__main__":
 
     mergeimg()
+    # mergeimg('./image/199603003_2_1.png','./image/199603003_2_2.png')
     img = Image.open('input.jpeg')
     img_resize = img.resize((int(img.width / 2), int(img.height / 2)))
     img_resize.save('input.jpeg')
