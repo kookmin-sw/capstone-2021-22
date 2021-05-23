@@ -121,31 +121,32 @@ if __name__ == "__main__":
     pyosidui = chr(54364)+chr(49884)+chr(46244)
 
     if not textlist :
-        shapecolor = []
-        os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
-        shapecolor = test('input-out.png')
-        # shapecolor = test('input.jpeg')
-
-        # test('./input-out.png')
-        print(shapecolor)
-        shape = []
-        color = []
-        for a in range(len(shapecolor)):
-            if shapecolor[a][-1] == chr(54805):
-                shape.append(shapecolor[a])
-            else:
-                color.append(shapecolor[a])
-
-        print(color)
-        print(shape)
-        ############################
-
-
-        for c in range(len(color)):
-            for s in range(len(shape)):
-                for index in range(23936):
-                    if (xlsx[euyakpoomjaehyung][index] == shape[s] and xlsx[saeksangap][index] == color[c]):
-                            pilllist.append(xlsx[poommoknumber][index])
+        pilllist = []
+        # shapecolor = []
+        # os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep None -postp No")
+        # shapecolor = test('input-out.png')
+        # # shapecolor = test('input.jpeg')
+        #
+        # # test('./input-out.png')
+        # print(shapecolor)
+        # shape = []
+        # color = []
+        # for a in range(len(shapecolor)):
+        #     if shapecolor[a][-1] == chr(54805):
+        #         shape.append(shapecolor[a])
+        #     else:
+        #         color.append(shapecolor[a])
+        #
+        # print(color)
+        # print(shape)
+        # ############################
+        #
+        #
+        # for c in range(len(color)):
+        #     for s in range(len(shape)):
+        #         for index in range(23936):
+        #             if (xlsx[euyakpoomjaehyung][index] == shape[s] and xlsx[saeksangap][index] == color[c]):
+        #                     pilllist.append(xlsx[poommoknumber][index])
 
         # print(len(pilllist))
         # print(pilllist[:5])
@@ -190,6 +191,35 @@ if __name__ == "__main__":
         if not pilllist:
             # print('B')
             for index in range(23935):
+                for c in range(len(textlist)):
+                    if (textlist[c] == str(xlsx[pyosiap][index])):
+                        for d in range(len(textlist)):
+                            if (textlist[d] == str(xlsx[pyosidui][index])):
+                                if xlsx[poommoknumber][index] != 200806190 and xlsx[poommoknumber][
+                                    index] != 200806191 and xlsx[poommoknumber][index] != 200806192:
+                                    if xlsx[poommoknumber][index] not in pilllist:
+                                        pilllist.append(xlsx[poommoknumber][index])
+                                        indexlist.append(index)
+                                else:
+                                    pilllist.append(xlsx[poommoknumber][index])
+                                    indexlist.append(index)
+
+            for index in range(23935):
+                for c in range(len(textlist)):
+                    if (textlist[c] == str(xlsx[pyosidui][index])):
+                        for d in range(len(textlist)):
+                            if (textlist[d] == str(xlsx[pyosiap][index])):
+                                if xlsx[poommoknumber][index] != 200806190 and xlsx[poommoknumber][
+                                    index] != 200806191 and xlsx[poommoknumber][index] != 200806192:
+                                    if xlsx[poommoknumber][index] not in pilllist:
+                                        pilllist.append(xlsx[poommoknumber][index])
+                                        indexlist.append(index)
+                                else:
+                                    pilllist.append(xlsx[poommoknumber][index])
+                                    indexlist.append(index)
+
+
+            for index in range(23935):
                 for c in range(len(textlist)) :
                     if (textlist[c] == str(xlsx[pyosiap][index])) or (textlist[c] == str(xlsx[pyosidui][index])) :
                         if xlsx[poommoknumber][index] != 200806190 and xlsx[poommoknumber][index] != 200806191 and xlsx[poommoknumber][index] != 200806192:
@@ -227,13 +257,13 @@ if __name__ == "__main__":
                             indexlist.append(index)
 
         # print(len(pilllist))
-        # print(pilllist[:20])
+        # print(pilllist)
 
         ############################
         if len(pilllist) == 1 :
             showpilllist = pilllist
         elif len(pilllist) > 0 :
-            os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
+            os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep None -postp No")
             shapecolor = []
             shapecolor = test('input-out.png')
 
@@ -258,12 +288,12 @@ if __name__ == "__main__":
 
     if not showpilllist:
 
-        if len(pilllist) > 5 : 
+        if len(pilllist) > 5 :
             temp=''
             for i in pilllist[:5]:
                 temp=temp+str(i)+','
             print(temp)
-        else : 
+        else :
             temp=''
             for i in pilllist:
                 temp=temp+str(i)+','
