@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import AsyncStorage from '@react-native-community/async-storage';
+
 
 import plus from '../src/icon/plus.png';
 
@@ -17,22 +19,27 @@ export function PhotoScreen(){
         formData.append("first", { uri: firstImage.uri, type: "image/jpeg", name: "first" });
         formData.append("second", { uri: secondImage.uri, type: "image/jpeg", name: "second" });
         console.log(formData)
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'multipart/form-data',
-                // Authorization : `Bearer ${token}` 토큰 보내는 이유가 모지 ? 
-            },
-            body: formData,
-        })
-        .then((response) => response.json())
-        .then((responseJson) => {
-            console.log('responseJson',responseJson);
-            return responseJson;
-        })
-        .catch((error) => {
-            console.log('error',error);
-        });
+        navigation.navigate('Loading', {formData: formData})
+        // AsyncStorage.getItem('token', (err, token) => {
+        //     if (token !== null) {
+        //         fetch("http://3.34.96.230/imageSearch/", {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'multipart/form-data',
+        //                 Authorization : `Bearer ${token}`
+        //             },
+        //             body: formData,
+        //         })
+        //         .then((res) => res.json())
+        //         .then((response) => {
+        //             console.log('response',response);
+        //             // return responseJson;
+        //         })
+        //         .catch((error) => {
+        //             console.log('error',error);
+        //         });
+        //     }
+        // });
     }
     
     runFirstCamera = async () => {
