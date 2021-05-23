@@ -122,7 +122,7 @@ if __name__ == "__main__":
 
     if not textlist :
         shapecolor = []
-        os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
+        os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep None -postp No")
         shapecolor = test('input-out.png')
         # shapecolor = test('input.jpeg')
 
@@ -233,7 +233,7 @@ if __name__ == "__main__":
         if len(pilllist) == 1 :
             showpilllist = pilllist
         elif len(pilllist) > 0 :
-            os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net")
+            os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep None -postp No")
             shapecolor = []
             shapecolor = test('input-out.png')
 
