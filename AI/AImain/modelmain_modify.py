@@ -121,31 +121,32 @@ if __name__ == "__main__":
     pyosidui = chr(54364)+chr(49884)+chr(46244)
 
     if not textlist :
-        shapecolor = []
-        os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep None -postp No")
-        shapecolor = test('input-out.png')
-        # shapecolor = test('input.jpeg')
-
-        # test('./input-out.png')
-        print(shapecolor)
-        shape = []
-        color = []
-        for a in range(len(shapecolor)):
-            if shapecolor[a][-1] == chr(54805):
-                shape.append(shapecolor[a])
-            else:
-                color.append(shapecolor[a])
-
-        print(color)
-        print(shape)
-        ############################
-
-
-        for c in range(len(color)):
-            for s in range(len(shape)):
-                for index in range(23936):
-                    if (xlsx[euyakpoomjaehyung][index] == shape[s] and xlsx[saeksangap][index] == color[c]):
-                            pilllist.append(xlsx[poommoknumber][index])
+        pilllist = []
+        # shapecolor = []
+        # os.system("python3 main.py -i input.jpeg -o input-out.png -m u2net -prep None -postp No")
+        # shapecolor = test('input-out.png')
+        # # shapecolor = test('input.jpeg')
+        #
+        # # test('./input-out.png')
+        # print(shapecolor)
+        # shape = []
+        # color = []
+        # for a in range(len(shapecolor)):
+        #     if shapecolor[a][-1] == chr(54805):
+        #         shape.append(shapecolor[a])
+        #     else:
+        #         color.append(shapecolor[a])
+        #
+        # print(color)
+        # print(shape)
+        # ############################
+        #
+        #
+        # for c in range(len(color)):
+        #     for s in range(len(shape)):
+        #         for index in range(23936):
+        #             if (xlsx[euyakpoomjaehyung][index] == shape[s] and xlsx[saeksangap][index] == color[c]):
+        #                     pilllist.append(xlsx[poommoknumber][index])
 
         # print(len(pilllist))
         # print(pilllist[:5])
