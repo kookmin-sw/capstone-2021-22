@@ -1,46 +1,102 @@
 import 'react-native-gesture-handler';
 import React, { Component, useState, useEffect } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
-import { Buffer } from 'buffer'
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { PillDetail } from '../component/PillDetail';
+import * as config from '../src/config';
 
 export function PillDetailScreen({route, navigation} = this.props) {
 
     const {id} = route.params;
-    const [pillDetail, setPillDetail] = useState([]);
+    const [pillInfo, setPillInfo] = useState([]);
 
-    arrayBufferToBase64 = buffer => {
-        let binary = '';
-        let bytes = new Uint8Array(buffer);
-        let len = bytes.byteLength;
-        for (let i = 0; i < len; i++) {
-          binary += String.fromCharCode(bytes[i]);
-        }
-        return Buffer.from(binary, 'binary').toString('base64');
-    };
+    const [flag, setFlag] = useState(true)
+    const [efcyQesitm, setefcy] = useState("");
+    const [useMethodQesitm, setuseMethodQesitm] = useState("");
+    const [atpnWarn, setatpnWarn] = useState("");
+    const [atpn, setatpn] = useState("");
+    const [depositMethod, setdepositMethod] = useState("");
+    const [intrc, setintrc] = useState("");
+    const [se, setse] = useState("");
 
     useEffect(() => {
-        console.log(id)
-        fetch("http://3.34.96.230/pillDetail", {
-            method : "POST",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body : JSON.stringify({
-                "pillId" : id
-            })
-        }).then(res => res.json())
-        .then(response => {
-            response.image = 'data:image/png;base64,' + arrayBufferToBase64(response.image.data)
-            setPillDetail(response)
+        AsyncStorage.getItem('token', (err, token) => {
+            if (token !== null) {
+                // console.log(id)
+                fetch("http://3.34.96.230/pillDetail", {
+                    method : "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization : `Bearer ${token}`
+                    },
+                    body : JSON.stringify({
+                        "pillId" : id
+                    })
+                }).then(res => res.json())
+                .then(response => {
+                    response.image = 'data:image/png;base64,' + config.arrayBufferToBase64(response.image.data)
+                    setPillInfo(response)
+                })
+                .catch(error => console.error('Error:', error));
+            } else {
+                fetch("http://3.34.96.230/pillDetail/unLogged", {
+                    method : "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body : JSON.stringify({
+                        "pillId" : id
+                    })
+                }).then(res => res.json())
+                .then(response => {
+                    response.image = 'data:image/png;base64,' + config.arrayBufferToBase64(response.image.data)
+                    setPillInfo(response)
+                })
+                .catch(error => console.error('Error:', error));
+            }
         })
-        .catch(error => console.error('Error:', error));
+
+        fetch("http://3.34.96.230/pillDetail/code", {
+                    method : "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body : JSON.stringify({
+                        "pillId" : id
+                    })
+                }).then(res => res.json())
+                .then(response => {
+                    console.log(response)
+                    console.log("length", Object.keys(response.response.body.items).length)
+                    if (Object.keys(response.response.body.items).length === 0){
+                        console.log("yes")
+                        setFlag(false)
+                    } else {
+                        const efcy = response.response.body.items.item.efcyQesitm._text;
+                        const useMethod = response.response.body.items.item.useMethodQesitm._text;
+                        const atpnWarn = response.response.body.items.item.atpnWarnQesitm._text;
+                        const atpn = response.response.body.items.item.atpnQesitm._text;
+                        const intrc = response.response.body.items.item.intrcQesitm._text;
+                        const se = response.response.body.items.item.seQesitm._text;
+                        const depositMethod = response.response.body.items.item.depositMethodQesitm._text;
+                        setefcy(efcy);
+                        setuseMethodQesitm(useMethod);
+                        setatpnWarn(atpnWarn);
+                        setatpn(atpn);
+                        setdepositMethod(depositMethod);
+                        setintrc(intrc);
+                        setse(se);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
     }, []);
 
     return (
         <ScrollView style={styles.scrollView}>
-            <PillDetail imgUrl={pillDetail.image} name={pillDetail.name} company={pillDetail.company} className={pillDetail.class} codeName={pillDetail.shape} />
+            <PillDetail imgUrl={pillInfo.image} name={pillInfo.name} company={pillInfo.company} className={pillInfo.class} codeName={pillInfo.shape} id={pillInfo.id} star={pillInfo.isFavorite}
+            flag={flag} efcy={efcyQesitm} useMethod={useMethodQesitm} atpnWarn={atpnWarn} atpn={atpn} intrc={intrc} depositMethod={depositMethod} se={se}
+            />
             <Text style={styles.text}>제공되는 알약의 모든 정보는 의약품 안전나라에 있습니다.</Text>
         </ScrollView>
     )
@@ -51,8 +107,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#f0f2f0',
     },
     text : {
-        margin: 10,
-        textAlign: 'center'
+        textAlign: 'center',
+        backgroundColor: '#fff',
+        height: 30
     }
 });
 

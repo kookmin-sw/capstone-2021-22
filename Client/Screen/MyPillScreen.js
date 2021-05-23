@@ -82,29 +82,9 @@ export function MyPillScreen() {
 
             <View>
                 {pillList.map((pill,index) => ( 
-                    <PillList key={index} data={pillList} imgUrl={pill.image} name={pill.name} className={pill.class} codeName={pill.shape} id={pill.id}/>
+                    <PillList key={index} data={pillList} imgUrl={pill.image} name={pill.name} className={pill.class} codeName={pill.shape} id={pill.id} favorite={true}/>
                 ))}
-                {/* <TouchableOpacity 
-                    style={styles.pillContainer}
-                    onPress={()=>{
-                        this.props.navigation.navigate('MyPillDetail')
-                    }}>
-                    <Image style={styles.pillImage} source={testImage}/>
-                    <View style={styles.textContainer}>
-                        <View style={{flexDirection: 'row'}}>
-                            <Text style={styles.mainText}>진셀몬정</Text> 
-                            <TouchableOpacity>
-                                <Image
-                                style={styles.icon}
-                                source={star}
-                                />
-                            </TouchableOpacity>
-                        </View>
-                        <Text style={styles.subText}>혼합비타민제</Text>
-                        <Text style={styles.subText}>필름코팅정</Text>
-                    </View>
-                </TouchableOpacity> */}
-                <View style= {styles.hr} />            
+                <View style={styles.hr} />            
             </View>
         
         </ScrollView>

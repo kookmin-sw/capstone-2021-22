@@ -18,9 +18,11 @@ export function SearchScreen() {
         setPillList([]);
         setLoading(true);
         AsyncStorage.getItem('token', (err, token) => {
+            if (token !== null) {
                 fetch("http://3.34.96.230/search/?pillName=" + keyword, {
                     method : "GET",
                     headers : {
+                        'Content-Type' : 'application/json',
                         Authorization : `Bearer ${token}`
                     },
                 }).then(res => res.json())
@@ -31,7 +33,21 @@ export function SearchScreen() {
                     setLoading(false);
                 })
                 .catch(error => console.error('Error:', error));
-            
+            } else {
+                fetch("http://3.34.96.230/search/unLogged/?pillName=" + keyword, {
+                    method : "GET",
+                    headers : {
+                        'Content-Type' : 'application/json',
+                    },
+                }).then(res => res.json())
+                .then(response => {
+                    console.log(response)
+                    setFlag(true);
+                    setPillList(response);
+                    setLoading(false);
+                })
+                .catch(error => console.error('Error:', error));
+            }
         })
     }
     
@@ -45,7 +61,7 @@ export function SearchScreen() {
             // console.log(pillList)
             return (
                 pillList.map((pill,index) => ( 
-                    <PillList key={index} data={pillList} imgUrl={pill.image} name={pill.name} className={pill.class} codeName={pill.shape} id={pill.id}/>
+                    <PillList key={index} data={pillList} imgUrl={pill.image} name={pill.name} className={pill.class} codeName={pill.shape} id={pill.id} favorite={pill.isFavorite}/>
                 ))
             )
         }

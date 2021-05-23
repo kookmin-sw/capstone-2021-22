@@ -16,6 +16,8 @@ import MyPillScreen from './screen/MyPillScreen';
 import PillDetailScreen from './screen/PillDetailScreen';
 import PhotoGuideScreen from './screen/PhotoGuideScreen';
 import PhotoScreen from './screen/PhotoScreen';
+import LoadingScreen from './screen/LoadingScreen';
+import PhotoSearchScreen from './screen/PhotoSearchScreen';
 import ConfirmScreen from './screen/ConfirmScreen';
 
 const Stack = createStackNavigator();
@@ -146,7 +148,7 @@ class App extends Component
                     <Stack.Screen
                     name="MyPill"
                     component={MyPillScreen}
-                    options={{ 
+                    options={({ navigation }) => ({ 
                         title: '내 약통' ,
                         headerTitleStyle: {
                             fontWeight: 'bold',
@@ -154,8 +156,19 @@ class App extends Component
                             color: "#707070"
                         },
                         headerBackTitleVisible: false,
-                        headerBackImage: BackBtn,
-                    }}
+                        headerLeft: () => (
+                            <TouchableOpacity
+                            onPress={()=>{
+                                navigation.reset({routes: [{name: 'Main'}]})
+                            }}>
+                                <Image
+                                    source={require('./src/icon/back.png')}
+                                    style={{marginLeft: 16, width: 24, height: 24}}
+                                />
+                            </TouchableOpacity>
+                             
+                        ),
+                    })}
                     />
 
                     <Stack.Screen
@@ -201,6 +214,46 @@ class App extends Component
                         headerBackTitleVisible: false,
                         headerBackImage: BackBtn,
                     }}
+                    />
+
+                    <Stack.Screen
+                    name="Loading"
+                    component={LoadingScreen}
+                    options={{ 
+                        title: '알약 촬영' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerShown: false
+                    }}
+                    />
+
+                    <Stack.Screen
+                    name="PhotoSearch"
+                    component={PhotoSearchScreen}
+                    options={({ navigation }) => ({ 
+                        title: '알약 정보' ,
+                        headerTitleStyle: {
+                            fontWeight: 'bold',
+                            fontSize: 20,
+                            color: "#707070"
+                        },
+                        headerBackTitleVisible: false,
+                        headerLeft: () => (
+                            <TouchableOpacity
+                            onPress={()=>{
+                                navigation.reset({routes: [{name: 'Main'}]})
+                            }}>
+                                <Image
+                                    source={require('./src/icon/home.png')}
+                                    style={{marginLeft: 16, width: 24, height: 24}}
+                                />
+                            </TouchableOpacity>
+                             
+                        ),
+                    })}
                     />
 
                     <Stack.Screen

@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Alert} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-import { Buffer } from 'buffer'
 import AsyncStorage from '@react-native-community/async-storage';
 
+import * as config from '../src/config';
 import star from '../src/icon/star.png';
 import fullStar from '../src/icon/full-star.png';
 
@@ -12,20 +12,17 @@ export function PillList(props) {
     const navigation = useNavigation();
     const [favorite, setFavorite] = useState(star);
 
-    arrayBufferToBase64 = buffer => {
-        let binary = '';
-        let bytes = new Uint8Array(buffer);
-        let len = bytes.byteLength;
-        for (let i = 0; i < len; i++) {
-          binary += String.fromCharCode(bytes[i]);
+    useEffect(() => {
+        console.log(props.favorite)
+        if (props.favorite) {
+            setFavorite(fullStar)
         }
-        return Buffer.from(binary, 'binary').toString('base64');
-    };
+    }, [])
     
     async function changeFavorite() {
         AsyncStorage.getItem('token', (err, token) => {
             if (token !== null) {
-                if (favorite === star) {
+                if (props.favorite === false) {
                     fetch("http://3.34.96.230/favorite", {
                         method : "POST",
                         headers : {
@@ -43,22 +40,28 @@ export function PillList(props) {
                     })
                     .catch(error => console.error('Error:', error));
                 } else {
-                    fetch("http://3.34.96.230/favorite", {
-                        method : "POST",
-                        headers: {
-                            'Content-Type' : 'application/json',
-                            Authorization : `Bearer ${token}`
-                        },
-                        body : JSON.stringify({
-                            "pillId" : props.id,
-                            "isFavorite" : false
+                    Alert.alert("내 약통에서 삭제하시겠습니까?", "", [
+                        { text: "네", onPress: () => {
+                        fetch("http://3.34.96.230/favorite", {
+                            method : "POST",
+                            headers: {
+                                'Content-Type' : 'application/json',
+                                Authorization : `Bearer ${token}`
+                            },
+                            body : JSON.stringify({
+                                "pillId" : props.id,
+                                "isFavorite" : false
+                            })
+                        }).then(res => res.json())
+                        .then(response => { 
+                            console.log(response)
+                            setFavorite(star)
                         })
-                    }).then(res => res.json())
-                    .then(response => { 
-                        console.log(response)
-                        setFavorite(star)
-                    })
-                    .catch(error => console.error('Error:', error));
+                        .catch(error => console.error('Error:', error));
+                        navigation.navigate("MyPill")}},
+                        { text: "아니요", onPress: () => console.log("아니라는데") },
+                      ],
+                      { cancelable: false });
                 }
             } else {
                 Alert.alert("로그인이 필요한 기능입니다.\n로그인 하시겠습니까?", "", [
@@ -81,7 +84,7 @@ export function PillList(props) {
                 <Image source={{
                     uri:
                     'data:image/jpeg;base64,' +
-                    arrayBufferToBase64(props.imgUrl.data),
+                    config.arrayBufferToBase64(props.imgUrl.data),
                 }} style={styles.imageStyle} resizeMode="contain"
                 />
                 <View style={{width: '50%'}}>
