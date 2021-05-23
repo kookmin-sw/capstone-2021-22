@@ -191,6 +191,35 @@ if __name__ == "__main__":
         if not pilllist:
             # print('B')
             for index in range(23935):
+                for c in range(len(textlist)):
+                    if (textlist[c] == str(xlsx[pyosiap][index])):
+                        for d in range(len(textlist)):
+                            if (textlist[d] == str(xlsx[pyosidui][index])):
+                                if xlsx[poommoknumber][index] != 200806190 and xlsx[poommoknumber][
+                                    index] != 200806191 and xlsx[poommoknumber][index] != 200806192:
+                                    if xlsx[poommoknumber][index] not in pilllist:
+                                        pilllist.append(xlsx[poommoknumber][index])
+                                        indexlist.append(index)
+                                else:
+                                    pilllist.append(xlsx[poommoknumber][index])
+                                    indexlist.append(index)
+
+            for index in range(23935):
+                for c in range(len(textlist)):
+                    if (textlist[c] == str(xlsx[pyosidui][index])):
+                        for d in range(len(textlist)):
+                            if (textlist[d] == str(xlsx[pyosiap][index])):
+                                if xlsx[poommoknumber][index] != 200806190 and xlsx[poommoknumber][
+                                    index] != 200806191 and xlsx[poommoknumber][index] != 200806192:
+                                    if xlsx[poommoknumber][index] not in pilllist:
+                                        pilllist.append(xlsx[poommoknumber][index])
+                                        indexlist.append(index)
+                                else:
+                                    pilllist.append(xlsx[poommoknumber][index])
+                                    indexlist.append(index)
+
+
+            for index in range(23935):
                 for c in range(len(textlist)) :
                     if (textlist[c] == str(xlsx[pyosiap][index])) or (textlist[c] == str(xlsx[pyosidui][index])) :
                         if xlsx[poommoknumber][index] != 200806190 and xlsx[poommoknumber][index] != 200806191 and xlsx[poommoknumber][index] != 200806192:
@@ -228,7 +257,7 @@ if __name__ == "__main__":
                             indexlist.append(index)
 
         # print(len(pilllist))
-        # print(pilllist[:20])
+        # print(pilllist)
 
         ############################
         if len(pilllist) == 1 :
@@ -259,12 +288,12 @@ if __name__ == "__main__":
 
     if not showpilllist:
 
-        if len(pilllist) > 5 : 
+        if len(pilllist) > 5 :
             temp=''
             for i in pilllist[:5]:
                 temp=temp+str(i)+','
             print(temp)
-        else : 
+        else :
             temp=''
             for i in pilllist:
                 temp=temp+str(i)+','
