@@ -244,8 +244,8 @@ if __name__ == "__main__":
                     shape.append(shapecolor[a])
                 else :
                     color.append(shapecolor[a])
-            print(shape)
-            print(color)
+            # print(shape)
+            # print(color)
             ############################
             for c in range(len(color)):
                 for s in range(len(shape)):
