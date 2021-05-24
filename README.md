@@ -15,11 +15,6 @@
 또한 약국에서 구입한 알약의 패키지나 처방받은 약의 봉투를 잃어버렸을 경우, 해당 알약이 어떤 알약인지 쉽게 알지못한다.  
 이러한 문제점을 해결하기 위해 우리는 사진 촬영만으로 알약 검색이 가능한 이미지 기반 알약 식별 모바일 애플리케이션 개발하려고 한다.   
 
-
-### 홍보영상 보러가기
-[![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
-
-
 ### 주요 기능 
 ![프로젝트기능](https://user-images.githubusercontent.com/28584133/118849030-48f8ab80-b90a-11eb-862b-81007536fefa.png)
 <!-- ![프로젝트기능](https://user-images.githubusercontent.com/28584226/113821628-4eb18c00-97b7-11eb-9b71-fbaebbfdaaa6.jpg) -->
@@ -39,7 +34,8 @@
 
 ## 2. 소개 영상
 
-프로젝트 소개하는 영상을 추가하세요
+### 홍보영상 보러가기
+[![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
 
 ## 3. 팀 소개
 
