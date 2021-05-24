@@ -6,8 +6,8 @@ import guide from './images/guide.png';
 
 class PhotoGuideScreen extends Component {
     
+    // 알약 촬영 가이드 스크린
     render () { 
-
         return (
             <View style={styles.MainView}>
                 <Image
@@ -25,8 +25,6 @@ class PhotoGuideScreen extends Component {
                 </View>
 
             </View>
-             
-            
         )
     }
 }
@@ -67,9 +65,7 @@ const styles = StyleSheet.create({
         letterSpacing: -0.48,
         textAlign: "center",
         color: "#c86e65"
-
     },
-
 });
 
 export default PhotoGuideScreen;

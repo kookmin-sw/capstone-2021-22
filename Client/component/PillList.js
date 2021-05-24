@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, Alert} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import * as config from '../src/config';
@@ -12,17 +12,18 @@ export function PillList(props) {
     const navigation = useNavigation();
     const [favorite, setFavorite] = useState(star);
 
+    // props로 즐겨찾기 상태 받아와서 true면 노란별 렌더링
     useEffect(() => {
-        console.log(props.favorite)
         if (props.favorite) {
             setFavorite(fullStar)
         }
     }, [])
     
+    // 토큰 유무 확인 -> 토큰 있으면 즐겨찾기 추가/제거, 없으면 alert
     async function changeFavorite() {
         AsyncStorage.getItem('token', (err, token) => {
             if (token !== null) {
-                if (props.favorite === false) {
+                if (favorite === star) {
                     fetch("http://3.34.96.230/favorite", {
                         method : "POST",
                         headers : {
@@ -69,11 +70,9 @@ export function PillList(props) {
                     { text: "아니요", onPress: () => console.log("아니라는데") },
                   ],
                   { cancelable: false });
-                
             }
         })
     }
-
 
     return(
         <View>

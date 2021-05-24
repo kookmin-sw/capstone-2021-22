@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, TextInput, Text, Image, TouchableOpacity, ScrollView, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
@@ -12,7 +12,8 @@ export function SearchScreen() {
     const [flag, setFlag] = useState(false);
     const [loading, setLoading] = useState(false);
 
-    
+    // 이름으로 검색 스크린
+    // 토큰 유무 확인 -> 입력된 검색어와 토큰을 담아 서버에 요청 -> 검색된 알약 리스트 응답
     async function search() {
         setFlag(false);
         setPillList([]);
@@ -27,7 +28,6 @@ export function SearchScreen() {
                     },
                 }).then(res => res.json())
                 .then(response => {
-                    // console.log(response)
                     setFlag(true);
                     setPillList(response);
                     setLoading(false);
@@ -51,14 +51,13 @@ export function SearchScreen() {
         })
     }
     
+    // 검색 결과가 없으면 "검색 결과가 없습니다." 문구 렌더링, 있으면 검색 결과 리스트 렌더링
     function showResult() {
-        // console.log(pillList)
         if (pillList.length === 0 && flag) {
             return(
                 <Text style={styles.text}>검색결과가 없습니다.</Text>
             )
         } else {
-            // console.log(pillList)
             return (
                 pillList.map((pill,index) => ( 
                     <PillList key={index} data={pillList} imgUrl={pill.image} name={pill.name} className={pill.class} codeName={pill.shape} id={pill.id} favorite={pill.isFavorite}/>
@@ -90,7 +89,6 @@ export function SearchScreen() {
                 {showResult()}
             </ScrollView>
         </View>
-            
     )
 }
 

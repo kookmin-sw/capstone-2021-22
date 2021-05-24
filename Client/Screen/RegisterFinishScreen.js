@@ -1,8 +1,9 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 export default class RegisterFinishScreen extends Component {
 
+    // 회원가입 완료 페이지
     render(){
         return (
             <View style={styles.container}>
@@ -24,10 +25,8 @@ export default class RegisterFinishScreen extends Component {
                     </TouchableOpacity>
                 </View>
             </View>
-            
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -36,19 +35,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
     },
-
     Text: {
         marginTop: 300,
         fontSize: 24,
         color: '#707070'
     },
-
     ButtonView : {
         marginTop: 120,
         alignItems: 'center',
         justifyContent : 'center',
     },
-
     ButtonText : {
         width: 100,
         height: 30,
@@ -58,7 +54,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#c86e65'
     },
-
     Button: {
         margin: 10,
         alignItems: 'center',

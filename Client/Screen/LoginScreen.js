@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
-
 import AsyncStorage from '@react-native-community/async-storage';
 
 export function LoginScreen() {
@@ -11,8 +10,8 @@ export function LoginScreen() {
     const [password, setPassword] = useState('');
     const navigation = useNavigation();
 
-    
-    logIn= async () => { 
+    // 입력받은 아이디와 비밀번호를 포함한 요청 -> 로그인 성공시 asyncstorage에 토큰 저장, 실패시 alert
+    logIn = async () => { 
         fetch("http://3.34.96.230/auth/login", {
             method : "POST",
             headers: {
@@ -24,7 +23,6 @@ export function LoginScreen() {
             })
         }).then(res => res.json())
         .then(response => {
-            // console.log(response)
             if(response.isLogin){
                 console.log('로그인 성공')
                 AsyncStorage.setItem('token',response.token);
@@ -51,7 +49,6 @@ export function LoginScreen() {
                 <Text style={styles.Text}>내 약통은 회원 전용 서비스 입니다.</Text>
                 <Text style={styles.Text}>해당 기능을 사용하시려면 로그인 해주세요.</Text>
             </View>
-
             <View style={styles.InputTextView}>
                 <TextInput style={styles.InputText}
                 placeholder='아이디'
@@ -61,7 +58,6 @@ export function LoginScreen() {
                 onChangeText={(text) => {setId(text);}}
                 />
                 <View style= {styles.hr} />
-
                 <TextInput style={styles.InputText}
                 placeholder = '비밀번호'
                 placeholderTextColor = '#cccccc'
@@ -70,9 +66,7 @@ export function LoginScreen() {
                 onChangeText={(text) => {setPassword(text);}}
                 secureTextEntry= {true} />
                 <View style= {styles.hr} />
-
             </View>
-
             <View style={styles.LoginButtonView}>
                 <TouchableOpacity
                     style={styles.LoginButton}
@@ -80,7 +74,6 @@ export function LoginScreen() {
                     <Text style={styles.LoginButtonText}>로그인</Text>
                 </TouchableOpacity>
             </View>
-
             <View style={styles.RegisterButtonView}>
                 <TouchableOpacity
                     style={styles.RegisterButton}
@@ -88,7 +81,6 @@ export function LoginScreen() {
                     <Text style={styles.RegisterButton}>회원가입</Text>
                 </TouchableOpacity>
             </View>
-
         </View>
         
     )
@@ -105,8 +97,6 @@ const styles = StyleSheet.create({
         paddingBottom : 57
     },
     Text: {
-        // width: 292,
-        // height: 46,
         // fontFamily: 'AppleSDGothicNeo',
         fontSize: 18,
         fontWeight: '300',
@@ -115,11 +105,8 @@ const styles = StyleSheet.create({
         letterSpacing: -0.36,
         textAlign: 'center',
         color: '#525252',
-
     }, 
     InputText : {
-        // width: 61,
-        // height: 29,
         // fontFamily: 'AppleSDGothicNeo',
         fontSize: 30,
         fontWeight: '200',
@@ -132,11 +119,9 @@ const styles = StyleSheet.create({
         marginRight : 10,
         marginLeft: 10,
         backgroundColor : 'white',
-
     },
     InputTextView : {
         flex : 3,
-        // alignItems: 'center',
         justifyContent : 'center',
         marginRight : 47,
         marginLeft: 47,
@@ -152,7 +137,6 @@ const styles = StyleSheet.create({
         flex : 2,
         alignItems: 'center',
         justifyContent : 'center',
-
     },
     LoginButton : {
         alignItems: 'center',
@@ -176,11 +160,8 @@ const styles = StyleSheet.create({
     RegisterButtonView : {
         flex : 2,
         alignItems: 'center',
-        // justifyContent : 'center',
     },
     RegisterButton : {
-        // width: 62,
-        // height: 21,
         // fontFamily: 'AppleSDGothicNeo',
         fontSize: 22,
         fontWeight: '500',

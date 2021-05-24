@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, TouchableOpacity, Alert } from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
 
 export function RegisterScreen() {
 
@@ -11,7 +10,8 @@ export function RegisterScreen() {
     const [password, setPassword] = useState('');
     const [validateId, setValidateId] = useState(false);
 
-    async function idCheck()  { // 아이디 중복 확인
+    // 아이디 중복확인 : 아이디를 담아 서버에 요청 -> 중복 여부 응답
+    async function idCheck() {
         fetch("http://3.34.96.230/auth/isExistId", {
             method : "POST",
             headers: {
@@ -33,10 +33,11 @@ export function RegisterScreen() {
         .catch(error => console.error('Error:', error));
     }
 
-    async function register()  { // 회원 등록
+    // 회원가입 : 이름, 아이디, 비밀번호를 담아 서버에 요청 -> 회원가입 완료 응답
+    async function register()  {
         if (!name || !id || !password) {
             Alert.alert('정보를 모두 입력해주세요.')
-        } else if (validateId === false) { // 중복 아이디 판별
+        } else if (validateId === false) {
             Alert.alert('아이디 중복확인을 해주세요.')
         } else {
             fetch("http://3.34.96.230/auth/join", {
@@ -73,7 +74,6 @@ export function RegisterScreen() {
                 onChangeText={(text) => {setName(text);}}
                 />
                 <View style={styles.hr}/>
-
                 <View style={styles.idView}>
                     <TextInput style={styles.idTextInput}
                     placeholder='아이디'
@@ -89,7 +89,6 @@ export function RegisterScreen() {
                     </TouchableOpacity>
                 </View>
                 <View style={styles.idhr} />
-
                 <TextInput style={styles.textinput}
                 placeholder='비밀번호'
                 placeholderTextColor = '#cccccc'
@@ -100,13 +99,11 @@ export function RegisterScreen() {
                 />
                 <View style={styles.hr} />
             </View>
-
             <TouchableOpacity
                 style={styles.registerButton}
                 onPress={() => register()}>
                 <Text style={styles.registerButtonText}>가입하기</Text>
             </TouchableOpacity>
-            
         </View>
     );
 }
@@ -117,17 +114,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
     },
-
     InputTextView: {
         margin: 60
     },
-
     hr : {
         width: 270,
         borderBottomWidth: 1,
         borderBottomColor: '#cccccc'
     },
-
     textinput: {
         marginTop: 60,
         width: 250,
@@ -136,11 +130,9 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#5c5c5c'
     },
-
     idView: {
         flexDirection: 'row',
     },
-
     idTextInput: {
         marginTop: 60,
         marginRight: 15,
@@ -150,7 +142,6 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#5c5c5c',
     },
-
     idCheckButtonText : {
         width: 70,
         // fontFamily: 'AppleSDGothicNeo',
@@ -159,7 +150,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#c86e65'
     },
-
     idCheckButton: {
         marginTop: 60,
         alignItems: 'center',
@@ -170,13 +160,11 @@ const styles = StyleSheet.create({
         borderColor: '#c86e65',
         backgroundColor: '#ffffff'
     },
-
     idhr : {
         width: 175,
         borderBottomWidth: 1,
         borderBottomColor: '#cccccc'
     },
-
     registerButtonText : {
         width: 100,
         // fontFamily: 'AppleSDGothicNeo',
@@ -185,7 +173,6 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         color: '#c86e65'
     },
-
     registerButton: {
         marginTop: 100,
         alignItems: 'center',

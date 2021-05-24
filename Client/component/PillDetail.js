@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, Linking, Alert } from 'react-native';
+import { StyleSheet, View, Text, Image, TouchableOpacity, Linking, Alert } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 import star from '../src/icon/star.png';
 import fullStar from '../src/icon/full-star.png';
@@ -11,13 +11,14 @@ export function PillDetail(props) {
     const navigation = useNavigation();
     const [favorite, setFavorite] = useState(star);
 
+    // props로 즐겨찾기 상태 받아와서 true면 노란별 렌더링
     useEffect(() => {
-        if (props.star) {
+        if (props.favorite) {
             setFavorite(fullStar)
-            // console.log(favorite)
         }
     })
 
+    // 토큰 유무 확인 -> 토큰 있으면 즐겨찾기 추가/제거, 없으면 alert
     async function changeFavorite() {
         AsyncStorage.getItem('token', (err, token) => {
             if (token !== null) {
@@ -76,6 +77,7 @@ export function PillDetail(props) {
         })
     }
 
+    // html 태그 제거
     function replaceTag(str) {
         if (str) {
             return str.replace(/<[^>]+>/g,'\n')
@@ -84,6 +86,7 @@ export function PillDetail(props) {
         }
     }
 
+    // props.flag가 false면(PillDetail 정보가 없을 때) 상세정보 페이지로 이동할 수 있는 링크 렌더링, true면 PillDetail 정보 렌더링
     function showDetail() {
         if (!props.flag) {
             return (
@@ -138,18 +141,12 @@ export function PillDetail(props) {
 
     return(
         <View>
-            <Image source={{
-                uri: props.imgUrl
-              }} style={styles.image} resizeMode="contain"
-            />
+            <Image source={{uri: props.imgUrl}} style={styles.image} resizeMode="contain"/>
             <View style={styles.mainContainer}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.titleText}>{props.name}</Text>
                     <TouchableOpacity onPress={changeFavorite}>
-                        <Image
-                        style={styles.icon}
-                        source={favorite}
-                        />
+                        <Image style={styles.icon} source={favorite}/>
                     </TouchableOpacity>
                 </View>      
 
@@ -166,7 +163,7 @@ export function PillDetail(props) {
                         <Text style={styles.valueText}>{props.codeName}</Text>
                     </View>
                 </View>
-                <View style= {styles.hr} />            
+                <View style={styles.hr} />            
             </View>
             {showDetail()}
         </View>
@@ -174,9 +171,6 @@ export function PillDetail(props) {
 }
 
 const styles = StyleSheet.create({
-    scrollView : {
-        backgroundColor: '#f0f2f0',  //f0f2f0
-    },
     mainContainer : {
         backgroundColor: '#ffff',
         padding: 35, 
