@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import React, { Component, useEffect, useState } from 'react';
-import { StyleSheet, View, Text, TextComponent, Image, Button, TouchableOpacity } from 'react-native';
+import React, { Component } from 'react';
+import { Image, TouchableOpacity } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -18,11 +18,10 @@ import PhotoGuideScreen from './screen/PhotoGuideScreen';
 import PhotoScreen from './screen/PhotoScreen';
 import LoadingScreen from './screen/LoadingScreen';
 import PhotoSearchScreen from './screen/PhotoSearchScreen';
-import ConfirmScreen from './screen/ConfirmScreen';
 
 const Stack = createStackNavigator();
 
-
+// 헤더 뒤로가기 아이콘 변경
 function BackBtn() {
     return (
         <Image
@@ -100,9 +99,6 @@ class App extends Component
                         headerLeft: () => (
                             <TouchableOpacity
                             onPress={()=>{
-                                // AsyncStorage.getItem('user').then((value) =>
-                                //     navigation.replace(value === null ? 'Main' : 'UserMain'),
-                                // );
                                 navigation.reset({routes: [{name: 'Main'}]})
                             }}>
                                 <Image
@@ -251,24 +247,8 @@ class App extends Component
                                     style={{marginLeft: 16, width: 24, height: 24}}
                                 />
                             </TouchableOpacity>
-                             
                         ),
                     })}
-                    />
-
-                    <Stack.Screen
-                    name="Confirm"
-                    component={ConfirmScreen}
-                    options={{ 
-                        title: '알약 촬영' ,
-                        headerTitleStyle: {
-                            fontWeight: 'bold',
-                            fontSize: 20,
-                            color: "#707070"
-                        },
-                        headerBackTitleVisible: false,
-                        headerBackImage: BackBtn,
-                    }}
                     />
 
                 </Stack.Navigator>
@@ -277,8 +257,5 @@ class App extends Component
         )
     }
 }
-
-const styles = StyleSheet.create({
-});
 
 export default App;

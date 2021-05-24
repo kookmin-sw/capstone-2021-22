@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import AsyncStorage from '@react-native-community/async-storage';
+import React from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView} from 'react-native';
 import { PillList } from '../component/PillList';
 
 export function PhotoSearchScreen({route, navigation} = this.props){
 
     const {pillList} = route.params;
 
+    // 사진으로 촬영한 검색 결과 보여주는 스크린
     return(
         <View style={styles.view}>
             <TouchableOpacity style={styles.button} onPress={()=>{

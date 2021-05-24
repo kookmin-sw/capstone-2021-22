@@ -2,21 +2,21 @@ import 'react-native-gesture-handler';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import AsyncStorage from '@react-native-community/async-storage';
 
+import * as config from '../src/config';
 import  logo  from './images/pill.png';
 import  MyPillLogo  from '../src/icon/pills-bottle.png';
 
-import AsyncStorage from '@react-native-community/async-storage';
-import * as config from '../src/config';
-
-
-export function MainScreen(props) {
+export function MainScreen() {
 
     const navigation = useNavigation();
     const [myPillText, setMyPillText] = useState('');
     const [myPillNum, setMyPillNum] = useState('')
     const [navScreen, setNavScreen] = useState('');
 
+    // 메인 스크린
+    // 토큰 유무 확인 -> 토큰 있으면 유저이름, 즐겨찾기 된 알약 수 포함해서 렌더링
     useEffect(() => {
         AsyncStorage.getItem('token', (err, token) => {
             if (token !== null) {
@@ -76,7 +76,6 @@ export function MainScreen(props) {
                     }}>
                     <Text style={styles.SearchButton}>알약 이름을 알고 계신가요?</Text>
                     <View style={styles.hr} />
-
                 </TouchableOpacity>
             </View>
             <View style={styles.MyPillButtonView}>
@@ -94,7 +93,6 @@ export function MainScreen(props) {
                 </TouchableOpacity>
             </View>
         </View>
-        
     )
 }
 
@@ -111,7 +109,6 @@ const styles = StyleSheet.create({
     },
     Text: {
         width: 287,
-        // height: 78,
         // fontFamily: 'AppleSDGothicNeo',
         fontSize: 32,
         fontWeight: '300',
@@ -119,21 +116,17 @@ const styles = StyleSheet.create({
         letterSpacing: -0.64,
         textAlign: 'left',
         color: '#525252'
-
     }, 
-
     MainButtonView : {
         flex : 3,
         alignItems: 'center',
         justifyContent : 'center',
     },
-
     LogoImage : {
         width: 121,
         height: 121,
         marginBottom : 38
     },
-    
     MainButtonContainer : {
         alignItems: 'center',
         justifyContent : 'center',
@@ -146,7 +139,6 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#D5D5D5'
     },
-
     MainButton : {
         width: 256,
         height: 56,
@@ -165,7 +157,6 @@ const styles = StyleSheet.create({
         letterSpacing: -0.48,
         textAlign: 'left',
         color: '#ffffff'
-
     },
     searchText: {
         marginTop: 15,
@@ -194,7 +185,6 @@ const styles = StyleSheet.create({
         marginRight : 15,
         alignItems: 'center',
         justifyContent : 'center',
-
     },
     MyPillLogoImage : {
         width: 36,

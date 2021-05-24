@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
@@ -7,7 +7,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import * as config from '../src/config';
 
 import logo from '../src/icon/pills-bottle.png';
-
 import { PillList } from '../component/PillList';
 
 
@@ -19,6 +18,8 @@ export function MyPillScreen() {
     const [pillList, setPillList] = useState([]);
     const [userName, setUserName] = useState("");
 
+    // 내 약통 스크린
+    // 토큰 유무 확인 -> 토큰 있으면 즐겨찾기 된 알약 리스트 렌더링, 없으면 로그인 페이지로 이동
     useEffect(() => {
         AsyncStorage.getItem('token', (err, token) => {
             config.IS_LOGIN = true;
@@ -37,7 +38,6 @@ export function MyPillScreen() {
                 setPillList(temp);
             })
             .catch(error => console.error('Error:', error));
-            
         });
     }, []);
 
@@ -65,8 +65,7 @@ export function MyPillScreen() {
                                     navigation.reset({
                                         index: 0,
                                         routes: [{name: 'Main'}]
-                                    })
-                                },
+                                    })},
                                 },
                                 { 
                                 text: "아니요", 
@@ -86,7 +85,6 @@ export function MyPillScreen() {
                 ))}
                 <View style={styles.hr} />            
             </View>
-        
         </ScrollView>
              
             
@@ -144,13 +142,11 @@ const styles = StyleSheet.create({
     },
     textContainer : {
         flex: 1,
-
     },
     mainText : {
         marginTop : 10, 
         marginBottom : 5, 
         marginLeft : 15,
-
         width: 145,
         height: 50,
         // fontFamily: 'AppleSDGothicNeo',
@@ -160,7 +156,6 @@ const styles = StyleSheet.create({
         letterSpacing: 0,
         textAlign: 'left',
         color: '#000000',
-        
     },
     subText : {
         marginLeft : 15,
@@ -175,7 +170,6 @@ const styles = StyleSheet.create({
         textAlign: 'left',
         color: '#585858'
     }
-
 });
 
 export default MyPillScreen;

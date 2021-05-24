@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { StyleSheet, View, Text, Image, TouchableOpacity, Alert, Animated } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { StyleSheet, View, Text, Animated, ActivityIndicator } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import { ActivityIndicator } from 'react-native';
 
 export function LoadingScreen({route, navigation} = this.props){
 
@@ -10,7 +8,8 @@ export function LoadingScreen({route, navigation} = this.props){
     const fadeAnim1 = useRef(new Animated.Value(0)).current;
     const fadeAnim2 = useRef(new Animated.Value(0)).current;
 
-
+    // 알약 검색 중 애니메이션 효과
+    // formData 형식의 사진 서버에 업로드 후 검색 결과 응답 -> 검색 결과 PhotoSearchScreen으로 전송
     useEffect(() => {
         Animated.timing(fadeAnim1, {
             toValue: 1,
@@ -22,7 +21,6 @@ export function LoadingScreen({route, navigation} = this.props){
             duration: 50000,
             useNativeDriver: true,
         }).start();
-        console.log(formData)
         AsyncStorage.getItem('token', (err, token) => {
             if (token !== null) {
                 fetch("http://3.34.96.230/imageSearch/", {
@@ -92,7 +90,6 @@ export function LoadingScreen({route, navigation} = this.props){
                     알약 검색 중
                 </Text>
             </Animated.View>
-            
         </View>
     )
 }

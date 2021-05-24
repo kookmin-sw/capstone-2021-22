@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
-import React, { Component, useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, ScrollView } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import { PillDetail } from '../component/PillDetail';
@@ -10,20 +10,13 @@ export function PillDetailScreen({route, navigation} = this.props) {
 
     const {id} = route.params;
     const [pillInfo, setPillInfo] = useState([]);
-
+    const [pillDetail, setPillDtail] = useState([]);
     const [flag, setFlag] = useState(true)
-    const [efcyQesitm, setefcy] = useState("");
-    const [useMethodQesitm, setuseMethodQesitm] = useState("");
-    const [atpnWarn, setatpnWarn] = useState("");
-    const [atpn, setatpn] = useState("");
-    const [depositMethod, setdepositMethod] = useState("");
-    const [intrc, setintrc] = useState("");
-    const [se, setse] = useState("");
 
+    // 알약 기본 정보 요청, 응답 : 토큰 유무 확인 -> 토큰 있으면 즐겨찾기 상태 포함한 응답, 없으면 즐겨찾기 상태 false인 응답
     useEffect(() => {
         AsyncStorage.getItem('token', (err, token) => {
             if (token !== null) {
-                // console.log(id)
                 fetch("http://3.34.96.230/pillDetail", {
                     method : "POST",
                     headers: {
@@ -57,45 +50,39 @@ export function PillDetailScreen({route, navigation} = this.props) {
             }
         })
 
+        // 알약 상세정보 요청, 응답
         fetch("http://3.34.96.230/pillDetail/code", {
-                    method : "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body : JSON.stringify({
-                        "pillId" : id
-                    })
-                }).then(res => res.json())
-                .then(response => {
-                    console.log(response)
-                    console.log("length", Object.keys(response.response.body.items).length)
-                    if (Object.keys(response.response.body.items).length === 0){
-                        console.log("yes")
-                        setFlag(false)
-                    } else {
-                        const efcy = response.response.body.items.item.efcyQesitm._text;
-                        const useMethod = response.response.body.items.item.useMethodQesitm._text;
-                        const atpnWarn = response.response.body.items.item.atpnWarnQesitm._text;
-                        const atpn = response.response.body.items.item.atpnQesitm._text;
-                        const intrc = response.response.body.items.item.intrcQesitm._text;
-                        const se = response.response.body.items.item.seQesitm._text;
-                        const depositMethod = response.response.body.items.item.depositMethodQesitm._text;
-                        setefcy(efcy);
-                        setuseMethodQesitm(useMethod);
-                        setatpnWarn(atpnWarn);
-                        setatpn(atpn);
-                        setdepositMethod(depositMethod);
-                        setintrc(intrc);
-                        setse(se);
-                    }
+                method : "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body : JSON.stringify({
+                    "pillId" : id
                 })
-                .catch(error => console.error('Error:', error));
+            }).then(res => res.json())
+            .then(response => {
+                if (Object.keys(response.response.body.items).length === 0){
+                    console.log("yes")
+                    setFlag(false)
+                } else {
+                    arr = {}
+                    arr.efcy = response.response.body.items.item.efcyQesitm._text;
+                    arr.useMethod = response.response.body.items.item.useMethodQesitm._text;
+                    arr.atpnWarn = response.response.body.items.item.atpnWarnQesitm._text;
+                    arr.atpn = response.response.body.items.item.atpnQesitm._text;
+                    arr.intrc = response.response.body.items.item.intrcQesitm._text;
+                    arr.se = response.response.body.items.item.seQesitm._text;
+                    arr.depositMethod = response.response.body.items.item.depositMethodQesitm._text;
+                    setPillDtail(arr)
+                }
+            })
+            .catch(error => console.error('Error:', error));
     }, []);
 
     return (
         <ScrollView style={styles.scrollView}>
-            <PillDetail imgUrl={pillInfo.image} name={pillInfo.name} company={pillInfo.company} className={pillInfo.class} codeName={pillInfo.shape} id={pillInfo.id} star={pillInfo.isFavorite}
-            flag={flag} efcy={efcyQesitm} useMethod={useMethodQesitm} atpnWarn={atpnWarn} atpn={atpn} intrc={intrc} depositMethod={depositMethod} se={se}
+            <PillDetail imgUrl={pillInfo.image} name={pillInfo.name} company={pillInfo.company} className={pillInfo.class} codeName={pillInfo.shape} id={pillInfo.id} favorite={pillInfo.isFavorite}
+            flag={flag} efcy={pillDetail.efcy} useMethod={pillDetail.useMethod} atpnWarn={pillDetail.atpnWarn} atpn={pillDetail.atpn} intrc={pillDetail.intrc} se={pillDetail.se} depositMethod={pillDetail.depositMethod}
             />
             <Text style={styles.text}>제공되는 알약의 모든 정보는 의약품 안전나라에 있습니다.</Text>
         </ScrollView>
