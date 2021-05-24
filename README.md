@@ -1,3 +1,4 @@
+<img width="484" alt="스크린샷 2021-05-24 오후 10 16 02" src="https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png">
 # 이게뭐약 ?
 
 **팀페이지 주소** -> https://kookmin-sw.github.io/capstone-2021-22  
