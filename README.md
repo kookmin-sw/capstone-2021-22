@@ -15,8 +15,9 @@
 
 
 ### 홍보영상 보러가기 
-[![텍스트](https://user-images.githubusercontent.com/28584159/119352092-34d2f680-bcdc-11eb-84e2-6b81ba1d7d08.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
-<!-- <img width="1440" alt="스크린샷 2021-05-24 오후 10 05 01" src="https://user-images.githubusercontent.com/28584159/119352092-34d2f680-bcdc-11eb-84e2-6b81ba1d7d08.png">(https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing) -->
+[![텍스트](https://user-images.githubusercontent.com/28584159/119353310-b1b2a000-bcdd-11eb-92c9-0792d7d4e5a0.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
+
+
 
 
 
