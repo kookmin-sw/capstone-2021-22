@@ -14,8 +14,12 @@
 이러한 문제점을 해결하기 위해 우리는 사진 촬영만으로 알약 검색이 가능한 이미지 기반 알약 식별 모바일 애플리케이션 개발하려고 한다.   
 
 
-### 홍보영상 보러가기 
-[![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing){: width=484}
+### 홍보영상 보러가기
+[![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png){: width="50%"}](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
+
+[![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)]{: width="50%"}(https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
+
+[![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing){: width="50%"}
 
 
 ### 주요 기능 
