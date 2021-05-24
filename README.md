@@ -21,7 +21,8 @@
 
 [![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)]{: width="50%"}(https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
 
-[![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing){: width="50%"}
+[![텍스트]{: width="50%"}(https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
+
 
 <img width="484" alt="스크린샷 2021-05-24 오후 10 16 02" src="https://user-images.githubusercontent.com/28584159/119354551-2d611c80-bcdf-11eb-9d68-293505f689a1.png" : https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing > 
 
