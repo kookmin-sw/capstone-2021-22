@@ -34,13 +34,14 @@
 
 ### 홍보영상 보러가기
 [![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
-
+### 시연영상 보러가기
+[![텍스트](https://user-images.githubusercontent.com/28584226/119618515-f0f80280-be3d-11eb-9bc1-7246ceba0dcc.png)](https://drive.google.com/file/d/1uk1CV_iIfjNnzZ5MIiyrygWHF8sZ8Njg/view?usp=sharing)
 
 ## 3. 팀 소개
 
 #### 김윤정
 
-![yunjeong](https://user-images.githubusercontent.com/28584226/113500722-40ffca80-955b-11eb-8d49-f90634764494.jpeg)
+<img src="https://user-images.githubusercontent.com/28584226/113485108-f80e2e80-94e6-11eb-903b-1b324d57382f.jpeg" alt="image-yunjeong" width= 30%/>
 
 ~~~
 Student ID: 20171600
@@ -50,7 +51,7 @@ Role: 팀장, AI 모델 개발, 데이터 라벨링
 
 #### 고지원
 
-![jiwon](https://user-images.githubusercontent.com/28584226/113500719-3e9d7080-955b-11eb-9fd1-90ca1932437d.jpeg)
+<img src="https://user-images.githubusercontent.com/28584226/113485623-82579200-94e9-11eb-8fbb-02e12f73396c.jpeg" alt="image-jiwon" width= 30% />
 
 ~~~
 Student ID: 20171577
@@ -60,7 +61,7 @@ Role: UI/UX 디자인 및 앱 기획, 클라이언트 개발
 
 #### 김규리
 
-![gyurl](https://user-images.githubusercontent.com/28584226/113500718-3cd3ad00-955b-11eb-96ec-cf1217d45017.jpeg)
+<img src="https://user-images.githubusercontent.com/28584226/113485312-d1042c80-94e7-11eb-8c78-f04a80c1a268.jpeg" alt="image-gyuri"  width= 30%/>
 
 ~~~
 Student ID: 20171582
@@ -70,7 +71,7 @@ Role: AI 모델 개발, 데이터 라벨링
 
 #### 김민주
 
-![minju](https://user-images.githubusercontent.com/28584226/113500721-40673400-955b-11eb-988d-b77a5124f736.jpeg)
+<img src="https://user-images.githubusercontent.com/28584226/113485307-ca75b500-94e7-11eb-9d06-70d290733e90.jpeg" alt="image-minju" width= 30%/>
 
 ~~~
 Student ID: 20171590
@@ -80,7 +81,7 @@ Role: 클라이언트 개발
 
 #### 송준호
 
-![junho](https://user-images.githubusercontent.com/28584226/113500720-3fce9d80-955b-11eb-8c92-a1681278236f.jpeg)
+<img src="https://user-images.githubusercontent.com/28584226/113485619-7ec40b00-94e9-11eb-8f68-c8ed81c3b492.jpeg" alt="image-junho" width= 30%/>
 
 ~~~
 Student ID: 20153190
@@ -90,8 +91,106 @@ Role: 데이터베이스 구축, 서버 개발, Git 관리
 
 ### 4. 사용법
 
-소스코드제출시 설치법이나 사용법을 작성하세요.
 
-### 5. 기타
+### 서버 실행 환경 설정
 
-추가적인 내용은 자유롭게 작성하세요.
+리눅스(우분투) 기준
+1. Node.js  설치
+```
+$ sudo apt-get update
+$ sudo apt-get install -y build-essential
+$ sudo apt-get install curl
+$ curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash –
+$ sudo apt-get install -y nodejs
+```
+
+2. npm 버전 업데이트
+```
+$ npm install -g npm
+```
+
+3. DB 설치
+```
+$ sudo apt-get update
+$ sudo apt-get install -y mysql-server
+$ sudo mysql_secure_installation
+```
+
+4. 서버 git clone
+```
+$ git clone https://github.com/kookmin-sw/capstone-2021-22.git
+// pull한 저장소의 Server 폴더로 이동 후 필요한 패키지 설치
+$ npm install express passport bcrpt jsonwebtoken fs path sequelize multer
+$ npm install child_process request xml-js express-session
+// .env 파일 생성 후 config.js 파일 설정에 필요한 password 설정 
+```
+
+5. 서버 실행 
+```
+// 80번 포트를 여는 라이브 서버용 실행 명렁어 
+npm start
+// 8001번 포트를 여는 테스트 서버용 실행 명렁어
+npm run-script dev 
+```
+
+### 클라이언트 실행 환경설정
+
+#### MacOS 환경 설정
+
+1. Nvm (node version manager) 설치
+```
+$ sudo curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+$ vi ~/.bash_profile
+// vi 에디터로 파일 내용에 추가 후 저장 
+-----------------------------------------------------------------
+export NVM_DIR="$HOME/.nvm"  
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm  
+-----------------------------------------------------------------
+$ source ~/.bash_profile
+```
+
+2. Node.js & Npm (node package manager) 설치
+```
+$ nvm install 14.13.1
+$ nvm use 14.13.1
+```
+
+3. Xcode 설치
+
+- install xcode in AppStore (version 12.4)
+- https://apps.apple.com/us/app/xcode/id497799835?mt=12
+
+
+4. Cocoapod 설치
+```
+$ sudo gem install cocoapods -v 1.10.0
+```
+
+5. React native cli 설치
+```
+$ npm install -g react-native-cli
+```
+
+#### ios 실행 방법
+```
+$ git clone https://github.com/kookmin-sw/capstone-2021-22.git
+$ cd Client
+$ npm install
+$ cd ios & pod install & cd ..
+$ npm start
+$ react-native run-ios
+```
+
+#### ios 디바이스 실행 방법
+
+1. 애플 개발자 생성  
+https://developer.apple.com/
+account -> login -> “By checking this box I confirm that I have read and agree to be bound by the Agreement above.” 체크 -> submit
+
+2. 디바이스 테스트 
+- Usb를 이용하여 테스트하고 싶은 디바이스와 mac연결
+- Client/Ios/Client.xcodeproj 실행
+- Client선택 -> TARGETS/Client -> General -> Signing -> team -> add account… -> 애플 개발자 계정 id & password 입력 -> download manual profiles
+- Team -> 추가한 아이디 선택 
+- TARGETS/ClientTests -> Signing -> team -> 추가한 아이디 선택
+- 실행시킬 device로 변경 후 화살표를 눌러 프로젝트 실행
