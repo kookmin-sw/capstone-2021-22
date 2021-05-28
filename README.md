@@ -2,6 +2,7 @@
 
 **팀페이지 주소** -> https://kookmin-sw.github.io/capstone-2021-22  
 **중간발표 주소**-> https://drive.google.com/file/d/1kPHVM13y5LI24Fdjgq_JBC69lQjyPFsl/view?usp=sharing 
+
 **발표 주소**-> https://youtu.be/-fjrBTSwmu4
 
 ## 1. 프로젝트 소개
