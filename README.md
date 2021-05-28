@@ -196,7 +196,3 @@ account -> login -> “By checking this box I confirm that I have read and agree
 - TARGETS/ClientTests -> Signing -> team -> 추가한 아이디 선택
 - 실행시킬 device로 변경 후 화살표를 눌러 프로젝트 실행
 
-
-### 5. 기타
-
-추가적인 내용은 자유롭게 작성하세요.
