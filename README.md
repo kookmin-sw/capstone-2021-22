@@ -38,6 +38,8 @@
 [![텍스트](https://user-images.githubusercontent.com/28584159/119353664-1ec63580-bcde-11eb-9313-22fd2e9eb4c0.png)](https://drive.google.com/file/d/1Zw7w_8N1e5AV6rv_GLk4jOZbXOUsoFyR/view?usp=sharing)
 ### 시연영상 보러가기
 [![텍스트](https://user-images.githubusercontent.com/28584226/119618515-f0f80280-be3d-11eb-9bc1-7246ceba0dcc.png)](https://drive.google.com/file/d/1uk1CV_iIfjNnzZ5MIiyrygWHF8sZ8Njg/view?usp=sharing)
+### 시연영상2 보러가기
+https://youtu.be/Yh6jDoGDLxA
 
 ## 3. 팀 소개
 
